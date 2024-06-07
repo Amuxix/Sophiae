@@ -1,5 +1,5 @@
 QMK_REPO ?= zsa/qmk_firmware
-QMK_BRANCH ?= firmware22
+QMK_BRANCH ?= firmware23
 
 .PHONY: build
 build: zsa_firmware/keyboards/moonlander/keymaps/mcoding  zsa_firmware/.build/moonlander_mcoding.bin

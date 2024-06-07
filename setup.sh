@@ -4,7 +4,7 @@ set -euo pipefail
 
 MY_DIR=$(cd "$(dirname "${0}")" && pwd -P)
 GIT_DIR=${MY_DIR}/zsa_firmware
-GIT_BRANCH=firmware22
+GIT_BRANCH=firmware23
 
 function qmk_setup() {
     pushd "${GIT_DIR}"
