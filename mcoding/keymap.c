@@ -18,8 +18,6 @@ enum custom_keycodes {
   ST_MACRO_10,
 };
 
-
-
 enum tap_dance_codes {
   DANCE_0,
   DANCE_1,
@@ -32,6 +30,7 @@ enum tap_dance_codes {
   DANCE_8,
   DANCE_9,
 };
+
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [0] = LAYOUT_moonlander(
     DM_PLY1,        KC_TRANSPARENT, KC_F2,          KC_F3,          KC_F4,          KC_F5,          KC_TRANSPARENT,                                 KC_TRANSPARENT, KC_F6,          KC_F7,          KC_F8,          KC_F9,          KC_TRANSPARENT, KC_F11,
@@ -98,6 +97,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     ST_MACRO_8,     KC_NO,          KC_NO,                          KC_NO,          KC_NO,          ST_MACRO_10
   ),
 };
+
 const uint16_t PROGMEM combo0[] = { KC_F, KC_O, KC_U, COMBO_END};
 const uint16_t PROGMEM combo1[] = { KC_L, KC_Y, KC_P, COMBO_END};
 const uint16_t PROGMEM combo2[] = { KC_H, KC_COLN, KC_COMMA, COMBO_END};
@@ -109,6 +109,7 @@ combo_t key_combos[COMBO_COUNT] = {
     COMBO(combo2, ST_MACRO_2),
     COMBO(combo3, ST_MACRO_3),
 };
+
 uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
         case MT(MOD_LGUI, KC_R):
@@ -192,6 +193,16 @@ const uint8_t PROGMEM ledmap[][RGB_MATRIX_LED_COUNT][3] = {
 
 };
 
+void set_led_color(int led, HSV hsv) {
+  if (!hsv.h && !hsv.s && !hsv.v) {
+    rgb_matrix_set_color( led, 0, 0, 0 );
+  } else {
+    RGB rgb = hsv_to_rgb( hsv );
+    float f = (float)rgb_matrix_config.hsv.v / UINT8_MAX;
+    rgb_matrix_set_color( led, f * rgb.r, f * rgb.g, f * rgb.b );
+  }
+}
+
 void set_layer_color(int layer) {
   for (int i = 0; i < RGB_MATRIX_LED_COUNT; i++) {
     HSV hsv = {
@@ -199,13 +210,7 @@ void set_layer_color(int layer) {
       .s = pgm_read_byte(&ledmap[layer][i][1]),
       .v = pgm_read_byte(&ledmap[layer][i][2]),
     };
-    if (!hsv.h && !hsv.s && !hsv.v) {
-        rgb_matrix_set_color( i, 0, 0, 0 );
-    } else {
-        RGB rgb = hsv_to_rgb( hsv );
-        float f = (float)rgb_matrix_config.hsv.v / UINT8_MAX;
-        rgb_matrix_set_color( i, f * rgb.r, f * rgb.g, f * rgb.b );
-    }
+    set_led_color(i, hsv);
   }
 }
 
@@ -247,13 +252,17 @@ bool rgb_matrix_indicators_user(void) {
   return true;
 }
 
-/* void caps_word_set_user(bool active) {
+void caps_word_set_user(bool active) {
     if (active) {
-        // Do something when Caps Word activates.
+        //HSV hsv = {.h = 0, .s = 245, .v = 245}
+        //set_led_color(31, hsv)
+        ML_LED_6(true);
     } else {
-        // Do something when Caps Word deactivates.
+        //HSV hsv = {.h = 0, .s = 0, .v = 0}
+        //set_led_color(31, hsv)
+        ML_LED_6(false);
     }
-} */
+}
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   switch (keycode) {
