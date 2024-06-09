@@ -121,14 +121,14 @@ const uint16_t SHORTCUTS[MATRIX_ROWS][MATRIX_COLS] = LAYOUT_moonlander(
 // clang-format on
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
-  [_BASE]        = &&BASE_WIN,
-  [_CANARY_G]    = &&CANARY_GAMING,
-  [_QWERTY_G]    = &&QWERTY_GAMING,
-  [_QWERTY_SG]   = &&QWERTY_SHIFTED_GAMING,
-  [_KEYPAD_SYMB] = &&KEYPAD_AND_SYMBOLS,
-  [_EXTRA_SYMB]  = &&EXTRA_SYMBOLS,
-  [_MOVEMENT]    = &&MOVEMENT,
-  [_SHORTCUTS]   = &&SHORTCUTS,
+  [_BASE]        = (uint16_t**)BASE_WIN,
+  [_CANARY_G]    = (uint16_t**)CANARY_GAMING,
+  [_QWERTY_G]    = (uint16_t**)QWERTY_GAMING,
+  [_QWERTY_SG]   = (uint16_t**)QWERTY_SHIFTED_GAMING,
+  [_KEYPAD_SYMB] = (uint16_t**)KEYPAD_AND_SYMBOLS,
+  [_EXTRA_SYMB]  = (uint16_t**)EXTRA_SYMBOLS,
+  [_MOVEMENT]    = (uint16_t**)MOVEMENT,
+  [_SHORTCUTS]   = (uint16_t**)SHORTCUTS,
 };
 
 const uint16_t PROGMEM combo0[] = { KC_F, KC_O, KC_U, COMBO_END};
