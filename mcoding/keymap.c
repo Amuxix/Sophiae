@@ -60,8 +60,8 @@ const uint16_t CANARY_GAMING[MATRIX_ROWS][MATRIX_COLS] = LAYOUT_moonlander(
   _______,          XXXXXXX,          KC_2,             KC_3,             KC_4,             KC_5,             _______,          _______,          KC_6,             KC_7,             KC_8,             KC_9,             XXXXXXX,          XXXXXXX,
   _______,          KC_1,             _______,          _______,          _______,          _______,          _______,          _______,          _______,          _______,          _______,          _______,          KC_0,             XXXXXXX,
   KC_LALT,          LALT_T(KC_W),     KC_R,             KC_S,             KC_T,             _______,          _______,          _______,          _______,          KC_N,             KC_E,             KC_I,             RALT_T(KC_QUOTE), KC_RALT,
-  KC_LSFT,          LSFT_T(KC_C),     _______,          _______,          _______,          _______,          _______,          _______,          _______,          _______,          _______,          _______,          RSFT_T(KC_A),     KC_RSFT,
-  KC_LCTL,          LCTL_T(KC_Q),     _______,          _______,          _______,          _______,          _______,          _______,          _______,          _______,          _______,          _______,          RCTL_T(KC_DOT),   KC_RCTL,
+  KC_LSFT,          LSFT_T(KC_C),     _______,          _______,          _______,          _______,                                              _______,          _______,          _______,          _______,          RSFT_T(KC_A),     KC_RSFT,
+  KC_LCTL,          LCTL_T(KC_Q),     _______,          _______,          _______,          _______,                                              _______,          _______,          _______,          _______,          RCTL_T(KC_DOT),   KC_RCTL,
   KC_BSPC,          _______,          _______,                                                                                                                                                          _______,          _______,          KC_SPACE
 );
 
