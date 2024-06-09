@@ -228,7 +228,7 @@ const uint8_t PROGMEM ledmap[][RGB_MATRIX_LED_COUNT][3] = {
 
 void set_led_color(int led, HSV hsv) {
   if (!hsv.h && !hsv.s && !hsv.v) {
-    rgb_matrix_set_color(led, 0, 0, 0 ;
+    rgb_matrix_set_color(led, 0, 0, 0);
   } else {
     RGB rgb = hsv_to_rgb(hsv);
     float f = (float)rgb_matrix_config.hsv.v / UINT8_MAX;
