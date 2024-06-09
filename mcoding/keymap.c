@@ -54,7 +54,7 @@ const uint16_t BASE_WIN[MATRIX_ROWS][MATRIX_COLS] = LAYOUT_moonlander(
   _______,          KC_C,             KC_J,             KC_V,             KC_D,             KC_K,                                                 KC_X,             KC_H,             KC_COLN,          KC_COMMA,         KC_A,             _______,
   _______,          KC_Q,             TD(DANCE_0),      TD(DANCE_1),      LT_KPD(KC_ESC),   TD(DANCE_2),                                          TD(DANCE_5),      LT_KPD(KC_DEL),   TD(DANCE_3),      TD(DANCE_4),      KC_DOT,           _______,
   LSFT_T(KC_BSPC),  LT_MOV(KC_TAB),   _______,                                                                                                                                                          KC_APPLICATION,   LT_SYM(KC_ENTER), RSFT_T(KC_SPACE)
-)
+);
 
 const uint16_t CANARY_GAMING[MATRIX_ROWS][MATRIX_COLS] = LAYOUT_moonlander(
   _______,          XXXXXXX,          KC_2,             KC_3,             KC_4,             KC_5,             _______,          _______,          KC_6,             KC_7,             KC_8,             KC_9,             XXXXXXX,          XXXXXXX,
@@ -63,7 +63,7 @@ const uint16_t CANARY_GAMING[MATRIX_ROWS][MATRIX_COLS] = LAYOUT_moonlander(
   KC_LSFT,          LSFT_T(KC_C),     _______,          _______,          _______,          _______,          _______,          _______,          _______,          _______,          _______,          _______,          RSFT_T(KC_A),     KC_RSFT,
   KC_LCTL,          LCTL_T(KC_Q),     _______,          _______,          _______,          _______,          _______,          _______,          _______,          _______,          _______,          _______,          RCTL_T(KC_DOT),   KC_RCTL,
   KC_BSPC,          _______,          _______,          _______,          _______,          KC_SPACE                                                                                                    _______,          _______,          KC_SPACE
-)
+);
 
 const uint16_t QWERTY_GAMING[MATRIX_ROWS][MATRIX_COLS] = LAYOUT_moonlander(
   _______,          KC_1,             KC_2,             KC_3,             KC_4,             KC_5,             _______,          _______,          KC_6,             KC_7,             KC_8,             KC_9,             XXXXXXX,          XXXXXXX,
@@ -72,7 +72,7 @@ const uint16_t QWERTY_GAMING[MATRIX_ROWS][MATRIX_COLS] = LAYOUT_moonlander(
   KC_LSFT,          KC_Z,             KC_X,             KC_C,             KC_V,             KC_B,                                                 KC_N,             KC_M,             _______,          _______,          KC_QUOTE,         KC_RSFT,
   KC_LCTL,          XXXXXXX,          _______,          _______,          _______,          _______,                                              _______,          _______,          _______,          _______,          _______,          KC_RCTL,
   KC_SPACE,         _______,          _______,                                                                                                                                                          TD(DANCE_6),      TD(DANCE_7),      KC_BSPC
-)
+);
 
 const uint16_t QWERTY_SHIFTED_GAMING[MATRIX_ROWS][MATRIX_COLS] = LAYOUT_moonlander(
   _______,          _______,          KC_1,             KC_2,             KC_3,             KC_4,             KC_5,             _______,          KC_6,             KC_7,             KC_8,             KC_9,             KC_0,             XXXXXXX,
@@ -81,7 +81,7 @@ const uint16_t QWERTY_SHIFTED_GAMING[MATRIX_ROWS][MATRIX_COLS] = LAYOUT_moonland
   KC_LSFT,          KC_LSFT,          KC_Z,             KC_X,             KC_C,             KC_V,                                                 KC_B,             KC_N,             KC_M,             KC_COLN,          KC_COMMA,         KC_RSFT,
   KC_LCTL,          KC_LCTL,          _______,          _______,          _______,          _______,                                              _______,          _______,          _______,          _______,          _______,          KC_RCTL,
   KC_SPACE,         _______,          KC_TAB,                                                                                                                                                           _______,          _______,          KC_BSPC
-)
+);
 
 const uint16_t KEYPAD_AND_SYMBOLS[MATRIX_ROWS][MATRIX_COLS] = LAYOUT_moonlander(
   XXXXXXX,          XXXXXXX,          KC_F14,           KC_F15,           KC_F16,           KC_F17,           _______,          _______,          KC_F18,           KC_F19,           KC_F20,           KC_F21,           XXXXXXX,          KC_F23,
@@ -90,7 +90,7 @@ const uint16_t KEYPAD_AND_SYMBOLS[MATRIX_ROWS][MATRIX_COLS] = LAYOUT_moonlander(
   XXXXXXX,          ST_MACRO_4,       KC_RBRC,          KC_RCBR,          KC_RPRN,          KC_RABK,                                              KC_KP_PLUS,       KC_KP_1,          KC_KP_2,          KC_KP_3,          KC_KP_ASTERISK,   XXXXXXX,
   XXXXXXX,          ST_MACRO_5,       XXXXXXX,          XXXXXXX,          _______,          _______,                                              _______,          _______,          KC_KP_0,          KC_EQUAL,         KC_KP_DOT,        XXXXXXX,
   _______,          _______,          _______,                                                                                                                                                          KC_PSCR,          _______,          _______
-)
+);
 
 const uint16_t EXTRA_SYMBOLS[MATRIX_ROWS][MATRIX_COLS] = LAYOUT_moonlander(
   XXXXXXX,          XXXXXXX,          KC_F2,            KC_F3,            KC_F4,            KC_F5,            _______,          _______,          KC_F6,            KC_F7,            KC_F8,            KC_F9,            XXXXXXX,          KC_F11,
@@ -99,7 +99,7 @@ const uint16_t EXTRA_SYMBOLS[MATRIX_ROWS][MATRIX_COLS] = LAYOUT_moonlander(
   DM_RSTP,          KC_EXLM,          KC_BSLS,          KC_AT,            KC_DQUO,          KC_PIPE,                                              XXXXXXX,          XXXXXXX,          XXXXXXX,          XXXXXXX,          XXXXXXX,          XXXXXXX,
   DM_REC2,          ST_MACRO_6,       XXXXXXX,          XXXXXXX,          _______,          _______,                                              _______,          _______,          XXXXXXX,          XXXXXXX,          XXXXXXX,          XXXXXXX,
   _______,          _______,          _______,                                                                                                                                                          _______,          _______,          _______
-)
+);
 
 const uint16_t MOVEMENT[MATRIX_ROWS][MATRIX_COLS] = LAYOUT_moonlander(
   XXXXXXX,          XXXXXXX,          KC_F2,            KC_F3,            KC_F4,            KC_F5,            _______,          _______,          KC_F6,            KC_F7,            KC_F8,            KC_F9,            XXXXXXX,          KC_F11,
@@ -108,7 +108,7 @@ const uint16_t MOVEMENT[MATRIX_ROWS][MATRIX_COLS] = LAYOUT_moonlander(
   XXXXXXX,          XXXXXXX,          XXXXXXX,          XXXXXXX,          XXXXXXX,          XXXXXXX,                                              KC_HOME,          KC_PGDN,          KC_PAGE_UP,       KC_END,           KC_MPLY,          XXXXXXX,
   XXXXXXX,          XXXXXXX,          XXXXXXX,          XXXXXXX,          _______,          _______,                                              _______,          KC_VOLD,          KC_MUTE,          KC_VOLU,          KC_MPRV,          XXXXXXX,
   _______,          _______,          _______,                                                                                                                                                          _______,          _______,          _______
-)
+);
 
 const uint16_t SHORTCUTS[MATRIX_ROWS][MATRIX_COLS] = LAYOUT_moonlander(
   XXXXXXX,          XXXXXXX,          TO(_CANARY_G),      TO(_QWERTY_G),    TO(_QWERTY_SG),   XXXXXXX,          XXXXXXX,          XXXXXXX,          XXXXXXX,          XXXXXXX,          XXXXXXX,          XXXXXXX,          XXXXXXX,          XXXXXXX,
@@ -117,7 +117,7 @@ const uint16_t SHORTCUTS[MATRIX_ROWS][MATRIX_COLS] = LAYOUT_moonlander(
   XXXXXXX,          KC_CALCULATOR,    XXXXXXX,            XXXXXXX,          XXXXXXX,          XXXXXXX,                                              XXXXXXX,          XXXXXXX,          XXXXXXX,          XXXXXXX,          XXXXXXX,          XXXXXXX,
   XXXXXXX,          C_S_T(KC_ESCAPE), _______,            _______,          XXXXXXX,          _______,                                              _______,          XXXXXXX,          _______,          _______,          XXXXXXX,          XXXXXXX,
   ST_MACRO_8,       XXXXXXX,          XXXXXXX,                                                                                                                                                            XXXXXXX,          XXXXXXX,          ST_MACRO_10
-)
+);
 // clang-format on
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
