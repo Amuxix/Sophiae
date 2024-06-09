@@ -47,7 +47,7 @@ enum layers {
 #define LT_MOV(key) LT(_MOVEMENT, key)
 
 // clang-format off
-const uint16_t PROGMEM BASE_WIN[MATRIX_ROWS][MATRIX_COLS] = LAYOUT_moonlander(
+const uint16_t BASE_WIN[MATRIX_ROWS][MATRIX_COLS] = LAYOUT_moonlander(
   DM_PLY1,          _______,          KC_F2,            KC_F3,            KC_F4,            KC_F5,            _______,          _______,          KC_F6,            KC_F7,            KC_F8,            KC_F9,            _______,          KC_F11,
   DM_PLY2,          KC_F1,            KC_L,             KC_Y,             KC_P,             KC_B,             _______,          _______,          KC_Z,             KC_F,             KC_O,             KC_U,             KC_F10,           KC_F12,
   _______,          KC_W,             LGUI_T(KC_R),     LALT_T(KC_S),     LCTL_T(KC_T),     KC_G,             CW_TOGG,          OSL(_SHORTCUTS),  KC_M,             LCTL_T(KC_N),     LALT_T(KC_E),     LGUI_T(KC_I),     KC_QUOTE,         _______,
@@ -121,14 +121,14 @@ const uint16_t SHORTCUTS[MATRIX_ROWS][MATRIX_COLS] = LAYOUT_moonlander(
 // clang-format on
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
-  [_BASE] = BASE_WIN,
-  [_CANARY_G] = CANARY_GAMING,
-  [_QWERTY_G] = QWERTY_GAMING,
-  [_QWERTY_SG] = QWERTY_SHIFTED_GAMING,
-  [_KEYPAD_SYMB] = KEYPAD_AND_SYMBOLS,
-  [_EXTRA_SYMB] = EXTRA_SYMBOLS,
-  [_MOVEMENT] = MOVEMENT,
-  [_SHORTCUTS] = SHORTCUTS,
+  [_BASE] = &BASE_WIN,
+  [_CANARY_G] = &CANARY_GAMING,
+  [_QWERTY_G] = &QWERTY_GAMING,
+  [_QWERTY_SG] = &QWERTY_SHIFTED_GAMING,
+  [_KEYPAD_SYMB] = &KEYPAD_AND_SYMBOLS,
+  [_EXTRA_SYMB] = &EXTRA_SYMBOLS,
+  [_MOVEMENT] = &MOVEMENT,
+  [_SHORTCUTS] = &SHORTCUTS,
 };
 
 const uint16_t PROGMEM combo0[] = { KC_F, KC_O, KC_U, COMBO_END};
