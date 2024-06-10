@@ -18,12 +18,12 @@
 
 uint8_t PROGMEM ledmap[][RGB_MATRIX_LED_COUNT][3] = {
     [_BASE] = LED_MATRIX_LAYOUT_moonlander(
-      LAVENDER_TEA,  _____________, LAVENDER_TEA,  LAVENDER_TEA,  LAVENDER_TEA,  LAVENDER_TEA,  _____________,                _____________, LAVENDER_TEA,  LAVENDER_TEA,  LAVENDER_TEA,  LAVENDER_TEA,  _____________, LAVENDER_TEA, 
-      LAVENDER_TEA,  LAVENDER_TEA,  LAVENDER_TEA,  LAVENDER_TEA,  LAVENDER_TEA,  LAVENDER_TEA,  _____________,                _____________, LAVENDER_TEA,  LAVENDER_TEA,  LAVENDER_TEA,  LAVENDER_TEA,  LAVENDER_TEA,  LAVENDER_TEA, 
+      LAVENDER_TEA,  _____________, LAVENDER_TEA,  LAVENDER_TEA,  LAVENDER_TEA,  LAVENDER_TEA,  _____________,                _____________, LAVENDER_TEA,  LAVENDER_TEA,  LAVENDER_TEA,  LAVENDER_TEA,  _____________, LAVENDER_TEA,
+      LAVENDER_TEA,  LAVENDER_TEA,  LAVENDER_TEA,  LAVENDER_TEA,  LAVENDER_TEA,  LAVENDER_TEA,  _____________,                _____________, LAVENDER_TEA,  LAVENDER_TEA,  LAVENDER_TEA,  LAVENDER_TEA,  LAVENDER_TEA,  LAVENDER_TEA,
       _____________, LAVENDER_TEA,  FOXY_FUCHSIA,  FOXY_FUCHSIA,  FOXY_FUCHSIA,  LAVENDER_TEA,  VITAMIN_C,                    TRAD_ROSE,     LAVENDER_TEA,  FOXY_FUCHSIA,  FOXY_FUCHSIA,  FOXY_FUCHSIA,  LAVENDER_TEA,  _____________,
       _____________, FOXY_FUCHSIA,  LAVENDER_TEA,  LAVENDER_TEA,  LAVENDER_TEA,  LAVENDER_TEA,                                               LAVENDER_TEA,  LAVENDER_TEA,  LAVENDER_TEA,  LAVENDER_TEA,  FOXY_FUCHSIA,  _____________,
       _____________, LAVENDER_TEA,  LAVENDER_TEA,  LAVENDER_TEA,  VITAMIN_C,                    VITAMIN_C,                    VITAMIN_C,                    VITAMIN_C,     LAVENDER_TEA,  LAVENDER_TEA,  LAVENDER_TEA,  _____________,
-                                                                  FOXY_FUCHSIA,  LAVENDER_TEA,  LAVENDER_TEA,                 LAVENDER_TEA,  LAVENDER_TEA,  FOXY_FUCHSIA 
+                                                                  FOXY_FUCHSIA,  LAVENDER_TEA,  LAVENDER_TEA,                 LAVENDER_TEA,  LAVENDER_TEA,  FOXY_FUCHSIA
     ),
 
     [_CANARY_G] = LED_MATRIX_LAYOUT_moonlander(
@@ -32,25 +32,25 @@ uint8_t PROGMEM ledmap[][RGB_MATRIX_LED_COUNT][3] = {
       _____________, LAVENDER_TEA,  FOXY_FUCHSIA,  FOXY_FUCHSIA,  FOXY_FUCHSIA,  LAVENDER_TEA,  VITAMIN_C,                    TRAD_ROSE,     LAVENDER_TEA,  FOXY_FUCHSIA,  FOXY_FUCHSIA,  FOXY_FUCHSIA,  LAVENDER_TEA,  _____________,
       _____________, FOXY_FUCHSIA,  LAVENDER_TEA,  LAVENDER_TEA,  LAVENDER_TEA,  LAVENDER_TEA,                                               LAVENDER_TEA,  LAVENDER_TEA,  LAVENDER_TEA,  LAVENDER_TEA,  FOXY_FUCHSIA,  _____________,
       _____________, LAVENDER_TEA,  LAVENDER_TEA,  LAVENDER_TEA,  VITAMIN_C,                    VITAMIN_C,                    VITAMIN_C,                    VITAMIN_C,     LAVENDER_TEA,  LAVENDER_TEA,  LAVENDER_TEA,  _____________,
-                                                                  FOXY_FUCHSIA,  LAVENDER_TEA,  LAVENDER_TEA,                 LAVENDER_TEA,  LAVENDER_TEA,  FOXY_FUCHSIA 
+                                                                  FOXY_FUCHSIA,  LAVENDER_TEA,  LAVENDER_TEA,                 LAVENDER_TEA,  LAVENDER_TEA,  FOXY_FUCHSIA
     ),
 
     [_QWERTY_G] = LED_MATRIX_LAYOUT_moonlander(
       FOXY_FUCHSIA,  FOXY_FUCHSIA,  FOXY_FUCHSIA,  FOXY_FUCHSIA,  FOXY_FUCHSIA,  FOXY_FUCHSIA,  _____________,                _____________, FOXY_FUCHSIA,  FOXY_FUCHSIA,  FOXY_FUCHSIA,  FOXY_FUCHSIA,  _____________, _____________,
       FOXY_FUCHSIA,  FOXY_FUCHSIA,  VITAMIN_C,     FOXY_FUCHSIA,  FOXY_FUCHSIA,  FOXY_FUCHSIA,  _____________,                _____________, FOXY_FUCHSIA,  FOXY_FUCHSIA,  FOXY_FUCHSIA,  FOXY_FUCHSIA,  FOXY_FUCHSIA,  _____________,
-      VITAMIN_C,     VITAMIN_C,     VITAMIN_C,     VITAMIN_C,     FOXY_FUCHSIA,  FOXY_FUCHSIA,  VITAMIN_C,                    TRAD_ROSE,     FOXY_FUCHSIA,  VITAMIN_C,     VITAMIN_C,     VITAMIN_C,     FOXY_FUCHSIA,  VITAMIN_C,    
-      VITAMIN_C,     FOXY_FUCHSIA,  FOXY_FUCHSIA,  FOXY_FUCHSIA,  FOXY_FUCHSIA,  FOXY_FUCHSIA,                                               FOXY_FUCHSIA,  FOXY_FUCHSIA,  FOXY_FUCHSIA,  FOXY_FUCHSIA,  VITAMIN_C,     VITAMIN_C,    
-      VITAMIN_C,     _____________, FOXY_FUCHSIA,  FOXY_FUCHSIA,  VITAMIN_C,                    VITAMIN_C,                    VITAMIN_C,                    VITAMIN_C,     FOXY_FUCHSIA,  FOXY_FUCHSIA,  FOXY_FUCHSIA,  VITAMIN_C,    
-                                                                  VITAMIN_C,     FOXY_FUCHSIA,  FOXY_FUCHSIA,                 FOXY_FUCHSIA,  FOXY_FUCHSIA,  VITAMIN_C    
+      VITAMIN_C,     VITAMIN_C,     VITAMIN_C,     VITAMIN_C,     FOXY_FUCHSIA,  FOXY_FUCHSIA,  VITAMIN_C,                    TRAD_ROSE,     FOXY_FUCHSIA,  VITAMIN_C,     VITAMIN_C,     VITAMIN_C,     FOXY_FUCHSIA,  VITAMIN_C,
+      VITAMIN_C,     FOXY_FUCHSIA,  FOXY_FUCHSIA,  FOXY_FUCHSIA,  FOXY_FUCHSIA,  FOXY_FUCHSIA,                                               FOXY_FUCHSIA,  FOXY_FUCHSIA,  FOXY_FUCHSIA,  FOXY_FUCHSIA,  VITAMIN_C,     VITAMIN_C,
+      VITAMIN_C,     _____________, FOXY_FUCHSIA,  FOXY_FUCHSIA,  VITAMIN_C,                    VITAMIN_C,                    VITAMIN_C,                    VITAMIN_C,     FOXY_FUCHSIA,  FOXY_FUCHSIA,  FOXY_FUCHSIA,  VITAMIN_C,
+                                                                  VITAMIN_C,     FOXY_FUCHSIA,  FOXY_FUCHSIA,                 FOXY_FUCHSIA,  FOXY_FUCHSIA,  VITAMIN_C
     ),
 
     [_QWERTY_SG] = LED_MATRIX_LAYOUT_moonlander(
-      SKYAN,         SKYAN,         SKYAN,         SKYAN,         SKYAN,         SKYAN,         SKYAN,                        SKYAN,         SKYAN,         SKYAN,         SKYAN,         SKYAN,         SKYAN,         SKYAN,        
-      BABY_MOUTH,    BABY_MOUTH,    BABY_MOUTH,    BABY_MOUTH,    BABY_MOUTH,    BABY_MOUTH,    BABY_MOUTH,                   BABY_MOUTH,    BABY_MOUTH,    BABY_MOUTH,    BABY_MOUTH,    BABY_MOUTH,    BABY_MOUTH,    BABY_MOUTH,  
-      WHITE,         WHITE,         WHITE,         WHITE,         WHITE,         WHITE,         WHITE,                        WHITE,         WHITE,         WHITE,         WHITE,         WHITE,         WHITE,         WHITE,    
-      BABY_MOUTH,    BABY_MOUTH,    BABY_MOUTH,    BABY_MOUTH,    BABY_MOUTH,    BABY_MOUTH,                                                 BABY_MOUTH,    BABY_MOUTH,    BABY_MOUTH,    BABY_MOUTH,    BABY_MOUTH,    BABY_MOUTH,  
-      SKYAN,         SKYAN,         SKYAN,         SKYAN,         SKYAN,                        BABY_MOUTH,                   BABY_MOUTH,                   SKYAN,         SKYAN,         SKYAN,         SKYAN,         SKYAN,        
-                                                                  SKYAN,         SKYAN,         SKYAN,                        SKYAN,         SKYAN,         SKYAN        
+      SKYAN,         SKYAN,         SKYAN,         SKYAN,         SKYAN,         SKYAN,         SKYAN,                        SKYAN,         SKYAN,         SKYAN,         SKYAN,         SKYAN,         SKYAN,         SKYAN,
+      BABY_MOUTH,    BABY_MOUTH,    BABY_MOUTH,    BABY_MOUTH,    BABY_MOUTH,    BABY_MOUTH,    BABY_MOUTH,                   BABY_MOUTH,    BABY_MOUTH,    BABY_MOUTH,    BABY_MOUTH,    BABY_MOUTH,    BABY_MOUTH,    BABY_MOUTH,
+      WHITE,         WHITE,         WHITE,         WHITE,         WHITE,         WHITE,         WHITE,                        WHITE,         WHITE,         WHITE,         WHITE,         WHITE,         WHITE,         WHITE,
+      BABY_MOUTH,    BABY_MOUTH,    BABY_MOUTH,    BABY_MOUTH,    BABY_MOUTH,    BABY_MOUTH,                                                 BABY_MOUTH,    BABY_MOUTH,    BABY_MOUTH,    BABY_MOUTH,    BABY_MOUTH,    BABY_MOUTH,
+      SKYAN,         SKYAN,         SKYAN,         SKYAN,         SKYAN,                        BABY_MOUTH,                   BABY_MOUTH,                   SKYAN,         SKYAN,         SKYAN,         SKYAN,         SKYAN,
+                                                                  SKYAN,         SKYAN,         SKYAN,                        SKYAN,         SKYAN,         SKYAN
     ),
 
     [_KEYPAD_SYMB] = LED_MATRIX_LAYOUT_moonlander(
@@ -63,7 +63,7 @@ uint8_t PROGMEM ledmap[][RGB_MATRIX_LED_COUNT][3] = {
     ),
 
     [_EXTRA_SYMB] = LED_MATRIX_LAYOUT_moonlander(
-      _____________, _____________, LAVENDER_TEA,  LAVENDER_TEA,  LAVENDER_TEA,  LAVENDER_TEA,  _____________,                _____________, LAVENDER_TEA,  LAVENDER_TEA,  LAVENDER_TEA,  LAVENDER_TEA,  _____________, LAVENDER_TEA, 
+      _____________, _____________, LAVENDER_TEA,  LAVENDER_TEA,  LAVENDER_TEA,  LAVENDER_TEA,  _____________,                _____________, LAVENDER_TEA,  LAVENDER_TEA,  LAVENDER_TEA,  LAVENDER_TEA,  _____________, LAVENDER_TEA,
       _____________, LAVENDER_TEA,  HOT_BUTTER,    HOT_BUTTER,    HOT_BUTTER,    HOT_BUTTER,    _____________,                _____________, _____________, _____________, _____________, _____________, LAVENDER_TEA,  LAVENDER_TEA,
       HOT_BUTTER,    HOT_BUTTER,    SOIL_AVAGDDU,  SOIL_AVAGDDU,  SOIL_AVAGDDU,  HOT_BUTTER,    VITAMIN_C,                    LAVENDER_TEA,  _____________, SOIL_AVAGDDU,  SOIL_AVAGDDU,  SOIL_AVAGDDU,  _____________, _____________,
       HOT_BUTTER,    SOIL_AVAGDDU,  HOT_BUTTER,    HOT_BUTTER,    HOT_BUTTER,    HOT_BUTTER,                                                 _____________, _____________, _____________, _____________, _____________, _____________,
@@ -72,7 +72,7 @@ uint8_t PROGMEM ledmap[][RGB_MATRIX_LED_COUNT][3] = {
     ),
 
     [_MOVEMENT] = LED_MATRIX_LAYOUT_moonlander(
-      _____________, _____________, LAVENDER_TEA,  LAVENDER_TEA,  LAVENDER_TEA,  LAVENDER_TEA,  _____________,                _____________, LAVENDER_TEA,  LAVENDER_TEA,  LAVENDER_TEA,  LAVENDER_TEA,  LAVENDER_TEA,  LAVENDER_TEA, 
+      _____________, _____________, LAVENDER_TEA,  LAVENDER_TEA,  LAVENDER_TEA,  LAVENDER_TEA,  _____________,                _____________, LAVENDER_TEA,  LAVENDER_TEA,  LAVENDER_TEA,  LAVENDER_TEA,  LAVENDER_TEA,  LAVENDER_TEA,
       _____________, LAVENDER_TEA,  _____________, _____________, _____________, _____________, _____________,                _____________, SKY_BLUE,      SKY_BLUE,      SKY_BLUE,      SKY_BLUE,      LAVENDER_TEA,  LAVENDER_TEA,
       _____________, _____________, SAPPHIRE_BLUE, SAPPHIRE_BLUE, SAPPHIRE_BLUE, _____________, VITAMIN_C,                     FOXY_FUCHSIA, SKY_BLUE,      SAPPHIRE_BLUE, SAPPHIRE_BLUE, SAPPHIRE_BLUE, SKY_BLUE,      _____________,
       _____________, _____________, _____________, _____________, _____________, _____________,                                              SKY_BLUE,      SKY_BLUE,      SKY_BLUE,      SKY_BLUE,      SAPPHIRE_BLUE, _____________,
