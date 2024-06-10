@@ -1,6 +1,7 @@
 #include QMK_KEYBOARD_H
 #include "version.h"
 #include "i18n.h"
+#include "moonlander.h"
 #define MOON_LED_LEVEL LED_LEVEL
 
 enum custom_keycodes {
