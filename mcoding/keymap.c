@@ -13,7 +13,7 @@
 // clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [BASE] = LAYOUT_moonlander(
-    DM_PLY1,          _______,          KC_F2,            KC_F3,            KC_F4,            KC_F5,            _______,                    _______,          KC_F6,            KC_F7,            KC_F8,            KC_F9,            _______,          KC_F11,
+    DM_PLY1,          _______,          KC_F2,            KC_F3,            KC_F4,            KC_F5,            CG_TOGG,                    _______,          KC_F6,            KC_F7,            KC_F8,            KC_F9,            _______,          KC_F11,
     DM_PLY2,          KC_F1,            KC_L,             KC_Y,             KC_P,             KC_B,             _______,                    _______,          KC_Z,             KC_F,             KC_O,             KC_U,             KC_F10,           KC_F12,
     _______,          KC_W,             LGUI_T(KC_R),     LALT_T(KC_S),     LCTL_T(KC_T),     KC_G,             CW_TOGG,                    OSL(SHORTCUTS),   KC_M,             LCTL_T(KC_N),     LALT_T(KC_E),     LGUI_T(KC_I),     KC_QUOTE,         _______,
     _______,          KC_C,             KC_J,             KC_V,             KC_D,             KC_K,                                                           KC_X,             KC_H,             KC_COLN,          KC_COMMA,         KC_A,             _______,
@@ -68,6 +68,22 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     XXXXXXX,          XXXXXXX,          XXXXXXX,          XXXXXXX,          _______,                            _______,                    _______,                            KC_VOLD,          KC_MUTE,          KC_VOLU,          KC_MPRV,          XXXXXXX,
                                                                             _______,          _______,          _______,                    _______,          _______,          _______
   ),
+  /*[MAC_L] = LAYOUT_moonlander(
+    _______,          _______,          _______,          _______,          _______,          _______,          _______,                    _______,          _______,          _______,          _______,          _______,          _______,          _______,
+    _______,          _______,          _______,          _______,          _______,          _______,          _______,                    _______,          _______,          _______,          _______,          _______,          _______,          _______,
+    _______,          _______,          LCTL_T(_______),  _______,          LGUI_T(_______),  _______,          _______,                    _______,          _______,          _______,          _______,          _______,          _______,          _______,
+    _______,          _______,          _______,          _______,          _______,          _______,                                                        _______,          _______,          _______,          _______,          _______,          _______,
+    _______,          _______,          TD(DANCE_11),     TD(DANCE_12),     _______,                            _______,                    _______,                            _______,          _______,          _______,          _______,          _______,
+                                                                            _______,          _______,          _______,                    _______,          _______,          _______
+  ),
+  [MAC_R] = LAYOUT_moonlander(
+    _______,          _______,          _______,          _______,          _______,          _______,          _______,                    _______,          _______,          _______,          _______,          _______,          _______,          _______,
+    _______,          _______,          _______,          _______,          _______,          _______,          _______,                    _______,          _______,          _______,          _______,          _______,          _______,          _______,
+    _______,          _______,          _______,          _______,          _______,          _______,          _______,                    _______,          _______,          LGUI_T(_______),  _______,          LCTL_T(_______),  _______,          _______,
+    _______,          _______,          _______,          _______,          _______,          _______,                                                        _______,          _______,          _______,          _______,          _______,          _______,
+    _______,          _______,          _______,          _______,          _______,                            _______,                    _______,                            _______,          _______,          _______,          _______,          _______,
+                                                                            _______,          _______,          _______,                    _______,          _______,          _______
+  ),*/
   [SHORTCUTS] = LAYOUT_moonlander(
     XXXXXXX,          XXXXXXX,          TO(CANARY_G),       TO(QWERTY_G),   TO(QWERTY_SG),    XXXXXXX,          XXXXXXX,                    XXXXXXX,          XXXXXXX,          XXXXXXX,          XXXXXXX,          XXXXXXX,          XXXXXXX,          XXXXXXX,
     XXXXXXX,          TO(BASE),         XXXXXXX,            XXXXXXX,        XXXXXXX,          ST_MACRO_7,       XXXXXXX,                    XXXXXXX,          LSA_T(KC_Z),      XXXXXXX,          XXXXXXX,          XXXXXXX,          XXXXXXX,          XXXXXXX,
@@ -156,7 +172,9 @@ void keyboard_post_init_user(void) {
   rgb_matrix_enable();
 }
 
-void set_led_color(int led, HSV hsv) {
+void set_led_color(int led, HSV hsv, bool force) {
+  if (led == CAPS_WORDS_LED_ID && is_caps_word_on()) return;
+  if (led == GUI_CTRL_SWAP_LED_ID && keymap_config.swap_lctl_lgui) return;
   if (!hsv.h && !hsv.s && !hsv.v) {
     rgb_matrix_set_color(led, 0, 0, 0);
   } else {
@@ -172,7 +190,7 @@ void set_led_color_from_layermap(int layer, int led) {
       .s = pgm_read_byte(&ledmap[layer][led][1]),
       .v = pgm_read_byte(&ledmap[layer][led][2]),
     };
-    set_led_color(led, hsv);
+    set_led_color(led, hsv, false);
 }
 
 void set_layer_color(int layer) {
@@ -221,13 +239,13 @@ bool rgb_matrix_indicators_user(void) {
 
 void caps_word_set_user(bool active) {
     if (active) {
-        //HSV hsv = {.h = 0, .s = 245, .v = 245}
-        //set_led_color(31, hsv)
+        HSV hsv = {.h = 0, .s = 0, .v = 0};
+        set_led_color(CAPS_WORDS_LED_ID, hsv, true);
         ML_LED_3(true);
         ML_LED_6(true);
     } else {
-        //HSV hsv = {.h = 0, .s = 0, .v = 0}
-        //set_led_color(31, hsv)
+        uint8_t layer = get_highest_layer(layer_state);
+        set_led_color_from_layermap(layer, CAPS_WORDS_LED_ID);
         ML_LED_3(false);
         ML_LED_6(false);
     }
