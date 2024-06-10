@@ -112,7 +112,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     XXXXXXX,          XXXXXXX,          XXXXXXX,            XXXXXXX,        XXXXXXX,          XXXXXXX,          XXXXXXX,                    QK_LLCK,          XXXXXXX,          XXXXXXX,          XXXXXXX,          ST_MACRO_9,       XXXXXXX,          XXXXXXX,
     XXXXXXX,          KC_CALCULATOR,    XXXXXXX,            XXXXXXX,        XXXXXXX,          XXXXXXX,                                                        XXXXXXX,          XXXXXXX,          XXXXXXX,          XXXXXXX,          XXXXXXX,          XXXXXXX,
     XXXXXXX,          C_S_T(KC_ESC),    _______,            _______,        XXXXXXX,                            _______,                    _______,                            XXXXXXX,          _______,          _______,          XXXXXXX,          XXXXXXX,
-                                                                            ST_MACRO_8,       XXXXXXX,          XXXXXXX,                    XXXXXXX,          XXXXXXX,          ST_MACRO_10,
+                                                                            ST_MACRO_8,       XXXXXXX,          XXXXXXX,                    XXXXXXX,          XXXXXXX,          ST_MACRO_10
   ),
 };
 // clang-format on
