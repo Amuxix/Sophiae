@@ -19,6 +19,39 @@
 #define CAPS_WORDS_LED_ID 31
 #define GUI_CTRL_SWAP_LED_ID 29
 
+extern rgb_config_t rgb_matrix_config;
+
+void keyboard_post_init_user(void) {
+  rgb_matrix_enable();
+}
+
+void set_led_color(int led, HSV hsv, bool force) {
+  if (led == CAPS_WORDS_LED_ID && is_caps_word_on()) return;
+  if (led == GUI_CTRL_SWAP_LED_ID && keymap_config.swap_lctl_lgui) return;
+  if (!hsv.h && !hsv.s && !hsv.v) {
+    rgb_matrix_set_color(led, 0, 0, 0);
+  } else {
+    RGB rgb = hsv_to_rgb(hsv);
+    float f = (float)rgb_matrix_config.hsv.v / UINT8_MAX;
+    rgb_matrix_set_color(led, f * rgb.r, f * rgb.g, f * rgb.b);
+  }
+}
+
+void set_led_color_from_layermap(int layer, int led) {
+    HSV hsv = {
+      .h = pgm_read_byte(&ledmap[layer][led][0]),
+      .s = pgm_read_byte(&ledmap[layer][led][1]),
+      .v = pgm_read_byte(&ledmap[layer][led][2]),
+    };
+    set_led_color(led, hsv, false);
+}
+
+void set_layer_color(int layer) {
+  for (int led = 0; led < RGB_MATRIX_LED_COUNT; led++) {
+    set_led_color_from_layermap(layer, led);
+  }
+}
+
 // clang-format off
 uint8_t PROGMEM ledmap[][RGB_MATRIX_LED_COUNT][3] = {
     [BASE] = LED_LAYOUT_moonlander(
