@@ -1,4 +1,3 @@
-#include "layers.c"
 #include "ledmap.h"
 
 uint8_t PROGMEM ledmap[][RGB_MATRIX_LED_COUNT][3] = {

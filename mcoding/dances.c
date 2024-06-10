@@ -1,5 +1,3 @@
-#include "layers.c"
-
 enum tap_dance_codes {
   DANCE_0,
   DANCE_1,
