@@ -26,4 +26,4 @@
     lb61, lb62, lb63, lb51, lb52, lb53, lb41, lb42, lb43, lb31, lb32, lb33 \
 }
 
-extern uint8_t PROGMEM ledmap[][DRIVER_LED_TOTAL][3];
+extern uint8_t PROGMEM ledmap[][RGB_MATRIX_LED_COUNT][3];
