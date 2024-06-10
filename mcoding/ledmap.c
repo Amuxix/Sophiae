@@ -17,7 +17,7 @@
 #define _____________   0,  0,  0
 
 uint8_t PROGMEM ledmap[][RGB_MATRIX_LED_COUNT][3] = {
-    [_BASE] = LED_MATRIX_LAYOUT_moonlander(
+    [BASE] = LED_LAYOUT_moonlander(
       LAVENDER_TEA,  _____________, LAVENDER_TEA,  LAVENDER_TEA,  LAVENDER_TEA,  LAVENDER_TEA,  _____________,                _____________, LAVENDER_TEA,  LAVENDER_TEA,  LAVENDER_TEA,  LAVENDER_TEA,  _____________, LAVENDER_TEA,
       LAVENDER_TEA,  LAVENDER_TEA,  LAVENDER_TEA,  LAVENDER_TEA,  LAVENDER_TEA,  LAVENDER_TEA,  _____________,                _____________, LAVENDER_TEA,  LAVENDER_TEA,  LAVENDER_TEA,  LAVENDER_TEA,  LAVENDER_TEA,  LAVENDER_TEA,
       _____________, LAVENDER_TEA,  FOXY_FUCHSIA,  FOXY_FUCHSIA,  FOXY_FUCHSIA,  LAVENDER_TEA,  VITAMIN_C,                    TRAD_ROSE,     LAVENDER_TEA,  FOXY_FUCHSIA,  FOXY_FUCHSIA,  FOXY_FUCHSIA,  LAVENDER_TEA,  _____________,
@@ -26,7 +26,7 @@ uint8_t PROGMEM ledmap[][RGB_MATRIX_LED_COUNT][3] = {
                                                                   FOXY_FUCHSIA,  LAVENDER_TEA,  LAVENDER_TEA,                 LAVENDER_TEA,  LAVENDER_TEA,  FOXY_FUCHSIA
     ),
 
-    [_CANARY_G] = LED_MATRIX_LAYOUT_moonlander(
+    [CANARY_G] = LED_LAYOUT_moonlander(
       LAVENDER_TEA,  _____________, LAVENDER_TEA,  LAVENDER_TEA,  LAVENDER_TEA,  LAVENDER_TEA,  _____________,                _____________, LAVENDER_TEA,  LAVENDER_TEA,  LAVENDER_TEA,  LAVENDER_TEA,  _____________, _____________,
       LAVENDER_TEA,  LAVENDER_TEA,  LAVENDER_TEA,  LAVENDER_TEA,  LAVENDER_TEA,  LAVENDER_TEA,  _____________,                _____________, LAVENDER_TEA,  LAVENDER_TEA,  LAVENDER_TEA,  LAVENDER_TEA,  LAVENDER_TEA,  _____________,
       _____________, LAVENDER_TEA,  FOXY_FUCHSIA,  FOXY_FUCHSIA,  FOXY_FUCHSIA,  LAVENDER_TEA,  VITAMIN_C,                    TRAD_ROSE,     LAVENDER_TEA,  FOXY_FUCHSIA,  FOXY_FUCHSIA,  FOXY_FUCHSIA,  LAVENDER_TEA,  _____________,
@@ -35,7 +35,7 @@ uint8_t PROGMEM ledmap[][RGB_MATRIX_LED_COUNT][3] = {
                                                                   FOXY_FUCHSIA,  LAVENDER_TEA,  LAVENDER_TEA,                 LAVENDER_TEA,  LAVENDER_TEA,  FOXY_FUCHSIA
     ),
 
-    [_QWERTY_G] = LED_MATRIX_LAYOUT_moonlander(
+    [QWERTY_G] = LED_LAYOUT_moonlander(
       FOXY_FUCHSIA,  FOXY_FUCHSIA,  FOXY_FUCHSIA,  FOXY_FUCHSIA,  FOXY_FUCHSIA,  FOXY_FUCHSIA,  _____________,                _____________, FOXY_FUCHSIA,  FOXY_FUCHSIA,  FOXY_FUCHSIA,  FOXY_FUCHSIA,  _____________, _____________,
       FOXY_FUCHSIA,  FOXY_FUCHSIA,  VITAMIN_C,     FOXY_FUCHSIA,  FOXY_FUCHSIA,  FOXY_FUCHSIA,  _____________,                _____________, FOXY_FUCHSIA,  FOXY_FUCHSIA,  FOXY_FUCHSIA,  FOXY_FUCHSIA,  FOXY_FUCHSIA,  _____________,
       VITAMIN_C,     VITAMIN_C,     VITAMIN_C,     VITAMIN_C,     FOXY_FUCHSIA,  FOXY_FUCHSIA,  VITAMIN_C,                    TRAD_ROSE,     FOXY_FUCHSIA,  VITAMIN_C,     VITAMIN_C,     VITAMIN_C,     FOXY_FUCHSIA,  VITAMIN_C,
@@ -44,7 +44,7 @@ uint8_t PROGMEM ledmap[][RGB_MATRIX_LED_COUNT][3] = {
                                                                   VITAMIN_C,     FOXY_FUCHSIA,  FOXY_FUCHSIA,                 FOXY_FUCHSIA,  FOXY_FUCHSIA,  VITAMIN_C
     ),
 
-    [_QWERTY_SG] = LED_MATRIX_LAYOUT_moonlander(
+    [QWERTY_SG] = LED_LAYOUT_moonlander(
       SKYAN,         SKYAN,         SKYAN,         SKYAN,         SKYAN,         SKYAN,         SKYAN,                        SKYAN,         SKYAN,         SKYAN,         SKYAN,         SKYAN,         SKYAN,         SKYAN,
       BABY_MOUTH,    BABY_MOUTH,    BABY_MOUTH,    BABY_MOUTH,    BABY_MOUTH,    BABY_MOUTH,    BABY_MOUTH,                   BABY_MOUTH,    BABY_MOUTH,    BABY_MOUTH,    BABY_MOUTH,    BABY_MOUTH,    BABY_MOUTH,    BABY_MOUTH,
       WHITE,         WHITE,         WHITE,         WHITE,         WHITE,         WHITE,         WHITE,                        WHITE,         WHITE,         WHITE,         WHITE,         WHITE,         WHITE,         WHITE,
@@ -53,7 +53,7 @@ uint8_t PROGMEM ledmap[][RGB_MATRIX_LED_COUNT][3] = {
                                                                   SKYAN,         SKYAN,         SKYAN,                        SKYAN,         SKYAN,         SKYAN
     ),
 
-    [_KEYPAD_SYMB] = LED_MATRIX_LAYOUT_moonlander(
+    [KEYPAD_SYMB] = LED_LAYOUT_moonlander(
       _____________, _____________, BLINKING_TERM, BLINKING_TERM, BLINKING_TERM, BLINKING_TERM, _____________,                _____________, BLINKING_TERM, BLINKING_TERM, BLINKING_TERM, BLINKING_TERM, _____________, BLINKING_TERM,
       _____________, BLINKING_TERM, BLINKING_TERM, BLINKING_TERM, BLINKING_TERM, BLINKING_TERM, _____________,                _____________, BLINKING_TERM, BLINKING_TERM, BLINKING_TERM, BLINKING_TERM, BLINKING_TERM, BLINKING_TERM,
       _____________, BLINKING_TERM, SERICOURT,     SERICOURT,     SERICOURT,     BLINKING_TERM, VITAMIN_C,                    LAVENDER_TEA,  BLINKING_TERM, SERICOURT,     SERICOURT,     SERICOURT,     BLINKING_TERM, _____________,
@@ -62,7 +62,7 @@ uint8_t PROGMEM ledmap[][RGB_MATRIX_LED_COUNT][3] = {
                                                                   SERICOURT,     BLINKING_TERM, BLINKING_TERM,                BLINKING_TERM, BLINKING_TERM, SERICOURT
     ),
 
-    [_EXTRA_SYMB] = LED_MATRIX_LAYOUT_moonlander(
+    [EXTRA_SYMB] = LED_LAYOUT_moonlander(
       _____________, _____________, LAVENDER_TEA,  LAVENDER_TEA,  LAVENDER_TEA,  LAVENDER_TEA,  _____________,                _____________, LAVENDER_TEA,  LAVENDER_TEA,  LAVENDER_TEA,  LAVENDER_TEA,  _____________, LAVENDER_TEA,
       _____________, LAVENDER_TEA,  HOT_BUTTER,    HOT_BUTTER,    HOT_BUTTER,    HOT_BUTTER,    _____________,                _____________, _____________, _____________, _____________, _____________, LAVENDER_TEA,  LAVENDER_TEA,
       HOT_BUTTER,    HOT_BUTTER,    SOIL_AVAGDDU,  SOIL_AVAGDDU,  SOIL_AVAGDDU,  HOT_BUTTER,    VITAMIN_C,                    LAVENDER_TEA,  _____________, SOIL_AVAGDDU,  SOIL_AVAGDDU,  SOIL_AVAGDDU,  _____________, _____________,
@@ -71,7 +71,7 @@ uint8_t PROGMEM ledmap[][RGB_MATRIX_LED_COUNT][3] = {
                                                                   SOIL_AVAGDDU,  HOT_BUTTER,    HOT_BUTTER,                   HOT_BUTTER,    HOT_BUTTER,    SOIL_AVAGDDU
     ),
 
-    [_MOVEMENT] = LED_MATRIX_LAYOUT_moonlander(
+    [MOVEMENT] = LED_LAYOUT_moonlander(
       _____________, _____________, LAVENDER_TEA,  LAVENDER_TEA,  LAVENDER_TEA,  LAVENDER_TEA,  _____________,                _____________, LAVENDER_TEA,  LAVENDER_TEA,  LAVENDER_TEA,  LAVENDER_TEA,  LAVENDER_TEA,  LAVENDER_TEA,
       _____________, LAVENDER_TEA,  _____________, _____________, _____________, _____________, _____________,                _____________, SKY_BLUE,      SKY_BLUE,      SKY_BLUE,      SKY_BLUE,      LAVENDER_TEA,  LAVENDER_TEA,
       _____________, _____________, SAPPHIRE_BLUE, SAPPHIRE_BLUE, SAPPHIRE_BLUE, _____________, VITAMIN_C,                     FOXY_FUCHSIA, SKY_BLUE,      SAPPHIRE_BLUE, SAPPHIRE_BLUE, SAPPHIRE_BLUE, SKY_BLUE,      _____________,
@@ -80,7 +80,7 @@ uint8_t PROGMEM ledmap[][RGB_MATRIX_LED_COUNT][3] = {
                                                                   SAPPHIRE_BLUE,  SKY_BLUE,     SKY_BLUE,                      SKY_BLUE,     SKY_BLUE,      SAPPHIRE_BLUE
     ),
 
-    [_SHORTCUTS] = LED_MATRIX_LAYOUT_moonlander(
+    [SHORTCUTS] = LED_LAYOUT_moonlander(
       _____________, _____________, LAVENDER_TEA,  VITAMIN_C,       BABY_MOUTH,  _____________, _____________,                _____________, _____________, _____________, _____________, _____________, _____________, _____________,
       _____________, FOXY_FUCHSIA,  _____________, _____________, _____________, SKY_BLUE,      _____________,                _____________, CAMARON_PINK,  _____________, _____________, _____________, _____________, _____________,
       _____________, _____________, _____________, _____________, _____________, _____________, _____________,                LAVENDER_TEA,  _____________, _____________, _____________, SKY_BLUE,      _____________, _____________,
