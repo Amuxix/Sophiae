@@ -13,7 +13,7 @@
 // clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [BASE] = LAYOUT_moonlander(
-    DM_PLY1,          _______,          KC_F2,            KC_F3,            KC_F4,            KC_F5,            CG_TOGG,                    _______,          KC_F6,            KC_F7,            KC_F8,            KC_F9,            _______,          KC_F11,
+    DM_PLY1,          _______,          KC_F2,            KC_F3,            KC_F4,            KC_F5,            CG_TOGG_MACRO,              _______,          KC_F6,            KC_F7,            KC_F8,            KC_F9,            _______,          KC_F11,
     DM_PLY2,          KC_F1,            KC_L,             KC_Y,             KC_P,             KC_B,             _______,                    _______,          KC_Z,             KC_F,             KC_O,             KC_U,             KC_F10,           KC_F12,
     _______,          KC_W,             LGUI_T(KC_R),     LALT_T(KC_S),     LCTL_T(KC_T),     KC_G,             CW_TOGG,                    OSL(SHORTCUTS),   KC_M,             LCTL_T(KC_N),     LALT_T(KC_E),     LGUI_T(KC_I),     KC_QUOTE,         _______,
     _______,          KC_C,             KC_J,             KC_V,             KC_D,             KC_K,                                                           KC_X,             KC_H,             KC_COLN,          KC_COMMA,         KC_A,             _______,
