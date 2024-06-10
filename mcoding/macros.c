@@ -72,7 +72,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       break;
     case CG_TOGG_MACRO:
       if (record->event.pressed) {
-        tap_code(CG_TOGG);
+        tap_code16(CG_TOGG);
         if (keymap_config.swap_lctl_lgui) {
           HSV hsv = {.h = 0, .s = 0, .v = 0};
           set_led_color(CAPS_WORDS_LED_ID, hsv, true);
