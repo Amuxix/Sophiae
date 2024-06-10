@@ -29,6 +29,7 @@ enum tap_dance_codes {
   DANCE_7,
   DANCE_8,
   DANCE_9,
+  DANCE_10,
 };
 
 enum layers {
@@ -54,7 +55,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _______,          KC_W,             LGUI_T(KC_R),     LALT_T(KC_S),     LCTL_T(KC_T),     KC_G,             CW_TOGG,                    OSL(_SHORTCUTS),  KC_M,             LCTL_T(KC_N),     LALT_T(KC_E),     LGUI_T(KC_I),     KC_QUOTE,         _______,
     _______,          KC_C,             KC_J,             KC_V,             KC_D,             KC_K,                                                           KC_X,             KC_H,             KC_COLN,          KC_COMMA,         KC_A,             _______,
     _______,          KC_Q,             TD(DANCE_0),      TD(DANCE_1),      LT_KPD(KC_ESC),                     TD(DANCE_2),                TD(DANCE_5),                        LT_KPD(KC_DEL),   TD(DANCE_3),      TD(DANCE_4),      KC_DOT,           _______,
-                                                                            LSFT_T(KC_BSPC),  LT_MOV(KC_TAB),   _______,                    KC_APPLICATION,   LT_SYM(KC_ENTER), RSFT_T(KC_SPACE)
+                                                                            LSFT_T(KC_BSPC),  LT_MOV(KC_TAB),   TD(DANCE_10),               KC_APPLICATION,   LT_SYM(KC_ENTER), RSFT_T(KC_SPACE)
   ),
   [_CANARY_G] = LAYOUT_moonlander(
     _______,          XXXXXXX,          KC_2,             KC_3,             KC_4,             KC_5,             _______,                    _______,          KC_6,             KC_7,             KC_8,             KC_9,             XXXXXXX,          XXXXXXX,
@@ -140,6 +141,8 @@ uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
         case TD(DANCE_1):
             return TAPPING_TERM + 45;
         case TD(DANCE_2):
+            return TAPPING_TERM + 45;
+        case TD(DANCE_10):
             return TAPPING_TERM + 45;
         case LT_MOV(KC_TAB):
             return LONG_TAPPING_TERM;
@@ -702,6 +705,39 @@ void dance_9_reset(tap_dance_state_t *state, void *user_data) {
     }
     dance_state[9].step = 0;
 }
+void on_dance_10(tap_dance_state_t *state, void *user_data);
+void dance_10_finished(tap_dance_state_t *state, void *user_data);
+void dance_10_reset(tap_dance_state_t *state, void *user_data);
+
+void on_dance_10(tap_dance_state_t *state, void *user_data) {
+    if(state->count == 3) {
+        tap_code16(QK_REPEAT_KEY);
+        tap_code16(QK_REPEAT_KEY);
+        tap_code16(QK_REPEAT_KEY);
+    }
+    if(state->count > 3) {
+        tap_code16(QK_REPEAT_KEY);
+    }
+}
+
+void dance_10_finished(tap_dance_state_t *state, void *user_data) {
+    dance_state[10].step = dance_step(state);
+    switch (dance_state[10].step) {
+        case SINGLE_TAP: register_code16(QK_REPEAT_KEY); break;
+        case DOUBLE_TAP: register_code16(QK_ALT_REPEAT_KEY); break;
+        case DOUBLE_SINGLE_TAP: tap_code16(QK_REPEAT_KEY); register_code16(QK_REPEAT_KEY);
+    }
+}
+
+void dance_10_reset(tap_dance_state_t *state, void *user_data) {
+    wait_ms(10);
+    switch (dance_state[10].step) {
+        case SINGLE_TAP: unregister_code16(QK_REPEAT_KEY); break;
+        case DOUBLE_TAP: unregister_code16(QK_ALT_REPEAT_KEY); break;
+        case DOUBLE_SINGLE_TAP: unregister_code16(QK_REPEAT_KEY); break;
+    }
+    dance_state[10].step = 0;
+}
 
 tap_dance_action_t tap_dance_actions[] = {
         [DANCE_0] = ACTION_TAP_DANCE_FN_ADVANCED(on_dance_0, dance_0_finished, dance_0_reset),
@@ -714,4 +750,5 @@ tap_dance_action_t tap_dance_actions[] = {
         [DANCE_7] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, dance_7_finished, dance_7_reset),
         [DANCE_8] = ACTION_TAP_DANCE_FN_ADVANCED(on_dance_8, dance_8_finished, dance_8_reset),
         [DANCE_9] = ACTION_TAP_DANCE_FN_ADVANCED(on_dance_9, dance_9_finished, dance_9_reset),
+        [DANCE_10] = ACTION_TAP_DANCE_FN_ADVANCED(on_dance_10, dance_10_finished, dance_10_reset),
 };
