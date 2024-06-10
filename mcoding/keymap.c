@@ -297,7 +297,6 @@ void caps_word_set_user(bool active) {
 
 layer_state_t layer_state_set_kb(layer_state_t state) {
     state = layer_state_set_user(state);
-    if (is_launching || !keyboard_config.led_level) return state;
     bool LED_1 = false;
     bool LED_2 = false;
     bool LED_4 = false;
