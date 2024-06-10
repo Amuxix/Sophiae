@@ -3,7 +3,7 @@
 #include "i18n.h"
 #include "layers.c"
 #include "ledmap.c"
-#include "tapdances.c"
+#include "dances.c"
 #include "macros.c"
 
 #define LT_KPD(key) LT(_KEYPAD_SYMB, key)
