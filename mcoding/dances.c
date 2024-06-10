@@ -259,7 +259,7 @@ void dance_6_reset(tap_dance_state_t *state, void *user_data);
 void dance_6_finished(tap_dance_state_t *state, void *user_data) {
     dance_state[6].step = dance_step(state);
     switch (dance_state[6].step) {
-        case DOUBLE_TAP: layer_move(_BASE); break;
+        case DOUBLE_TAP: layer_move(BASE); break;
     }
 }
 
@@ -275,7 +275,7 @@ void dance_7_reset(tap_dance_state_t *state, void *user_data);
 void dance_7_finished(tap_dance_state_t *state, void *user_data) {
     dance_state[7].step = dance_step(state);
     switch (dance_state[7].step) {
-        case DOUBLE_HOLD: layer_on(_EXTRA_SYMB); break;
+        case DOUBLE_HOLD: layer_on(EXTRA_SYMB); break;
     }
 }
 
@@ -283,8 +283,8 @@ void dance_7_reset(tap_dance_state_t *state, void *user_data) {
     wait_ms(10);
     switch (dance_state[7].step) {
               case DOUBLE_HOLD:
-                if(!is_layer_locked(_EXTRA_SYMB)) {
-                  layer_off(_EXTRA_SYMB);
+                if(!is_layer_locked(EXTRA_SYMB)) {
+                  layer_off(EXTRA_SYMB);
                 }
                 break;
     }
