@@ -185,13 +185,9 @@ void caps_word_set_user(bool active) {
     if (active) {
         HSV hsv = {.h = 0, .s = 0, .v = 0};
         set_led_color(CAPS_WORDS_LED_ID, hsv, true);
-        ML_LED_3(true);
-        ML_LED_6(true);
     } else {
         uint8_t layer = get_highest_layer(layer_state);
         set_led_color_from_layermap(layer, CAPS_WORDS_LED_ID);
-        ML_LED_3(false);
-        ML_LED_6(false);
     }
 }
 
