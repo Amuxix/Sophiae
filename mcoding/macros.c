@@ -72,14 +72,15 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       break;
     case CG_TOGG_MACRO:
       if (record->event.pressed) {
-        tap_code16(CG_TOGG);
+        keymap_config.swap_lctl_lgui = !keymap_config.swap_lctl_lgui;
+        keymap_config.swap_rctl_rgui = keymap_config.swap_lctl_lgui;
         if (keymap_config.swap_lctl_lgui) {
           HSV hsv = {.h = 0, .s = 0, .v = 0};
           set_led_color(CAPS_WORDS_LED_ID, hsv, true);
           ML_LED_3(true);
         } else {
           uint8_t layer = get_highest_layer(layer_state);
-          set_led_color_from_layermap(layer, CAPS_WORDS_LED_ID);
+          set_led_color_from_layermap(layer, GUI_CTRL_SWAP_LED_ID);
           ML_LED_3(false);
         }
       }
