@@ -75,7 +75,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         keymap_config.swap_lctl_lgui = !keymap_config.swap_lctl_lgui;
         keymap_config.swap_rctl_rgui = keymap_config.swap_lctl_lgui;
         if (keymap_config.swap_lctl_lgui) {
-          HSV hsv = {.h = 0, .s = 0, .v = 0};
+          HSV hsv = {.h = 0, .s = 0, .v = 255};
           set_led_color(CAPS_WORDS_LED_ID, hsv, true);
           ML_LED_3(true);
         } else {
