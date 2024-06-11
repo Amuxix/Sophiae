@@ -134,10 +134,6 @@ uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
             return LONG_TAPPING_TERM;
         case KC_SPACE:
             return LONG_TAPPING_TERM;
-        case TD(DANCE_6):
-            return TAPPING_TERM + 70;
-        case TD(DANCE_7):
-            return TAPPING_TERM + 45;
         case MT(MOD_LGUI, KC_LBRC):
             return LONG_TAPPING_TERM;
         case MT(MOD_LGUI, KC_KP_6):
