@@ -2,13 +2,10 @@
 #include "version.h"
 #include "i18n.h"
 #include "layers.c"
+#include "keycodes.c"
 #include "ledmap.c"
 #include "dances.c"
 #include "macros.c"
-
-#define LT_KPD(key) LT(KEYPAD_SYMB, key)
-#define LT_SYM(key) LT(EXTRA_SYMB, key)
-#define LT_MOV(key) LT(MOVEMENT, key)
 
 // clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -34,7 +31,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_LALT,          KC_A,             KC_S,             KC_D,             KC_F,             KC_G,             _______,                    _______,          KC_H,             KC_J,             KC_K,             KC_L,             KC_P,             KC_RALT,
     KC_LSFT,          KC_Z,             KC_X,             KC_C,             KC_V,             KC_B,                                                           KC_N,             KC_M,             _______,          _______,          KC_QUOTE,         KC_RSFT,
     KC_LCTL,          XXXXXXX,          _______,          _______,          _______,                            _______,                    _______,                            _______,          _______,          _______,          _______,          KC_RCTL,
-                                                                            KC_SPACE,         _______,          _______,                    TD(DANCE_6),      TD(DANCE_7),      KC_BSPC
+                                                                            KC_SPACE,         _______,          _______,                    _______,          _______,          KC_BSPC
   ),
   [QWERTY_SG] = LAYOUT_moonlander(
     _______,          _______,          KC_1,             KC_2,             KC_3,             KC_4,             KC_5,                       _______,          KC_6,             KC_7,             KC_8,             KC_9,             KC_0,             XXXXXXX,
