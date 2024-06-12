@@ -75,7 +75,8 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         keymap_config.swap_lctl_lgui = !keymap_config.swap_lctl_lgui;
         keymap_config.swap_rctl_rgui = keymap_config.swap_lctl_lgui;
         if (keymap_config.swap_lctl_lgui) {
-          set_led_color(CAPS_WORDS_LED_ID, (HSV)WHITE, true);
+          rgb_matrix_set_color(CAPS_WORDS_LED_ID, 0, 0, 0)
+          //set_led_color(CAPS_WORDS_LED_ID, (HSV)WHITE, true);
         } else {
           uint8_t layer = get_highest_layer(layer_state);
           set_led_color_from_layermap(layer, GUI_CTRL_SWAP_LED_ID);
