@@ -39,21 +39,9 @@ uint8_t dance_step(tap_dance_state_t *state) {
     return MORE_TAPS;
 }
 
-#define ON_DANCE(kc) \
-  void on_dance(tap_dance_state_t *inner_state, void *inner_user_data) { \
-    if(inner_state->count == 3) { \
-        tap_code16(kc); \
-        tap_code16(kc); \
-        tap_code16(kc); \
-    } \
-    if(inner_state->count > 3) { \
-        tap_code16(kc); \
-    } \
-  }
-
 typedef void (*two_var_func) (tap_dance_state_t*, void*);
 
-two_var_func on_dance(uint16_t kc) {
+static inline two_var_func on_dance(uint16_t kc) {
   void on_dance_inner(tap_dance_state_t *inner_state, void *inner_user_data) {
     if(inner_state->count == 3) {
         tap_code16(kc);
@@ -102,7 +90,7 @@ void dance_0_reset(tap_dance_state_t *state, void *user_data) {
     dance_state[0].step = 0;
 }
 
-/*void on_dance_1(tap_dance_state_t *state, void *user_data) {
+void on_dance_1(tap_dance_state_t *state, void *user_data) {
     if(state->count == 3) {
         tap_code16(LCTL(KC_V));
         tap_code16(LCTL(KC_V));
@@ -111,10 +99,6 @@ void dance_0_reset(tap_dance_state_t *state, void *user_data) {
     if(state->count > 3) {
         tap_code16(LCTL(KC_V));
     }
-}*/
-
-void on_dance_1(tap_dance_state_t *state, void *user_data) {
-  return ON_DANCE(LCTL(KC_V))(state, user_data)
 }
 
 void dance_1_finished(tap_dance_state_t *state, void *user_data) {
