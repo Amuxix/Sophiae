@@ -15,7 +15,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _______,          KC_W,             LGUI_T(KC_R),     LALT_T(KC_S),     LCTL_T(KC_T),     KC_G,             CW_TOGG,                    OSL(SHORTCUTS),   KC_M,             LCTL_T(KC_N),     LALT_T(KC_E),     LGUI_T(KC_I),     KC_QUOTE,         _______,
     _______,          KC_C,             KC_J,             KC_V,             KC_D,             KC_K,                                                           KC_X,             KC_H,             KC_COLN,          KC_COMMA,         KC_A,             _______,
     _______,          KC_Q,             TD(DANCE_0),      TD(DANCE_1),      LT_KPD(KC_ESC),                     TD(DANCE_2),                TD(DANCE_5),                        LT_KPD(KC_DEL),   TD(DANCE_3),      TD(DANCE_4),      KC_DOT,           _______,
-                                                                            LSFT_T(KC_BSPC),  LT_MOV(KC_TAB),   TD(DANCE_8),               KC_APPLICATION,   LT_SYM(KC_ENTER), RSFT_T(KC_SPACE)
+                                                                            LSFT_T(KC_BSPC),  LT_MOV(KC_TAB),   QK_REPEAT_KEY,              KC_APPLICATION,   LT_SYM(KC_ENTER), RSFT_T(KC_SPACE)
   ),
   [CANARY_G] = LAYOUT_moonlander(
     _______,          XXXXXXX,          KC_2,             KC_3,             KC_4,             KC_5,             _______,                    _______,          KC_6,             KC_7,             KC_8,             KC_9,             XXXXXXX,          XXXXXXX,
