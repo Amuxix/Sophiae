@@ -39,7 +39,7 @@ uint8_t dance_step(tap_dance_state_t *state) {
     return MORE_TAPS;
 }
 
-/*static inline tap_dance_user_fn_t on_dance(uint16_t kc) {
+static inline tap_dance_user_fn_t on_dance(uint16_t kc) {
   void on_dance_inner(tap_dance_state_t *state, void *user_data) {
     if(state->count == 3) {
         tap_code16(kc);
@@ -51,7 +51,7 @@ uint8_t dance_step(tap_dance_state_t *state) {
     }
   }
   return on_dance_inner;
-}*/
+}
 
 #define ON_DANCE(name, kc) \
   void name(tap_dance_state_t *state, void *user_data) { \
@@ -66,8 +66,11 @@ uint8_t dance_step(tap_dance_state_t *state) {
   }
 
 
-ON_DANCE(on_dance_0, LCTL(KC_C))
+//ON_DANCE(on_dance_0, LCTL(KC_C))
 
+void on_dance_0(tap_dance_state_t *state, void *user_data) {
+  return on_dance(LCTL(KC_C))(state, user_data)
+}
 /*void on_dance_0(tap_dance_state_t *state, void *user_data) {
     if(state->count == 3) {
         tap_code16(LCTL(KC_C));
