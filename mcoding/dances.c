@@ -39,9 +39,7 @@ uint8_t dance_step(tap_dance_state_t *state) {
     return MORE_TAPS;
 }
 
-typedef void (*two_var_func) (tap_dance_state_t*, void*);
-
-static inline two_var_func on_dance(uint16_t kc) {
+static inline tap_dance_user_fn_t on_dance(uint16_t kc) {
   void on_dance_inner(tap_dance_state_t *inner_state, void *inner_user_data) {
     if(inner_state->count == 3) {
         tap_code16(kc);
