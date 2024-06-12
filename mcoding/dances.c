@@ -39,6 +39,34 @@ uint8_t dance_step(tap_dance_state_t *state) {
     return MORE_TAPS;
 }
 
+#define ON_DANCE(kc) \
+  void on_dance(tap_dance_state_t *inner_state, void *inner_user_data) { \
+    if(inner_state->count == 3) { \
+        tap_code16(kc); \
+        tap_code16(kc); \
+        tap_code16(kc); \
+    } \
+    if(inner_state->count > 3) { \
+        tap_code16(kc); \
+    } \
+  }
+
+typedef void (*two_var_func) (tap_dance_state_t*, void*);
+
+two_var_func on_dance(uint16_t kc) {
+  void on_dance_inner(tap_dance_state_t *inner_state, void *inner_user_data) {
+    if(inner_state->count == 3) {
+        tap_code16(kc);
+        tap_code16(kc);
+        tap_code16(kc);
+    }
+    if(inner_state->count > 3) {
+        tap_code16(kc);
+    }
+  }
+  return on_dance_inner;
+}
+
 
 void on_dance_0(tap_dance_state_t *state, void *user_data) {
     if(state->count == 3) {
@@ -74,7 +102,7 @@ void dance_0_reset(tap_dance_state_t *state, void *user_data) {
     dance_state[0].step = 0;
 }
 
-void on_dance_1(tap_dance_state_t *state, void *user_data) {
+/*void on_dance_1(tap_dance_state_t *state, void *user_data) {
     if(state->count == 3) {
         tap_code16(LCTL(KC_V));
         tap_code16(LCTL(KC_V));
@@ -83,6 +111,10 @@ void on_dance_1(tap_dance_state_t *state, void *user_data) {
     if(state->count > 3) {
         tap_code16(LCTL(KC_V));
     }
+}*/
+
+void on_dance_1(tap_dance_state_t *state, void *user_data) {
+  return ON_DANCE(LCTL(KC_V))(state, user_data)
 }
 
 void dance_1_finished(tap_dance_state_t *state, void *user_data) {
@@ -327,7 +359,7 @@ void dance_8_reset(tap_dance_state_t *state, void *user_data) {
 }
 
 tap_dance_action_t tap_dance_actions[] = {
-        [DANCE_0] = ACTION_TAP_DANCE_FN_ADVANCED(on_dance_0, dance_0_finished, dance_0_reset),
+        [DANCE_0] = ACTION_TAP_DANCE_FN_ADVANCED(on_dance(LCTL(KC_C)), dance_0_finished, dance_0_reset),
         [DANCE_1] = ACTION_TAP_DANCE_FN_ADVANCED(on_dance_1, dance_1_finished, dance_1_reset),
         [DANCE_2] = ACTION_TAP_DANCE_FN_ADVANCED(on_dance_2, dance_2_finished, dance_2_reset),
         [DANCE_3] = ACTION_TAP_DANCE_FN_ADVANCED(on_dance_3, dance_3_finished, dance_3_reset),
