@@ -26,8 +26,12 @@ void keyboard_post_init_user(void) {
 }
 
 void set_led_color(int led, HSV hsv, bool force) {
-  if (led == CAPS_WORDS_LED_ID && is_caps_word_on()) return;
-  if (led == GUI_CTRL_SWAP_LED_ID && keymap_config.swap_lctl_lgui) return;
+  if (led == CAPS_WORDS_LED_ID && is_caps_word_on()) return; // cool effect
+
+  if (led == GUI_CTRL_SWAP_LED_ID && keymap_config.swap_lctl_lgui) {
+    hsv = {.h = 0, .s = 0, .v = 255};
+  }
+
   if (!hsv.h && !hsv.s && !hsv.v) {
     rgb_matrix_set_color(led, 0, 0, 0);
   } else {

@@ -181,7 +181,7 @@ bool rgb_matrix_indicators_user(void) {
   return true;
 }
 
-void caps_word_set_user(bool active) {
+/* void caps_word_set_user(bool active) {
     if (active) {
         HSV hsv = {.h = 0, .s = 0, .v = 0};
         set_led_color(CAPS_WORDS_LED_ID, hsv, true);
@@ -189,7 +189,7 @@ void caps_word_set_user(bool active) {
         uint8_t layer = get_highest_layer(layer_state);
         set_led_color_from_layermap(layer, CAPS_WORDS_LED_ID);
     }
-}
+} */
 
 layer_state_t layer_state_set_kb(layer_state_t state) {
     state = layer_state_set_user(state);
