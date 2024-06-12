@@ -54,7 +54,7 @@ uint8_t dance_step(tap_dance_state_t *state) {
 }*/
 
 #define ON_DANCE(name, kc) \
-  void *name(tap_dance_state_t *state, void *user_data) { \
+  void name(tap_dance_state_t *state, void *user_data) { \
     if(state->count == 3) { \
         tap_code16(kc); \
         tap_code16(kc); \
