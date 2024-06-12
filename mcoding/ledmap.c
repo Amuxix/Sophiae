@@ -1,5 +1,3 @@
-#include "ledmap.h"
-
 #define LAVENDER_TEA  {202,122,255}
 #define FOXY_FUCHSIA  {205,255,192}
 #define VITAMIN_C     {  0,245,245}
