@@ -69,7 +69,7 @@ static inline tap_dance_user_fn_t on_dance(uint16_t kc) {
 //ON_DANCE(on_dance_0, LCTL(KC_C))
 
 void on_dance_0(tap_dance_state_t *state, void *user_data) {
-  return on_dance(LCTL(KC_C))(state, user_data)
+  return on_dance(LCTL(KC_C))(state, user_data);
 }
 /*void on_dance_0(tap_dance_state_t *state, void *user_data) {
     if(state->count == 3) {
