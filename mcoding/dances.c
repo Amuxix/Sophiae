@@ -8,6 +8,7 @@ enum tap_dance_codes {
   DANCE_6,
   DANCE_7,
   DANCE_8,
+  MAX_DANCES,
 };
 
 typedef struct {
@@ -24,9 +25,7 @@ enum {
     MORE_TAPS
 };
 
-static tap dance_state[9];
-
-uint8_t dance_step(tap_dance_state_t *state);
+static tap dance_state[MAX_DANCES];
 
 uint8_t dance_step(tap_dance_state_t *state) {
     if (state->count == 1) {
@@ -346,7 +345,7 @@ void dance_8_finished(tap_dance_state_t *state, void *user_data) {
 }
 
 void dance_8_reset(tap_dance_state_t *state, void *user_data) {
-    wait_ms(8);
+    wait_ms(10);
     switch (dance_state[8].step) {
         case SINGLE_TAP: unregister_code16(QK_REPEAT_KEY); break;
         case DOUBLE_TAP: unregister_code16(QK_ALT_REPEAT_KEY); break;

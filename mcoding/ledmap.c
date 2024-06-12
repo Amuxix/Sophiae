@@ -29,7 +29,7 @@ void set_led_color(int led, HSV hsv, bool force) {
   if (led == CAPS_WORDS_LED_ID && is_caps_word_on()) return; // cool effect
 
   if (led == GUI_CTRL_SWAP_LED_ID && keymap_config.swap_lctl_lgui) {
-    hsv = (HSV)WHITE;
+    hsv = (HSV)SAPPHIRE_BLUE;
   }
 
   if (!hsv.h && !hsv.s && !hsv.v) {
