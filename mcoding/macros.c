@@ -10,7 +10,6 @@ enum custom_keycodes {
   ST_MACRO_8,
   ST_MACRO_9,
   ST_MACRO_10,
-  CG_TOGG_MACRO,
 };
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
@@ -68,19 +67,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     case ST_MACRO_10:
       if (record->event.pressed) {
         SEND_STRING(SS_LSFT(SS_TAP(X_LEFT)) SS_DELAY(10) SS_TAP(X_TAB) SS_DELAY(10) SS_LSFT(SS_TAP(X_RIGHT)));
-      }
-      break;
-    case CG_TOGG_MACRO:
-      if (record->event.pressed) {
-        keymap_config.swap_lctl_lgui = !keymap_config.swap_lctl_lgui;
-        keymap_config.swap_rctl_rgui = keymap_config.swap_lctl_lgui;
-        if (keymap_config.swap_lctl_lgui) {
-          rgb_matrix_set_color(CAPS_WORDS_LED_ID, 0, 0, 0);
-          //set_led_color(CAPS_WORDS_LED_ID, (HSV)WHITE, true);
-        } else {
-          uint8_t layer = get_highest_layer(layer_state);
-          set_led_color_from_layermap(layer, GUI_CTRL_SWAP_LED_ID);
-        }
       }
       break;
   }
