@@ -5,6 +5,8 @@ enum tap_dance_codes {
   UNDO,
   REDO,
   LAUNCH_PAUSE,
+  LALT_LBRACK,
+  LCTL_LPAREN,
   MAX_DANCES,
 };
 
@@ -94,36 +96,6 @@ void st_sh_reset(tap_dance_state_t *state, int dance_id, uint16_t single_tap, ui
   dance_state[dance_id].step = 0;
 }
 
-#define ON_DANCE(id) on_dance_ ## id
-#define DANCE_FINISHED(id) dance_ ## id ## _finished
-#define DANCE_RESET(id) dance_ ## id ## _reset
-
-#define ST_SH_DT_DH(id, single_tap, single_hold, double_tap, double_hold) \
-  void ON_DANCE(id)(tap_dance_state_t *state, void *user_data) { \
-    on_dance(state, single_tap); \
-  } \
- \
-  void DANCE_FINISHED(id)(tap_dance_state_t *state, void *user_data) { \
-    st_sh_dt_dh_finished(state, id, single_tap, single_hold, double_tap, double_hold); \
-  } \
- \
-  void DANCE_RESET(id)(tap_dance_state_t *state, void *user_data) { \
-    st_sh_dt_dh_reset(state, id, single_tap, single_hold, double_tap, double_hold); \
-  }
-
-#define ST_SH(id, single_tap, single_hold) \
-  void ON_DANCE(id)(tap_dance_state_t *state, void *user_data) { \
-    on_dance(state, single_tap); \
-  } \
- \
-  void DANCE_FINISHED(id)(tap_dance_state_t *state, void *user_data) { \
-    st_sh_finished(state, id, single_tap, single_hold); \
-  } \
- \
-  void DANCE_RESET(id)(tap_dance_state_t *state, void *user_data) { \
-    st_sh_reset(state, id, single_tap, single_hold); \
-  }
-
 ST_SH_DT_DH(COPY_CUT, LCTL(KC_C), LCS(KC_C), LCTL(KC_X), LCS(KC_X))
 
 ST_SH(PASTE, LCTL(KC_V), LCS(KC_V))
@@ -136,7 +108,9 @@ ST_SH(REDO, LCTL(KC_Y), LCS(KC_Y))
 
 ST_SH(LAUNCH_PAUSE, LALT(KC_SPACE), KC_MEDIA_PLAY_PAUSE)
 
-#define TAP_DANCE_ADVANCED(id) [id] = ACTION_TAP_DANCE_FN_ADVANCED(ON_DANCE(id), DANCE_FINISHED(id), DANCE_RESET(id))
+ST_SH(LALT_LBRACK, KC_LCBR, KC_LEFT_ALT)
+
+ST_SH(LCTL_LPAREN, KC_LPRN, KC_LEFT_CTRL)
 
 tap_dance_action_t tap_dance_actions[] = {
   TAP_DANCE_ADVANCED(COPY_CUT),
@@ -145,4 +119,6 @@ tap_dance_action_t tap_dance_actions[] = {
   TAP_DANCE_ADVANCED(UNDO),
   TAP_DANCE_ADVANCED(REDO),
   TAP_DANCE_ADVANCED(LAUNCH_PAUSE),
+  TAP_DANCE_ADVANCED(LALT_LBRACK),
+  TAP_DANCE_ADVANCED(LCTL_LPAREN),
 };
