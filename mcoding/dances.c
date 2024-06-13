@@ -110,9 +110,60 @@ ST_SH(REDO, LCTL(KC_Y), LCS(KC_Y))
 
 ST_SH(LAUNCH_PAUSE, LALT(KC_SPACE), KC_MEDIA_PLAY_PAUSE)
 
-ST_SH(LALT_LBRACK, KC_LCBR, KC_LEFT_ALT)
 
-ST_SH(LCTL_LPAREN, KC_LPRN, KC_LEFT_CTRL)
+void on_dance_LALT_LBRACK(tap_dance_state_t *state, void *user_data) {
+  on_dance(state, KC_LCBR);
+}
+
+void dance_LALT_LBRACK_finished(tap_dance_state_t *state, void *user_data) {
+  dance_state[LALT_LBRACK].step = dance_step(state);
+  switch (dance_state[LALT_LBRACK].step) {
+    case SINGLE_TAP: register_code16(KC_LCBR); break;
+    case SINGLE_HOLD: register_code16(KC_LEFT_ALT); break;
+    case DOUBLE_TAP: register_code16(KC_LCBR); register_code16(KC_LCBR); break;
+    case DOUBLE_SINGLE_TAP: tap_code16(KC_LCBR); register_code16(KC_LCBR);
+  }
+}
+
+void dance_LALT_LBRACK_reset(tap_dance_state_t *state, void *user_data) {
+  wait_ms(10);
+  switch (dance_state[LALT_LBRACK].step) {
+    case SINGLE_TAP: unregister_code16(KC_LCBR); break;
+    case SINGLE_HOLD: unregister_code16(KC_LEFT_ALT); break;
+    case DOUBLE_TAP: unregister_code16(KC_LCBR); break;
+    case DOUBLE_SINGLE_TAP: unregister_code16(KC_LCBR); break;
+  }
+  dance_state[LALT_LBRACK].step = 0;
+}
+
+void on_dance_LCTL_LPAREN(tap_dance_state_t *state, void *user_data) {
+  on_dance(state, KC_LPRN);
+}
+
+void dance_LCTL_LPAREN_finished(tap_dance_state_t *state, void *user_data) {
+  dance_state[LCTL_LPAREN].step = dance_step(state);
+  switch (dance_state[LCTL_LPAREN].step) {
+    case SINGLE_TAP: register_code16(KC_LPRN); break;
+    case SINGLE_HOLD: register_code16(KC_LEFT_CTRL); break;
+    case DOUBLE_TAP: register_code16(KC_LPRN); register_code16(KC_LPRN); break;
+    case DOUBLE_SINGLE_TAP: tap_code16(KC_LPRN); register_code16(KC_LPRN);
+  }
+}
+
+void dance_LCTL_LPAREN_reset(tap_dance_state_t *state, void *user_data) {
+  wait_ms(10);
+  switch (dance_state[LCTL_LPAREN].step) {
+    case SINGLE_TAP: unregister_code16(KC_LPRN); break;
+    case SINGLE_HOLD: unregister_code16(KC_LEFT_CTRL); break;
+    case DOUBLE_TAP: unregister_code16(KC_LPRN); break;
+    case DOUBLE_SINGLE_TAP: unregister_code16(KC_LPRN); break;
+  }
+  dance_state[LCTL_LPAREN].step = 0;
+}
+
+//ST_SH(LALT_LBRACK, KC_LCBR, KC_LEFT_ALT)
+
+//ST_SH(LCTL_LPAREN, KC_LPRN, KC_LEFT_CTRL)
 
 tap_dance_action_t tap_dance_actions[] = {
   TAP_DANCE_ADVANCED(COPY_CUT),
