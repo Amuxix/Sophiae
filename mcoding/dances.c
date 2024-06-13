@@ -1,3 +1,5 @@
+#include "dances.h"
+
 enum tap_dance_codes {
   COPY_CUT,
   PASTE,
