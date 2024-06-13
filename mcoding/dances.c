@@ -105,7 +105,7 @@ void st_sh_reset(tap_dance_state_t *state, int dance_id, uint16_t single_tap, ui
 
 #define ST_SH_DT_DH(id, single_tap, single_hold, double_tap, double_hold) \
   void ON_DANCE(id)(tap_dance_state_t *state, void *user_data) { \
-    on_dance(state, LCTL(KC_C)); \
+    on_dance(state, single_tap); \
   } \
  \
   void DANCE_FINISHED(id)(tap_dance_state_t *state, void *user_data) { \
@@ -116,32 +116,22 @@ void st_sh_reset(tap_dance_state_t *state, int dance_id, uint16_t single_tap, ui
     st_sh_dt_dh_reset(state, DANCE(id), single_tap, single_hold, double_tap, double_hold); \
   }
 
+#define ST_SH(id, single_tap, single_hold) \
+  void ON_DANCE(id)(tap_dance_state_t *state, void *user_data) { \
+    on_dance(state, single_tap); \
+  } \
+ \
+  void DANCE_FINISHED(id)(tap_dance_state_t *state, void *user_data) { \
+    st_sh_finished(state, DANCE(id), single_tap, single_hold); \
+  } \
+ \
+  void DANCE_RESET(id)(tap_dance_state_t *state, void *user_data) { \
+    st_sh_reset(state, DANCE(id), single_tap, single_hold); \
+  }
 
 ST_SH_DT_DH(0, LCTL(KC_C), LCS(KC_C), LCTL(KC_X), LCS(KC_X))
 
-/*void on_dance_0(tap_dance_state_t *state, void *user_data) {
-  on_dance(state, LCTL(KC_C));
-}
-
-void dance_0_finished(tap_dance_state_t *state, void *user_data) {
-  st_sh_dt_dh_finished(state, DANCE_0, LCTL(KC_C), LCS(KC_C), LCTL(KC_X), LCS(KC_X));
-}
-
-void dance_0_reset(tap_dance_state_t *state, void *user_data) {
-  st_sh_dt_dh_reset(state, DANCE_0, LCTL(KC_C), LCS(KC_C), LCTL(KC_X), LCS(KC_X));
-}*/
-
-void on_dance_1(tap_dance_state_t *state, void *user_data) {
-  on_dance(state, LCTL(KC_V));
-}
-
-void dance_1_finished(tap_dance_state_t *state, void *user_data) {
-  st_sh_finished(state, DANCE_1, LCTL(KC_V), LCS(KC_V));
-}
-
-void dance_1_reset(tap_dance_state_t *state, void *user_data) {
-  st_sh_reset(state, DANCE_1, LCTL(KC_V), LCS(KC_V));
-}
+ST_SH(1, LCTL(KC_V), LCS(KC_V))
 
 void on_dance_2(tap_dance_state_t *state, void *user_data) {
   on_dance(state, LCTL(KC_BSLS));
@@ -317,7 +307,7 @@ void dance_8_reset(tap_dance_state_t *state, void *user_data) {
 
 tap_dance_action_t tap_dance_actions[] = {
   TAP_DANCE_ADVANCED(0),
-  [DANCE_1] = ACTION_TAP_DANCE_FN_ADVANCED(on_dance_1, dance_1_finished, dance_1_reset),
+  TAP_DANCE_ADVANCED(1),
   [DANCE_2] = ACTION_TAP_DANCE_FN_ADVANCED(on_dance_2, dance_2_finished, dance_2_reset),
   [DANCE_3] = ACTION_TAP_DANCE_FN_ADVANCED(on_dance_3, dance_3_finished, dance_3_reset),
   [DANCE_4] = ACTION_TAP_DANCE_FN_ADVANCED(on_dance_4, dance_4_finished, dance_4_reset),
