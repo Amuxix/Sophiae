@@ -208,3 +208,7 @@ layer_state_t layer_state_set_kb(layer_state_t state) {
     ML_LED_5(LED_5);
     return state;
 }
+
+void post_process_record_user(uint16_t keycode, keyrecord_t *record) {
+  process_repeat_key(keycode, record);
+}
