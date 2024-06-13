@@ -91,7 +91,7 @@ void st_sh_reset(tap_dance_state_t *state, int dance_id, uint16_t single_tap, ui
   switch (dance_state[dance_id].step) {
     case SINGLE_TAP: unregister_code16(single_tap); break;
     case SINGLE_HOLD: unregister_code16(single_hold); break;
-    case DOUBLE_TAP: unregister_code16(double_tap); break;
+    case DOUBLE_TAP: unregister_code16(single_tap); break;
     case DOUBLE_HOLD: unregister_code16(single_tap); break;
     case DOUBLE_SINGLE_TAP: unregister_code16(single_tap); break;
   }
@@ -100,7 +100,7 @@ void st_sh_reset(tap_dance_state_t *state, int dance_id, uint16_t single_tap, ui
 
 #define ON_DANCE(id) on_dance_ ## id
 #define ON_DANCE_FINISHED(id) dance_ ## id ## _finished
-#define ON_DANCE_RESET(id) dance_ ## id ## reset
+#define ON_DANCE_RESET(id) dance_ ## id ## _reset
 #define DANCE(id) DANCE_ ## id
 
 #define ST_SH_DT_DH(id, single_tap, single_hold, double_tap, double_hold) \
@@ -136,11 +136,11 @@ void on_dance_1(tap_dance_state_t *state, void *user_data) {
 }
 
 void dance_1_finished(tap_dance_state_t *state, void *user_data) {
-  st_sh_dt_dh_finished(state, DANCE_1, LCTL(KC_V), LCS(KC_V));
+  st_sh_finished(state, DANCE_1, LCTL(KC_V), LCS(KC_V));
 }
 
 void dance_1_reset(tap_dance_state_t *state, void *user_data) {
-  st_sh_dt_dh_reset(state, DANCE_1, LCTL(KC_V), LCS(KC_V));
+  st_sh_reset(state, DANCE_1, LCTL(KC_V), LCS(KC_V));
 }
 
 void on_dance_2(tap_dance_state_t *state, void *user_data) {
