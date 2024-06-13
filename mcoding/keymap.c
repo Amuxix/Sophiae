@@ -15,7 +15,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     XXXXXXX,          KC_W,             LGUI_T(KC_R),     LALT_T(KC_S),     LCTL_T(KC_T),     KC_G,             CW_TOGG,                    OSL(SHORTCUTS),   KC_M,             LCTL_T(KC_N),     LALT_T(KC_E),     LGUI_T(KC_I),     KC_QUOTE,         XXXXXXX,
     XXXXXXX,          KC_C,             KC_J,             KC_V,             KC_D,             KC_K,                                                           KC_X,             KC_H,             KC_COLN,          KC_COMMA,         KC_A,             XXXXXXX,
     XXXXXXX,          KC_Q,             TD(COPY_CUT),     TD(PASTE),        LT_KPD(KC_ESC),                     TD(MUTE_UNMUTE),            TD(LAUNCH_PAUSE),                   LT_KPD(KC_DEL),   TD(UNDO),         TD(REDO),         KC_DOT,           XXXXXXX,
-                                                                            LSFT_T(KC_BSPC),  LT_MOV(KC_TAB),   QK_REPEAT_KEY,              KC_APPLICATION,   LT_SYM(KC_ENTER), RSFT_T(KC_SPACE)
+                                                                            LSFT_T(KC_BSPC),  LT_MOV(KC_TAB),   TD(REPEAT),                 KC_APPLICATION,   LT_SYM(KC_ENTER), RSFT_T(KC_SPACE)
   ),
   [CANARY_G] = LAYOUT_moonlander(
     _______,          XXXXXXX,          KC_2,             KC_3,             KC_4,             KC_5,             _______,                    _______,          KC_6,             KC_7,             KC_8,             KC_9,             XXXXXXX,          XXXXXXX,
@@ -44,7 +44,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [KEYPAD_SYMB] = LAYOUT_moonlander(
     XXXXXXX,          XXXXXXX,          KC_F14,           KC_F15,           KC_F16,           KC_F17,           _______,                    _______,          KC_F18,           KC_F19,           KC_F20,           KC_F21,           XXXXXXX,          KC_F23,
     XXXXXXX,          KC_F13,           KC_PERC,          KC_DLR,           KC_HASH,          US_DEG,           _______,                    _______,          KC_INSERT,        KC_KP_7,          KC_KP_8,          KC_KP_9,          KC_F22,           KC_F24,
-    XXXXXXX,          US_EURO,          LGUI_T(KC_LBRC),  LALT_LBRACK,      LCTL_LPAREN,      KC_LABK,          _______,                    QK_LLCK,          KC_KP_MINUS,      LCTL_T(KC_KP_4),  LALT_T(KC_KP_5),  LGUI_T(KC_KP_6),  KC_KP_SLASH,      XXXXXXX,
+    XXXXXXX,          US_EURO,          LGUI_T(KC_LBRC),  TD(LALT_LBRACK),  TD(LCTL_LPAREN),  KC_LABK,          _______,                    QK_LLCK,          KC_KP_MINUS,      LCTL_T(KC_KP_4),  LALT_T(KC_KP_5),  LGUI_T(KC_KP_6),  KC_KP_SLASH,      XXXXXXX,
     XXXXXXX,          ST_MACRO_4,       KC_RBRC,          KC_RCBR,          KC_RPRN,          KC_RABK,                                                        KC_KP_PLUS,       KC_KP_1,          KC_KP_2,          KC_KP_3,          KC_KP_ASTERISK,   XXXXXXX,
     XXXXXXX,          ST_MACRO_5,       XXXXXXX,          XXXXXXX,          _______,                            _______,                    _______,                            _______,          KC_KP_0,          KC_EQUAL,         KC_KP_DOT,        XXXXXXX,
                                                                             _______,          _______,          _______,                    KC_PSCR,          _______,          _______
@@ -67,10 +67,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
   [SHORTCUTS] = LAYOUT_moonlander(
     XXXXXXX,          XXXXXXX,          TO(CANARY_G),       TO(QWERTY_G),   TO(QWERTY_SG),    XXXXXXX,          XXXXXXX,                    XXXXXXX,          XXXXXXX,          XXXXXXX,          XXXXXXX,          XXXXXXX,          XXXXXXX,          XXXXXXX,
-    XXXXXXX,          TO(BASE),         XXXXXXX,            XXXXXXX,        XXXXXXX,          ST_MACRO_7,       XXXXXXX,                    XXXXXXX,          LSA_T(KC_Z),      XXXXXXX,          XXXXXXX,          XXXXXXX,          XXXXXXX,          XXXXXXX,
+    XXXXXXX,          TO(BASE),         XXXXXXX,            XXXXXXX,        XXXXXXX,          ST_MACRO_7,       XXXXXXX,                    XXXXXXX,          LSA(KC_Z),        XXXXXXX,          XXXXXXX,          XXXXXXX,          XXXXXXX,          XXXXXXX,
     XXXXXXX,          XXXXXXX,          XXXXXXX,            XXXXXXX,        XXXXXXX,          XXXXXXX,          XXXXXXX,                    QK_LLCK,          XXXXXXX,          XXXXXXX,          XXXXXXX,          ST_MACRO_9,       XXXXXXX,          XXXXXXX,
     XXXXXXX,          KC_CALCULATOR,    XXXXXXX,            XXXXXXX,        XXXXXXX,          XXXXXXX,                                                        XXXXXXX,          XXXXXXX,          XXXXXXX,          XXXXXXX,          XXXXXXX,          XXXXXXX,
-    XXXXXXX,          C_S_T(KC_ESC),    _______,            _______,        XXXXXXX,                            _______,                    _______,                            XXXXXXX,          _______,          _______,          XXXXXXX,          XXXXXXX,
+    XXXXXXX,          LCS(KC_ESC),      _______,            _______,        XXXXXXX,                            _______,                    _______,                            XXXXXXX,          _______,          _______,          XXXXXXX,          XXXXXXX,
                                                                             ST_MACRO_8,       XXXXXXX,          XXXXXXX,                    XXXXXXX,          XXXXXXX,          ST_MACRO_10
   ),
 };
@@ -90,11 +90,21 @@ combo_t key_combos[COMBO_COUNT] = {
 
 uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
-        case MT(MOD_LGUI, KC_R):
+        case LGUI_T(KC_R):
             return LONG_TAPPING_TERM;
-        case MT(MOD_LALT, KC_S):
+        case LALT_T(KC_S):
             return LONG_TAPPING_TERM;
-        case MT(MOD_LCTL, KC_T):
+        case LCTL_T(KC_T):
+            return LONG_TAPPING_TERM;
+        case LCTL_T(KC_N):
+            return LONG_TAPPING_TERM;
+        case LALT_T(KC_E):
+            return LONG_TAPPING_TERM;
+        case LGUI_T(KC_I):
+            return LONG_TAPPING_TERM;
+        case LT_MOV(KC_TAB):
+            return LONG_TAPPING_TERM;
+        case LT_SYM(KC_ENTER):
             return LONG_TAPPING_TERM;
         case TD(COPY_CUT):
             return TAPPING_TERM + 45;
@@ -102,39 +112,25 @@ uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
             return TAPPING_TERM + 45;
         case TD(MUTE_UNMUTE):
             return TAPPING_TERM + 45;
-        case LT_MOV(KC_TAB):
-            return LONG_TAPPING_TERM;
-        case MT(MOD_LCTL, KC_N):
-            return LONG_TAPPING_TERM;
-        case MT(MOD_LALT, KC_E):
-            return LONG_TAPPING_TERM;
-        case MT(MOD_LGUI, KC_I):
-            return LONG_TAPPING_TERM;
-        case LT_SYM(KC_ENTER):
-            return LONG_TAPPING_TERM;
-        case MT(MOD_RSFT, KC_SPACE):
+        case RSFT_T(KC_SPACE):
             return TAPPING_TERM + 30;
-        case MT(MOD_LALT, KC_W):
+        //CANARY_G
+        case LALT_T(KC_W):
             return LONG_TAPPING_TERM;
-        case MT(MOD_LSFT, KC_C):
+        case LSFT_T(KC_C):
             return LONG_TAPPING_TERM;
-        case MT(MOD_LCTL, KC_Q):
+        case LCTL_T(KC_Q):
             return LONG_TAPPING_TERM;
-        case KC_BSPC:
+        case RALT_T(KC_QUOTE):
             return LONG_TAPPING_TERM;
-        case _______:
+        case RSFT_T(KC_A):
             return LONG_TAPPING_TERM;
-        case MT(MOD_RALT, KC_QUOTE):
+        case RCTL_T(KC_DOT):
             return LONG_TAPPING_TERM;
-        case MT(MOD_RSFT, KC_A):
+        //KEYPAD_SYMB
+        case LGUI_T(KC_LBRC):
             return LONG_TAPPING_TERM;
-        case MT(MOD_RCTL, KC_DOT):
-            return LONG_TAPPING_TERM;
-        case KC_SPACE:
-            return LONG_TAPPING_TERM;
-        case MT(MOD_LGUI, KC_LBRC):
-            return LONG_TAPPING_TERM;
-        case MT(MOD_LGUI, KC_KP_6):
+        case LGUI_T(KC_KP_6):
             return LONG_TAPPING_TERM;
         default:
             return TAPPING_TERM;
@@ -178,16 +174,6 @@ bool rgb_matrix_indicators_user(void) {
   }
   return true;
 }
-
-/* void caps_word_set_user(bool active) {
-    if (active) {
-        HSV hsv = {.h = 0, .s = 0, .v = 0};
-        set_led_color(CAPS_WORDS_LED_ID, hsv, true);
-    } else {
-        uint8_t layer = get_highest_layer(layer_state);
-        set_led_color_from_layermap(layer, CAPS_WORDS_LED_ID);
-    }
-} */
 
 layer_state_t layer_state_set_kb(layer_state_t state) {
     state = layer_state_set_user(state);
