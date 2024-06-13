@@ -15,7 +15,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     XXXXXXX,          KC_W,             LGUI_T(KC_R),     LALT_T(KC_S),     LCTL_T(KC_T),     KC_G,             CW_TOGG,                    OSL(SHORTCUTS),   KC_M,             LCTL_T(KC_N),     LALT_T(KC_E),     LGUI_T(KC_I),     KC_QUOTE,         XXXXXXX,
     XXXXXXX,          KC_C,             KC_J,             KC_V,             KC_D,             KC_K,                                                           KC_X,             KC_H,             KC_COLN,          KC_COMMA,         KC_A,             XXXXXXX,
     XXXXXXX,          KC_Q,             TD(COPY_CUT),     TD(PASTE),        LT_KPD(KC_ESC),                     TD(MUTE_UNMUTE),            TD(LAUNCH_PAUSE),                   LT_KPD(KC_DEL),   TD(UNDO),         TD(REDO),         KC_DOT,           XXXXXXX,
-                                                                            LSFT_T(KC_BSPC),  LT_MOV(KC_TAB),   TD(REPEAT),                 KC_APPLICATION,   LT_SYM(KC_ENTER), RSFT_T(KC_SPACE)
+                                                                            LSFT_T(KC_BSPC),  LT_MOV(KC_TAB),   QK_AREP,                     KC_APPLICATION,   LT_SYM(KC_ENTER), RSFT_T(KC_SPACE)
   ),
   [CANARY_G] = LAYOUT_moonlander(
     _______,          XXXXXXX,          KC_2,             KC_3,             KC_4,             KC_5,             _______,                    _______,          KC_6,             KC_7,             KC_8,             KC_9,             XXXXXXX,          XXXXXXX,
@@ -207,8 +207,4 @@ layer_state_t layer_state_set_kb(layer_state_t state) {
     ML_LED_4(LED_4);
     ML_LED_5(LED_5);
     return state;
-}
-
-void post_process_record_user(uint16_t keycode, keyrecord_t *record) {
-  process_repeat_key(keycode, record);
 }
