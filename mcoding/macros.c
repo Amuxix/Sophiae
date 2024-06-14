@@ -1,70 +1,82 @@
 enum custom_keycodes {
-  ST_MACRO_0 = ML_SAFE_RANGE, // Start in a safe range
-  ST_MACRO_1,
-  ST_MACRO_2,
-  ST_MACRO_3,
-  ST_MACRO_4,
-  ST_MACRO_5,
-  ST_MACRO_6,
-  ST_MACRO_7,
-  ST_MACRO_8,
-  ST_MACRO_9,
-  ST_MACRO_10,
+  AO = ML_SAFE_RANGE, // Start in a safe range
+  OES,
+  CAO,
+  COES,
+  LEFT_ARROW,
+  RIGHT_ARROW,
+  EQ_RIGHT_ARROW,
+  BOLD,
+  UNINDENT,
+  ITALIC,
+  INDENT,
+};
+
+const uint16_t PROGMEM FOU[] = { KC_F, KC_O, KC_U, COMBO_END};
+const uint16_t PROGMEM LYP[] = { KC_L, KC_Y, KC_P, COMBO_END};
+const uint16_t PROGMEM HCOLONCOMMA[] = { KC_H, KC_COLN, KC_COMMA, COMBO_END};
+const uint16_t PROGMEM jvd[] = { KC_J, KC_V, KC_D, COMBO_END};
+
+combo_t key_combos[COMBO_COUNT] = {
+  COMBO(FOU, AO),
+  COMBO(LYP, OES),
+  COMBO(HCOLONCOMMA, CAO),
+  COMBO(jvd, COES),
 };
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   switch (keycode) {
-    case ST_MACRO_0:
+    case AO:
       if (record->event.pressed) {
         SEND_STRING(SS_LSFT(SS_TAP(X_GRAVE)) SS_DELAY(10) SS_TAP(X_A) SS_DELAY(10) SS_TAP(X_O));
       }
       break;
-    case ST_MACRO_1:
+    case OES:
       if (record->event.pressed) {
         SEND_STRING(SS_LSFT(SS_TAP(X_GRAVE)) SS_DELAY(10) SS_TAP(X_O) SS_DELAY(10) SS_TAP(X_E) SS_DELAY(10) SS_TAP(X_S));
       }
       break;
-    case ST_MACRO_2:
+    case CAO:
       if (record->event.pressed) {
         SEND_STRING(SS_LALT(SS_LCTL(SS_TAP(X_COMMA))) SS_DELAY(10) SS_LSFT(SS_TAP(X_GRAVE)) SS_DELAY(10) SS_TAP(X_A) SS_DELAY(10) SS_TAP(X_O));
       }
       break;
-    case ST_MACRO_3:
+    case COES:
       if (record->event.pressed) {
         SEND_STRING(SS_LALT(SS_LCTL(SS_TAP(X_COMMA))) SS_DELAY(10) SS_LSFT(SS_TAP(X_GRAVE)) SS_DELAY(10) SS_TAP(X_O) SS_DELAY(10) SS_TAP(X_E) SS_DELAY(10) SS_TAP(X_S));
       }
       break;
-    case ST_MACRO_4:
+    case LEFT_ARROW:
       if (record->event.pressed) {
         SEND_STRING(SS_LSFT(SS_TAP(X_COMMA)) SS_DELAY(10) SS_TAP(X_MINUS));
       }
       break;
-    case ST_MACRO_5:
+    case RIGHT_ARROW:
       if (record->event.pressed) {
         SEND_STRING(SS_TAP(X_MINUS) SS_DELAY(10) SS_LSFT(SS_TAP(X_DOT)));
       }
       break;
-    case ST_MACRO_6:
+    case EQ_RIGHT_ARROW:
       if (record->event.pressed) {
         SEND_STRING(SS_TAP(X_EQUAL) SS_DELAY(10) SS_LSFT(SS_TAP(X_DOT)));
       }
       break;
-    case ST_MACRO_7:
+    case BOLD:
       if (record->event.pressed) {
         SEND_STRING(SS_LCTL(SS_LSFT(SS_TAP(X_LEFT))) SS_DELAY(10) SS_RCTL(SS_TAP(X_B)) SS_DELAY(10) SS_TAP(X_RIGHT) SS_DELAY(10) SS_LCTL(SS_TAP(X_RIGHT)));
       }
       break;
-    case ST_MACRO_8:
+    case UNINDENT:
       if (record->event.pressed) {
         SEND_STRING(SS_LSFT(SS_TAP(X_LEFT)) SS_DELAY(10) SS_LSFT(SS_TAP(X_TAB)) SS_DELAY(10) SS_LSFT(SS_TAP(X_RIGHT)));
       }
       break;
-    case ST_MACRO_9:
+    case ITALIC:
       if (record->event.pressed) {
         SEND_STRING(SS_LCTL(SS_LSFT(SS_TAP(X_LEFT))) SS_DELAY(10) SS_LCTL(SS_TAP(X_I)) SS_DELAY(10) SS_TAP(X_RIGHT) SS_DELAY(10) SS_LCTL(SS_TAP(X_RIGHT)));
       }
       break;
-    case ST_MACRO_10:
+    case INDENT:
       if (record->event.pressed) {
         SEND_STRING(SS_LSFT(SS_TAP(X_LEFT)) SS_DELAY(10) SS_TAP(X_TAB) SS_DELAY(10) SS_LSFT(SS_TAP(X_RIGHT)));
       }
