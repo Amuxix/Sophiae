@@ -101,6 +101,8 @@ uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
             return TAPPING_TERM + 45;
         case TD(MUTE_UNMUTE):
             return TAPPING_TERM + 45;
+        case TD(LAUNCH_PAUSE):
+            return TAPPING_TERM + 45;
         case RSFT_T(KC_SPACE):
             return TAPPING_TERM + 30;
         //CANARY_G
