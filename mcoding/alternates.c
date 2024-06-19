@@ -1,9 +1,6 @@
-//In this file even though it it might seem to only check for left modifiers the way they are bit packed
-//it actually checks for both as Right modifiers just has an extra bit set to 1
-//see modifiers.h for more info
 uint16_t get_alt_repeat_key_keycode_user(uint16_t keycode, uint8_t mods) {
-  //remove defaults I don't want
-  if ((mods & (MOD_LCTL | MOD_LALT | MOD_LGUI))) {
+  // Remove defaults I don't want
+  if ((mods & (MOD_MASK_CTRL | MOD_MASK_ALT | MOD_MASK_GUI))) {
     switch (keycode) {
       case KC_F: return KC_NO;
       case KC_D: return KC_NO;
@@ -13,14 +10,15 @@ uint16_t get_alt_repeat_key_keycode_user(uint16_t keycode, uint8_t mods) {
     }
   }
 
-  if ((mods & MOD_LCTL)) {
+  // Revert Undo/Redo
+  if ((mods & MOD_MASK_CTRL)) {
     switch (keycode) {
       case KC_Y: return LCTL(KC_Z);
       case KC_Z: return LCTL(KC_Y);
     }
   }
 
-  bool shifted = (mods & MOD_LCTL);
+  bool shifted = (mods & MOD_MASK_SHIFT);
   switch (keycode) {
     case KC_TAB:
     if (shifted) {
@@ -28,10 +26,6 @@ uint16_t get_alt_repeat_key_keycode_user(uint16_t keycode, uint8_t mods) {
     } else {
       return LSFT(KC_TAB);
     }
-    case KC_D: return KC_NO;
-    case KC_N: return KC_NO;
-    case KC_A: return KC_NO;
-    case KC_O: return KC_NO;
     //SFBs
     case KC_QUOTE: return KC_A;
     case KC_Y: return KC_S;
