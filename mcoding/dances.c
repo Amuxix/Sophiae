@@ -14,7 +14,7 @@ enum tap_dance_codes {
 
 typedef struct {
   bool is_press_action;
-  uint8_t step;
+  int8_t step;
 } tap;
 
 // Holds are negative, taps are positive
@@ -29,7 +29,7 @@ enum {
 
 static tap dance_state[MAX_DANCES];
 
-uint8_t dance_step(tap_dance_state_t *state) {
+int8_t dance_step(tap_dance_state_t *state) {
   if (state->count == 1) {
     if (state->interrupted || !state->pressed) return SINGLE_TAP;
     else return SINGLE_HOLD;
