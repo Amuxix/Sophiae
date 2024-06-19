@@ -17,13 +17,14 @@ typedef struct {
   uint8_t step;
 } tap;
 
+// Holds are negative, taps are positive
 enum {
-  SINGLE_TAP = 1,
+  DOUBLE_HOLD = -2,
   SINGLE_HOLD,
-  DOUBLE_TAP,
-  DOUBLE_HOLD,
   DOUBLE_SINGLE_TAP,
-  MORE_TAPS
+  SINGLE_TAP,
+  DOUBLE_TAP,
+  MAX_TAPS
 };
 
 static tap dance_state[MAX_DANCES];
@@ -38,21 +39,28 @@ uint8_t dance_step(tap_dance_state_t *state) {
     else if (state->pressed) return DOUBLE_HOLD;
     else return DOUBLE_TAP;
   }
-  return MORE_TAPS;
+  return MAX_TAPS;
 }
 
 void on_dance(tap_dance_state_t *state, uint16_t kc) {
-  if (state->count == 3) {
-    tap_code16(kc);
-    tap_code16(kc);
-    tap_code16(kc);
+  if (state->count == MAX_TAPS) {
+    for (int taps = 0; taps < MAX_TAPS; taps++) {
+      tap_code16(kc);
+    }
   }
-  if (state->count > 3) {
+  if (state->count > MAX_TAPS) {
     tap_code16(kc);
   }
 }
 
-void st_sh_dt_dh_finished(tap_dance_state_t *state, int dance_id, uint16_t single_tap, uint16_t single_hold, uint16_t double_tap, uint16_t double_hold) {
+void single_tap__single_hold__double_tap__double_hold__finished(
+  tap_dance_state_t *state,
+  int dance_id,
+  uint16_t single_tap,
+  uint16_t single_hold,
+  uint16_t double_tap,
+  uint16_t double_hold
+) {
   dance_state[dance_id].step = dance_step(state);
   switch (dance_state[dance_id].step) {
     case SINGLE_TAP: register_code16(single_tap); break;
@@ -63,7 +71,14 @@ void st_sh_dt_dh_finished(tap_dance_state_t *state, int dance_id, uint16_t singl
   }
 }
 
-void st_sh_dt_dh_reset(tap_dance_state_t *state, int dance_id, uint16_t single_tap, uint16_t single_hold, uint16_t double_tap, uint16_t double_hold) {
+void single_tap__single_hold__double_tap__double_hold__reset(
+  tap_dance_state_t *state,
+  int dance_id,
+  uint16_t single_tap,
+  uint16_t single_hold,
+  uint16_t double_tap,
+  uint16_t double_hold
+) {
   wait_ms(10);
   switch (dance_state[dance_id].step) {
     case SINGLE_TAP: unregister_code16(single_tap); break;
@@ -75,7 +90,12 @@ void st_sh_dt_dh_reset(tap_dance_state_t *state, int dance_id, uint16_t single_t
   dance_state[dance_id].step = 0;
 }
 
-void st_sh_finished(tap_dance_state_t *state, int dance_id, uint16_t single_tap, uint16_t single_hold) {
+void single_tap__single_hold__finished(
+  tap_dance_state_t *state,
+  int dance_id,
+  uint16_t single_tap,
+  uint16_t single_hold
+) {
   dance_state[dance_id].step = dance_step(state);
   switch (dance_state[dance_id].step) {
     case SINGLE_TAP: register_code16(single_tap); break;
@@ -86,7 +106,12 @@ void st_sh_finished(tap_dance_state_t *state, int dance_id, uint16_t single_tap,
   }
 }
 
-void st_sh_reset(tap_dance_state_t *state, int dance_id, uint16_t single_tap, uint16_t single_hold) {
+void single_tap__single_hold__reset(
+  tap_dance_state_t *state,
+  int dance_id,
+  uint16_t single_tap,
+  uint16_t single_hold
+) {
   wait_ms(10);
   switch (dance_state[dance_id].step) {
     case SINGLE_TAP: unregister_code16(single_tap); break;
@@ -97,22 +122,21 @@ void st_sh_reset(tap_dance_state_t *state, int dance_id, uint16_t single_tap, ui
   }
   dance_state[dance_id].step = 0;
 }
+SINGLE_TAP__SINGLE_HOLD__DOUBLE_TAP__DOUBLE_HOLD(COPY_CUT, LCTL(KC_C), LCS(KC_C), LCTL(KC_X), LCS(KC_X))
 
-ST_SH_DT_DH(COPY_CUT, LCTL(KC_C), LCS(KC_C), LCTL(KC_X), LCS(KC_X))
+SINGLE_TAP__SINGLE_HOLD(PASTE, LCTL(KC_V), LCS(KC_V))
 
-ST_SH(PASTE, LCTL(KC_V), LCS(KC_V))
+SINGLE_TAP__DOUBLE_TAP(MUTE_UNMUTE, LCTL(KC_BSLS), LCS(KC_BSLS))
 
-ST_SH_DT_DH(MUTE_UNMUTE, LCTL(KC_BSLS), LCTL(KC_BSLS), LCS(KC_BSLS), LCS(KC_BSLS))
+SINGLE_TAP__SINGLE_HOLD(UNDO, LCTL(KC_Z), LCS(KC_Z))
 
-ST_SH(UNDO, LCTL(KC_Z), LCS(KC_Z))
+SINGLE_TAP__SINGLE_HOLD(REDO, LCTL(KC_Y), LCS(KC_Y))
 
-ST_SH(REDO, LCTL(KC_Y), LCS(KC_Y))
+SINGLE_TAP__DOUBLE_TAP(LAUNCH_PAUSE, KC_MEDIA_PLAY_PAUSE, LCTL(KC_SPACE))
 
-ST_SH(LAUNCH_PAUSE, KC_MEDIA_PLAY_PAUSE, LCTL(KC_SPACE))
+SINGLE_TAP__SINGLE_HOLD(LALT_LBRACK, KC_LCBR, KC_LEFT_ALT)
 
-ST_SH(LALT_LBRACK, KC_LCBR, KC_LEFT_ALT)
-
-ST_SH(LCTL_LPAREN, KC_LPRN, KC_LEFT_CTRL)
+SINGLE_TAP__SINGLE_HOLD(LCTL_LPAREN, KC_LPRN, KC_LEFT_CTRL)
 
 tap_dance_action_t tap_dance_actions[] = {
   TAP_DANCE_ADVANCED(COPY_CUT),
