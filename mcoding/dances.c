@@ -79,7 +79,7 @@ void single_tap__single_hold__double_tap__double_hold__reset(
   uint16_t double_tap,
   uint16_t double_hold
 ) {
-  wait_ms(10);
+  wait_ms(TAP_CODE_DELAY);
   switch (dance_state[dance_id].step) {
     case SINGLE_TAP: unregister_code16(single_tap); break;
     case SINGLE_HOLD: unregister_code16(single_hold); break;
@@ -112,7 +112,7 @@ void single_tap__single_hold__reset(
   uint16_t single_tap,
   uint16_t single_hold
 ) {
-  wait_ms(10);
+  wait_ms(TAP_CODE_DELAY);
   switch (dance_state[dance_id].step) {
     case SINGLE_TAP: unregister_code16(single_tap); break;
     case SINGLE_HOLD: unregister_code16(single_hold); break;
