@@ -7,6 +7,7 @@
 #include "dances.c"
 #include "macros.c"
 #include "alternates.c"
+#include "overrides.c"
 
 // clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
