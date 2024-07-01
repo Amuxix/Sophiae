@@ -19,28 +19,28 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                                                             LSFT_T(KC_BSPC),  LT_MOV(KC_TAB),   QK_AREP,                    KC_APPLICATION,   LT_SYM(KC_ENTER), RSFT_T(KC_SPACE)
   ),
   [CANARY_G] = LAYOUT_moonlander(
-    _______,          XXXXXXX,          KC_2,             KC_3,             KC_4,             KC_5,             _______,                    _______,          KC_6,             KC_7,             KC_8,             KC_9,             XXXXXXX,          XXXXXXX,
-    _______,          KC_1,             _______,          _______,          _______,          _______,          _______,                    _______,          _______,          _______,          _______,          _______,          KC_0,             XXXXXXX,
+    _______,          XXXXXXX,          KC_2,             KC_3,             KC_4,             KC_5,             _______,                    _______,          KC_6,             KC_7,             KC_8,             KC_9,             XXXXXXX,          KC_F11,
+    _______,          KC_1,             _______,          _______,          _______,          _______,          _______,                    _______,          _______,          _______,          _______,          _______,          KC_0,             KC_F12,
     KC_LALT,          LALT_T(KC_W),     KC_R,             KC_S,             KC_T,             _______,          _______,                    _______,          _______,          KC_N,             KC_E,             KC_I,             RALT_T(KC_QUOTE), KC_RALT,
     KC_LSFT,          LSFT_T(KC_C),     _______,          _______,          _______,          _______,                                                        _______,          _______,          _______,          _______,          RSFT_T(KC_A),     KC_RSFT,
     KC_LCTL,          LCTL_T(KC_Q),     _______,          _______,          _______,                            _______,                    _______,                            _______,          _______,          _______,          RCTL_T(KC_DOT),   KC_RCTL,
-                                                                            KC_BSPC,          _______,          _______,                    _______,          _______,          KC_SPACE
+                                                                            KC_BSPC,          _______,          KC_LGUI,                    _______,          _______,          KC_SPACE
   ),
   [QWERTY_G] = LAYOUT_moonlander(
-    _______,          KC_1,             KC_2,             KC_3,             KC_4,             KC_5,             _______,                    _______,          KC_6,             KC_7,             KC_8,             KC_9,             XXXXXXX,          XXXXXXX,
-    _______,          KC_Q,             KC_W,             KC_E,             KC_R,             KC_T,             _______,                    _______,          KC_Y,             KC_U,             KC_I,             KC_O,             KC_0,             XXXXXXX,
+    _______,          KC_1,             KC_2,             KC_3,             KC_4,             KC_5,             _______,                    _______,          KC_6,             KC_7,             KC_8,             KC_9,             XXXXXXX,          KC_F11,
+    _______,          KC_Q,             KC_W,             KC_E,             KC_R,             KC_T,             _______,                    _______,          KC_Y,             KC_U,             KC_I,             KC_O,             KC_0,             KC_F12,
     KC_LALT,          KC_A,             KC_S,             KC_D,             KC_F,             KC_G,             _______,                    _______,          KC_H,             KC_J,             KC_K,             KC_L,             KC_P,             KC_RALT,
     KC_LSFT,          KC_Z,             KC_X,             KC_C,             KC_V,             KC_B,                                                           KC_N,             KC_M,             _______,          _______,          KC_QUOTE,         KC_RSFT,
     KC_LCTL,          XXXXXXX,          _______,          _______,          _______,                            _______,                    _______,                            _______,          _______,          _______,          _______,          KC_RCTL,
-                                                                            KC_SPACE,         _______,          _______,                    _______,          _______,          KC_BSPC
+                                                                            KC_SPACE,         _______,          KC_LGUI,                    _______,          _______,          KC_BSPC
   ),
   [QWERTY_SG] = LAYOUT_moonlander(
-    _______,          _______,          KC_1,             KC_2,             KC_3,             KC_4,             KC_5,                       _______,          KC_6,             KC_7,             KC_8,             KC_9,             KC_0,             XXXXXXX,
-    _______,          XXXXXXX,          KC_Q,             KC_W,             KC_E,             KC_R,             KC_T,                       _______,          KC_Y,             KC_U,             KC_I,             KC_O,             KC_P,             XXXXXXX,
+    _______,          _______,          KC_1,             KC_2,             KC_3,             KC_4,             KC_5,                       _______,          KC_6,             KC_7,             KC_8,             KC_9,             KC_0,             KC_F11,
+    _______,          XXXXXXX,          KC_Q,             KC_W,             KC_E,             KC_R,             KC_T,                       _______,          KC_Y,             KC_U,             KC_I,             KC_O,             KC_P,             KC_F12,
     KC_LALT,          KC_LALT,          KC_A,             KC_S,             KC_D,             KC_F,             KC_G,                       _______,          KC_H,             KC_J,             KC_K,             KC_L,             KC_P,             KC_QUOTE,
     KC_LSFT,          KC_LSFT,          KC_Z,             KC_X,             KC_C,             KC_V,                                                           KC_B,             KC_N,             KC_M,             KC_COLN,          KC_COMMA,         KC_RSFT,
     KC_LCTL,          KC_LCTL,          _______,          _______,          _______,                            _______,                    _______,                            _______,          _______,          _______,          _______,          KC_RCTL,
-                                                                            KC_SPACE,         _______,          KC_TAB,                     _______,          _______,          KC_BSPC
+                                                                            KC_SPACE,         _______,          KC_LGUI,                    _______,          _______,          KC_BSPC
   ),
   [KEYPAD_SYMB] = LAYOUT_moonlander(
     XXXXXXX,          XXXXXXX,          KC_F14,           KC_F15,           KC_F16,           KC_F17,           _______,                    _______,          KC_F18,           KC_F19,           KC_F20,           KC_F21,           XXXXXXX,          KC_F23,
