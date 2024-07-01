@@ -93,9 +93,9 @@ uint8_t PROGMEM ledmap[][RGB_MATRIX_LED_COUNT][3] = {
 };
 // clang-format on
 
-void set_led_color(int led, HSV hsv, bool force) {
+void set_led_color(int layer, int led, HSV hsv, bool force) {
   if (led == CAPS_WORDS_LED_ID && is_caps_word_on()) return; // cool effect
-  if (led == LAYER_LOCK_LED_ID && locked_layers > 0) return; // cool effect
+  if (led == LAYER_LOCK_LED_ID && is_layer_locked(layer)) return; // cool effect
 
   if (led == GUI_CTRL_SWAP_LED_ID && keymap_config.swap_lctl_lgui) {
     hsv = (HSV)SAPPHIRE_BLUE;
@@ -116,7 +116,7 @@ void set_led_color_from_layermap(int layer, int led) {
       .s = pgm_read_byte(&ledmap[layer][led][1]),
       .v = pgm_read_byte(&ledmap[layer][led][2]),
     };
-    set_led_color(led, hsv, false);
+    set_led_color(layer, led, hsv, false);
 }
 
 void set_layer_color(int layer) {
