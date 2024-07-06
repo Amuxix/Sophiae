@@ -131,9 +131,6 @@ uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
 }
 
 bool rgb_matrix_indicators_user(void) {
-  if (rawhid_state.rgb_control) {
-      return false;
-  }
   if (keyboard_config.disable_layer_led) { return false; }
   switch (biton32(layer_state)) {
     case BASE:
