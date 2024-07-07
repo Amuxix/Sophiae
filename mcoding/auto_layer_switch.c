@@ -5,7 +5,7 @@ RGB webhid_leds[RGB_MATRIX_LED_COUNT];
 
 uint8_t layer = 0;
 void move_layer() {
-  layer_move(layer)
+  layer_move(layer);
 }
 
 void raw_hid_receive(uint8_t *data, uint8_t length) {
