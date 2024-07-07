@@ -6,5 +6,6 @@ enum layers {
   KEYPAD_SYMB, //4
   EXTRA_SYMB, //5
   MOVEMENT, //6
-  SHORTCUTS //7
+  SHORTCUTS, //7
+  LAST_LAYER
 };
