@@ -1,5 +1,7 @@
 #include "raw_hid.h"
 
+RGB webhid_leds[RGB_MATRIX_LED_COUNT];
+
 void raw_hid_receive(uint8_t *data, uint8_t length) {
   if (strstr((char *) data, "LC")) {
     layer_move(data[2]);
