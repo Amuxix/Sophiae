@@ -80,54 +80,54 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 // clang-format on
 
 uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
-    switch (keycode) {
-        case LGUI_T(KC_R):
-            return LONG_TAPPING_TERM;
-        case LALT_T(KC_S):
-            return LONG_TAPPING_TERM;
-        case LCTL_T(KC_T):
-            return LONG_TAPPING_TERM;
-        case LCTL_T(KC_N):
-            return LONG_TAPPING_TERM;
-        case LALT_T(KC_E):
-            return LONG_TAPPING_TERM;
-        case LGUI_T(KC_I):
-            return LONG_TAPPING_TERM;
-        case LT_MOV(KC_TAB):
-            return LONG_TAPPING_TERM;
-        case LT_SYM(KC_ENTER):
-            return LONG_TAPPING_TERM;
-        case TD(COPY_CUT):
-            return TAPPING_TERM + 45;
-        case TD(PASTE):
-            return TAPPING_TERM + 45;
-        case TD(MUTE_UNMUTE):
-            return TAPPING_TERM + 45;
-        case TD(LAUNCH_PAUSE):
-            return TAPPING_TERM + 45;
-        case RSFT_T(KC_SPACE):
-            return TAPPING_TERM + 30;
-        //CANARY_G
-        case LALT_T(KC_W):
-            return LONG_TAPPING_TERM;
-        case LSFT_T(KC_C):
-            return LONG_TAPPING_TERM;
-        case LCTL_T(KC_Q):
-            return LONG_TAPPING_TERM;
-        case RALT_T(KC_QUOTE):
-            return LONG_TAPPING_TERM;
-        case RSFT_T(KC_A):
-            return LONG_TAPPING_TERM;
-        case RCTL_T(KC_DOT):
-            return LONG_TAPPING_TERM;
-        //KEYPAD_SYMB
-        case LGUI_T(KC_LBRC):
-            return LONG_TAPPING_TERM;
-        case LGUI_T(KC_KP_6):
-            return LONG_TAPPING_TERM;
-        default:
-            return TAPPING_TERM;
-    }
+  switch (keycode) {
+    case LGUI_T(KC_R):
+      return LONG_TAPPING_TERM;
+    case LALT_T(KC_S):
+      return LONG_TAPPING_TERM;
+    case LCTL_T(KC_T):
+      return LONG_TAPPING_TERM;
+    case LCTL_T(KC_N):
+      return LONG_TAPPING_TERM;
+    case LALT_T(KC_E):
+      return LONG_TAPPING_TERM;
+    case LGUI_T(KC_I):
+      return LONG_TAPPING_TERM;
+    case LT_MOV(KC_TAB):
+      return LONG_TAPPING_TERM;
+    case LT_SYM(KC_ENTER):
+      return LONG_TAPPING_TERM;
+    case TD(COPY_CUT):
+      return TAPPING_TERM + 45;
+    case TD(PASTE):
+      return TAPPING_TERM + 45;
+    case TD(MUTE_UNMUTE):
+      return TAPPING_TERM + 45;
+    case TD(LAUNCH_PAUSE):
+      return TAPPING_TERM + 45;
+    case RSFT_T(KC_SPACE):
+      return TAPPING_TERM + 30;
+    //CANARY_G
+    case LALT_T(KC_W):
+      return LONG_TAPPING_TERM;
+    case LSFT_T(KC_C):
+      return LONG_TAPPING_TERM;
+    case LCTL_T(KC_Q):
+      return LONG_TAPPING_TERM;
+    case RALT_T(KC_QUOTE):
+      return LONG_TAPPING_TERM;
+    case RSFT_T(KC_A):
+      return LONG_TAPPING_TERM;
+    case RCTL_T(KC_DOT):
+      return LONG_TAPPING_TERM;
+    //KEYPAD_SYMB
+    case LGUI_T(KC_LBRC):
+      return LONG_TAPPING_TERM;
+    case LGUI_T(KC_KP_6):
+      return LONG_TAPPING_TERM;
+    default:
+      return TAPPING_TERM;
+  }
 }
 
 bool rgb_matrix_indicators_user(void) {
@@ -166,35 +166,35 @@ bool rgb_matrix_indicators_user(void) {
 }
 
 layer_state_t layer_state_set_kb(layer_state_t state) {
-    state = layer_state_set_user(state);
-    bool LED_1 = false;
-    bool LED_2 = false;
-    bool LED_4 = false;
-    bool LED_5 = false;
+  state = layer_state_set_user(state);
+  bool LED_1 = false;
+  bool LED_2 = false;
+  bool LED_4 = false;
+  bool LED_5 = false;
 
-    uint8_t layer = get_highest_layer(state);
+  uint8_t layer = get_highest_layer(state);
     switch (layer) {
-        case CANARY_G:
-        case QWERTY_G:
-        case QWERTY_SG:
-            LED_2 = true;
-            break;
-        case KEYPAD_SYMB:
-            LED_1 = true;
-            break;
-        case EXTRA_SYMB:
-            LED_4 = true;
-            break;
-        case MOVEMENT:
-            LED_5 = true;
-            break;
-        default:
-            break;
+      case CANARY_G:
+      case QWERTY_G:
+      case QWERTY_SG:
+        LED_2 = true;
+        break;
+      case KEYPAD_SYMB:
+        LED_1 = true;
+        break;
+      case EXTRA_SYMB:
+        LED_4 = true;
+        break;
+      case MOVEMENT:
+        LED_5 = true;
+        break;
+      default:
+        break;
     }
 
-    ML_LED_1(LED_1);
-    ML_LED_2(LED_2);
-    ML_LED_4(LED_4);
-    ML_LED_5(LED_5);
-    return state;
+  ML_LED_1(LED_1);
+  ML_LED_2(LED_2);
+  ML_LED_4(LED_4);
+  ML_LED_5(LED_5);
+  return state;
 }
