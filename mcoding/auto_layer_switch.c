@@ -5,7 +5,7 @@
 RGB webhid_leds[RGB_MATRIX_LED_COUNT];
 
 uint8_t layer = 0;
-void move_layer() {
+void move_layer(void) {
   layer_move(layer);
 }
 
