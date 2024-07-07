@@ -6,6 +6,13 @@ void raw_hid_receive(uint8_t *data, uint8_t length) {
   if (strstr((char *) data, "LC")) {
     layer_move(data[2]);
     raw_hid_send(data, length);
+    ML_LED_5(true);
+    wait_ms(250);
+    ML_LED_5(false);
+    wait_ms(250);
+    ML_LED_5(true);
+    wait_ms(250);
+    ML_LED_5(false);
   } else {
     char response[RAW_EPSIZE] = "ERROR";
     memset(response + 5, 0, RAW_EPSIZE - 5);
