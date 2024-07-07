@@ -5,7 +5,7 @@
 RGB webhid_leds[RGB_MATRIX_LED_COUNT];
 
 void raw_hid_receive(uint8_t *data, uint8_t length) {
-  if (strstr((char *) data, "LC")) {
+  if (data[0] == 'L' && data[1] == 'C') {
       uint8_t layer = data[2] - 48; // Convert from ascii
       uprintf("Changing to layer %i\n", layer);
       layer_move(layer);
