@@ -7,4 +7,4 @@ enum layers {
   EXTRA_SYMB, //5
   MOVEMENT, //6
   SHORTCUTS //7
-}
+};
