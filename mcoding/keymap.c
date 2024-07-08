@@ -165,25 +165,31 @@ bool rgb_matrix_indicators_user(void) {
   return true;
 }
 
-layer_state_t layer_state_set_kb(layer_state_t state) {
-  state = layer_state_set_user(state);
+layer_state_t layer_state_set_user(layer_state_t state) {
+  uint8_t layer = get_highest_layer(state);
+  auto_layer_set(layer);
   bool LED_1 = false;
   bool LED_2 = false;
+  bool LED_3 = false;
   bool LED_4 = false;
   bool LED_5 = false;
+  bool LED_6 = false;
 
-  uint8_t layer = get_highest_layer(state);
     switch (layer) {
       case CANARY_G:
-      case QWERTY_G:
-      case QWERTY_SG:
-        LED_2 = true;
-        break;
-      case KEYPAD_SYMB:
         LED_1 = true;
         break;
-      case EXTRA_SYMB:
+      case QWERTY_G:
+        LED_2 = true;
+        break;
+      case QWERTY_SG:
+        LED_3 = true;
+        break;
+      case KEYPAD_SYMB:
         LED_4 = true;
+        break;
+      case EXTRA_SYMB:
+        LED_6 = true;
         break;
       case MOVEMENT:
         LED_5 = true;
@@ -194,7 +200,9 @@ layer_state_t layer_state_set_kb(layer_state_t state) {
 
   ML_LED_1(LED_1);
   ML_LED_2(LED_2);
+  ML_LED_3(LED_3);
   ML_LED_4(LED_4);
   ML_LED_5(LED_5);
+  ML_LED_6(LED_6);
   return state;
 }
