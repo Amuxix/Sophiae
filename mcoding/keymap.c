@@ -175,28 +175,28 @@ layer_state_t layer_state_set_user(layer_state_t state) {
   bool LED_5 = false;
   bool LED_6 = false;
 
-    switch (layer) {
-      case CANARY_G:
-        LED_1 = true;
-        break;
-      case QWERTY_G:
-        LED_2 = true;
-        break;
-      case QWERTY_SG:
-        LED_3 = true;
-        break;
-      case KEYPAD_SYMB:
-        LED_4 = true;
-        break;
-      case EXTRA_SYMB:
-        LED_6 = true;
-        break;
-      case MOVEMENT:
-        LED_5 = true;
-        break;
-      default:
-        break;
-    }
+  switch (layer) {
+    case CANARY_G:
+      LED_1 = true;
+      break;
+    case QWERTY_G:
+      LED_2 = true;
+      break;
+    case QWERTY_SG:
+      LED_3 = true;
+      break;
+    case KEYPAD_SYMB:
+      LED_4 = true;
+      break;
+    case EXTRA_SYMB:
+      LED_6 = true;
+      break;
+    case MOVEMENT:
+      LED_5 = true;
+      break;
+    default:
+      break;
+  }
 
   ML_LED_1(LED_1);
   ML_LED_2(LED_2);
