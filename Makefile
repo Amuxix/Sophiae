@@ -15,3 +15,7 @@ zsa_firmware/keyboards/moonlander/keymaps/mcoding: mcoding qmk_setup
 
 zsa_firmware/.build/moonlander_mcoding.bin: mcoding qmk_setup
 	make -C zsa_firmware moonlander:mcoding
+
+.PHONY: flash
+flash: zsa_firmware/keyboards/moonlander/keymaps/mcoding
+	make -C zsa_firmware moonlander:mcoding:flash
