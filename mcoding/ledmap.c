@@ -124,3 +124,38 @@ void set_layer_color(int layer) {
     set_led_color_from_layermap(layer, led);
   }
 }
+
+bool rgb_matrix_indicators_user(void) {
+  if (keyboard_config.disable_layer_led) { return false; }
+  switch (biton32(layer_state)) {
+    case BASE:
+      set_layer_color(BASE);
+      break;
+    case CANARY_G:
+      set_layer_color(CANARY_G);
+      break;
+    case QWERTY_G:
+      set_layer_color(QWERTY_G);
+      break;
+    case QWERTY_SG:
+      set_layer_color(QWERTY_SG);
+      break;
+    case KEYPAD_SYMB:
+      set_layer_color(KEYPAD_SYMB);
+      break;
+    case EXTRA_SYMB:
+      set_layer_color(EXTRA_SYMB);
+      break;
+    case MOVEMENT:
+      set_layer_color(MOVEMENT);
+      break;
+    case SHORTCUTS:
+      set_layer_color(SHORTCUTS);
+      break;
+   default:
+    if (rgb_matrix_get_flags() == LED_FLAG_NONE)
+      rgb_matrix_set_color_all(0, 0, 0);
+    break;
+  }
+  return true;
+}
