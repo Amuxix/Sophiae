@@ -7,7 +7,6 @@
 #include "macros.c"
 #include "alternates.c"
 #include "overrides.c"
-#include "auto_layer_switch.c"
 
 // clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -131,7 +130,6 @@ uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
 
 layer_state_t layer_state_set_user(layer_state_t state) {
   uint8_t layer = get_highest_layer(state);
-  auto_layer_set(layer);
   bool LED_1 = false;
   bool LED_2 = false;
   bool LED_3 = false;
