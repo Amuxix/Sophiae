@@ -26,3 +26,6 @@
 #define RGB_MATRIX_STARTUP_SPD 60
 
 #define MOONLANDER_USER_LEDS
+// Macro settings
+// 5ms betweed key presses
+#define DYNAMIC_MACRO_DELAY 5
