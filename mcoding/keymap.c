@@ -8,6 +8,7 @@
 #include "alternates.c"
 #include "overrides.c"
 #include "auto_layer_switch.c"
+#include "caps_word.c"
 
 // clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
