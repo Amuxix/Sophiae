@@ -97,7 +97,7 @@ void set_led_color(int layer, int led, HSV hsv, bool force) {
   if (led == CAPS_WORDS_LED_ID && is_caps_word_on()) return; // cool effect
   if (led == LAYER_LOCK_LED_ID && is_layer_locked(layer)) return; // cool effect
 
-  if (led == GUI_CTRL_SWAP_LED_ID && keymap_config.swap_lctl_lgui) {
+  if (led == GUI_CTRL_SWAP_LED_ID && MAC_MODE) {
     hsv = (HSV)SAPPHIRE_BLUE;
   }
 
