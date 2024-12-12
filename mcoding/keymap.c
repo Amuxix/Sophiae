@@ -3,7 +3,7 @@
 #include "keycodes.h"
 #include "layers.c"
 #include "dances.c"
-#include "macros.c"
+#include "custom_keys.c"
 #include "ledmap.c"
 #include "alternates.c"
 #include "auto_layer_switch.c"
@@ -25,7 +25,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_LALT,          LALT_T(KC_W),     KC_R,             KC_S,             KC_T,             _______,          _______,                    _______,          _______,          KC_N,             KC_E,             KC_I,             RALT_T(KC_QUOTE), KC_RALT,
     KC_LSFT,          LSFT_T(KC_C),     _______,          _______,          _______,          _______,                                                        _______,          _______,          _______,          _______,          RSFT_T(KC_A),     KC_RSFT,
     KC_LCTL,          LCTL_T(KC_Q),     _______,          _______,          _______,                            _______,                    _______,                            _______,          _______,          _______,          RCTL_T(KC_DOT),   KC_RCTL,
-                                                                            KC_BSPC,          _______,          KC_LGUI,                    _______,          _______,          KC_SPACE
+                                                                            KC_BSPC,          _______,          _______,                    _______,          _______,          KC_SPACE
   ),
   [QWERTY_G] = LAYOUT_moonlander(
     _______,          KC_1,             KC_2,             KC_3,             KC_4,             KC_5,             _______,                    _______,          KC_6,             KC_7,             KC_8,             KC_9,             XXXXXXX,          KC_F11,
@@ -33,7 +33,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_LALT,          KC_A,             KC_S,             KC_D,             KC_F,             KC_G,             _______,                    _______,          KC_H,             KC_J,             KC_K,             KC_L,             KC_P,             KC_RALT,
     KC_LSFT,          KC_Z,             KC_X,             KC_C,             KC_V,             KC_B,                                                           KC_N,             KC_M,             _______,          _______,          KC_QUOTE,         KC_RSFT,
     KC_LCTL,          XXXXXXX,          _______,          _______,          _______,                            _______,                    _______,                            _______,          _______,          _______,          _______,          KC_RCTL,
-                                                                            KC_SPACE,         _______,          KC_LGUI,                    _______,          _______,          KC_BSPC
+                                                                            KC_SPACE,         _______,          _______,                    _______,          _______,          KC_BSPC
   ),
   [QWERTY_SG] = LAYOUT_moonlander(
     _______,          _______,          KC_1,             KC_2,             KC_3,             KC_4,             KC_5,                       _______,          KC_6,             KC_7,             KC_8,             KC_9,             KC_0,             KC_F11,
@@ -41,7 +41,15 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_LALT,          KC_LALT,          KC_A,             KC_S,             KC_D,             KC_F,             KC_G,                       _______,          KC_H,             KC_J,             KC_K,             KC_L,             KC_P,             KC_QUOTE,
     KC_LSFT,          KC_LSFT,          KC_Z,             KC_X,             KC_C,             KC_V,                                                           KC_B,             KC_N,             KC_M,             KC_COLN,          KC_COMMA,         KC_RSFT,
     KC_LCTL,          KC_LCTL,          _______,          _______,          _______,                            _______,                    _______,                            _______,          _______,          _______,          _______,          KC_RCTL,
-                                                                            KC_SPACE,         _______,          KC_LGUI,                    _______,          _______,          KC_BSPC
+                                                                            KC_SPACE,         _______,          _______,                    _______,          _______,          KC_BSPC
+  ),
+  [QWERTY_SG] = LAYOUT_moonlander(
+    _______,          _______,          _______,          _______,          _______,          _______,          _______,                    _______,          _______,          _______,          _______,          _______,          _______,          _______,
+    _______,          _______,          _______,          _______,          _______,          _______,          _______,                    _______,          _______,          _______,          _______,          _______,          _______,          _______,
+    _______,          _______,          _______,          _______,          _______,          _______,          _______,                    _______,          _______,          _______,          _______,          _______,          _______,          _______,
+    _______,          _______,          _______,          _______,          _______,          _______,                                                        _______,          _______,          _______,          _______,          _______,          _______,
+    _______,          _______,          _______,          _______,          _______,                            _______,                    _______,                            _______,          _______,          _______,          _______,          _______,
+                                                                            KC_SPACE,         _______,          _______,                    _______,          _______,          KC_BSPC
   ),
   [KEYPAD_SYMB] = LAYOUT_moonlander(
     XXXXXXX,          XXXXXXX,          KC_F14,           KC_F15,           KC_F16,           KC_F17,           _______,                    _______,          KC_F18,           KC_F19,           KC_F20,           KC_F21,           XXXXXXX,          KC_F23,
@@ -130,43 +138,12 @@ uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
 }
 
 layer_state_t layer_state_set_user(layer_state_t state) {
-  uint8_t layer = get_highest_layer(state);
-  auto_layer_set(layer);
-  bool LED_1 = false;
-  bool LED_2 = false;
-  bool LED_3 = false;
-  bool LED_4 = false;
-  bool LED_5 = false;
-  bool LED_6 = false;
-
-  switch (layer) {
-    case CANARY_G:
-      LED_1 = true;
-      break;
-    case QWERTY_G:
-      LED_2 = true;
-      break;
-    case QWERTY_SG:
-      LED_3 = true;
-      break;
-    case KEYPAD_SYMB:
-      LED_4 = true;
-      break;
-    case EXTRA_SYMB:
-      LED_6 = true;
-      break;
-    case MOVEMENT:
-      LED_5 = true;
-      break;
-    default:
-      break;
-  }
-
-  ML_LED_1(LED_1);
-  ML_LED_2(LED_2);
-  ML_LED_3(LED_3);
-  ML_LED_4(LED_4);
-  ML_LED_5(LED_5);
-  ML_LED_6(LED_6);
+  auto_layer_set(state);
+  ML_LED_1(IS_LAYER_ON_STATE(state, CANARY_G));
+  ML_LED_2(IS_LAYER_ON_STATE(state, QWERTY_G) || IS_LAYER_ON_STATE(state, QWERTY_SG));
+  ML_LED_3(IS_LAYER_ON_STATE(state, SPACE_BSPC_SWAP));
+  ML_LED_4(IS_LAYER_ON_STATE(state, KEYPAD_SYMB));
+  ML_LED_5(IS_LAYER_ON_STATE(state, MOVEMENT));
+  ML_LED_6(IS_LAYER_ON_STATE(state, EXTRA_SYMB));
   return state;
 }

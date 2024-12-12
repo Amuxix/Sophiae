@@ -1,6 +1,6 @@
 #define WINDOWS_MAC_KEY(windows_key, mac_key) \
   if (MAC_MODE) { \
-    SS_TAP(mac_key); \
+    TAP_KEY(mac_key); \
   } else { \
     TAP_KEY(windows_key); \
   }
@@ -48,26 +48,24 @@ combo_t key_combos[COMBO_COUNT] = {
   } \
 }
 
+void send_c_cedilla() {
+  if (!MAC_MODE) {
+    SEND_STRING_DELAY(SS_LALT(SS_LCTL(SS_TAP(X_COMMA))), 5);
+  } else {
+    SEND_STRING_DELAY(SS_TAP(X_QUOTE), 5);
+  }
+}
+
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   if (record->event.pressed) {
     switch (keycode) {
       case CAO:
-        if (!MAC_MODE) {
-          SEND_STRING_DELAY(SS_LALT(SS_LCTL(SS_TAP(X_COMMA)), 5);
-        } else {
-          SEND_STRING_DELAY(SS_TAP(X_QUOTE), 5);
-        }
-        // No break continue to add ão
+        send_c_cedilla; // No break continue to add ão
       case AO:
         SEND_STRING_DELAY(SS_LSFT(SS_TAP(X_GRAVE)) SS_TAP(X_A) SS_TAP(X_O), 5);
         break;
       case COES:
-        if (!MAC_MODE) {
-          SEND_STRING_DELAY(SS_LALT(SS_LCTL(SS_TAP(X_COMMA)), 5);
-        } else {
-          SEND_STRING_DELAY(SS_TAP(X_QUOTE), 5);
-        }
-        // No break continue to add ões
+        send_c_cedilla; // No break continue to add ões
       case OES:
         SEND_STRING_DELAY(SS_LSFT(SS_TAP(X_GRAVE)) SS_TAP(X_O) SS_TAP(X_E) SS_TAP(X_S), 5);
         break;
@@ -114,31 +112,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         break;
       case SNIPPING:
         WINDOWS_MAC_KEY(LGUI(LCS(KC_4)), KC_PSCR)
-        break;
-    }
-  }
-  if (macro_id != 0 && dynamic_macro_valid_key_user(keycode, record)) {
-    /*
-      Macro recording in progress
-      Key is valid
-      Send macro after it was recorded
-     */
-    switch (keycode) {
-      case QK_DYNAMIC_MACRO_RECORD_START_1:
-      case QK_DYNAMIC_MACRO_RECORD_START_2:
-      case QK_DYNAMIC_MACRO_RECORD_STOP:
-        return false; //Do nothing with start and stop buttons
-      case QK_DYNAMIC_MACRO_PLAY_1:
-        if (macro_id != 1) {
-          // No nesting of same macro
-          dynamic_macro_play(macro_buffer, macro_end, +1);
-        }
-        break;
-      case QK_DYNAMIC_MACRO_PLAY_2:
-        if (macro_id != 2) {
-          // No nesting of same macro
-          dynamic_macro_play(r_macro_buffer, r_macro_end, -1);
-        }
         break;
     }
   }
