@@ -48,11 +48,11 @@ combo_t key_combos[COMBO_COUNT] = {
   } \
 }
 
-void send_c_cedilla() {
+void send_c_cedilla(void) {
   if (!MAC_MODE) {
     SEND_STRING_DELAY(SS_LALT(SS_LCTL(SS_TAP(X_COMMA))), 5);
   } else {
-    SEND_STRING_DELAY(SS_TAP(X_QUOTE), 5);
+    SEND_STRING_DELAY(SS_TAP(X_QUOTE) SS_TAP(X_C), 5);
   }
 }
 
@@ -60,12 +60,12 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   if (record->event.pressed) {
     switch (keycode) {
       case CAO:
-        send_c_cedilla; // No break continue to add ão
+        send_c_cedilla(); // No break continue to add ão
       case AO:
         SEND_STRING_DELAY(SS_LSFT(SS_TAP(X_GRAVE)) SS_TAP(X_A) SS_TAP(X_O), 5);
         break;
       case COES:
-        send_c_cedilla; // No break continue to add ões
+        send_c_cedilla(); // No break continue to add ões
       case OES:
         SEND_STRING_DELAY(SS_LSFT(SS_TAP(X_GRAVE)) SS_TAP(X_O) SS_TAP(X_E) SS_TAP(X_S), 5);
         break;
