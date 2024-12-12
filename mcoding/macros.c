@@ -20,6 +20,7 @@ enum custom_keycodes {
   MAC_MODE_TOGG,
   EURO,
   POUND,
+  DEGREE,
   HOME,
   END,
   SNIPPING,
@@ -97,10 +98,13 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         keymap_config.swap_rctl_rgui = MAC_MODE;
         break;
       case EURO:
-        WINDOWS_MAC_KEY(S(LALT(KC_2)), ALGR(KC_5))
+        WINDOWS_MAC_KEY(ALGR(KC_5), S(LALT(KC_2)))
         break;
       case POUND:
-        WINDOWS_MAC_KEY(LALT(KC_3), ALGR(KC_4))
+        WINDOWS_MAC_KEY(S(ALGR(KC_4)), LALT(KC_3))
+        break;
+      case DEGREE:
+        WINDOWS_MAC_KEY(S(ALGR(KC_SCLN)), LALT(KC_0))
         break;
       case HOME:
         WINDOWS_MAC_KEY(KC_HOME, LGUI(KC_LEFT))
