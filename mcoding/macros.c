@@ -19,8 +19,10 @@ enum custom_keycodes {
   UNINDENT,
   MAC_MODE_TOGG,
   EURO,
+  POUND,
   HOME,
   END,
+  SNIPPING,
 };
 
 bool MAC_MODE = false;
@@ -54,6 +56,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         } else {
           SEND_STRING_DELAY(SS_TAP(X_QUOTE), 5);
         }
+        // No break continue to add ão
       case AO:
         SEND_STRING_DELAY(SS_LSFT(SS_TAP(X_GRAVE)) SS_TAP(X_A) SS_TAP(X_O), 5);
         break;
@@ -63,6 +66,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         } else {
           SEND_STRING_DELAY(SS_TAP(X_QUOTE), 5);
         }
+        // No break continue to add ões
       case OES:
         SEND_STRING_DELAY(SS_LSFT(SS_TAP(X_GRAVE)) SS_TAP(X_O) SS_TAP(X_E) SS_TAP(X_S), 5);
         break;
@@ -96,13 +100,16 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         WINDOWS_MAC_KEY(S(LALT(KC_2)), ALGR(KC_5))
         break;
       case POUND:
-        WINDOWS_MAC_KEY(LALT(KC_3), LALT(KC_3))
+        WINDOWS_MAC_KEY(LALT(KC_3), ALGR(KC_4))
         break;
       case HOME:
         WINDOWS_MAC_KEY(KC_HOME, LGUI(KC_LEFT))
         break;
       case END:
         WINDOWS_MAC_KEY(KC_END, LGUI(KC_RIGHT))
+        break;
+      case SNIPPING:
+        WINDOWS_MAC_KEY(LGUI(LCS(KC_4)), KC_PSCR)
         break;
     }
   }
