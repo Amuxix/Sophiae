@@ -6,14 +6,13 @@
 #include "macros.c"
 #include "ledmap.c"
 #include "alternates.c"
-#include "overrides.c"
 #include "auto_layer_switch.c"
 #include "caps_word.c"
 
 // clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [BASE] = LAYOUT_moonlander(
-    DM_PLY1,          XXXXXXX,          KC_F2,            KC_F3,            KC_F4,            KC_F5,            CG_TOGG,                    XXXXXXX,          KC_F6,            KC_F7,            KC_F8,            KC_F9,            XXXXXXX,          KC_F11,
+    DM_PLY1,          XXXXXXX,          KC_F2,            KC_F3,            KC_F4,            KC_F5,            MAC_MODE_TOGG,              XXXXXXX,          KC_F6,            KC_F7,            KC_F8,            KC_F9,            XXXXXXX,          KC_F11,
     DM_PLY2,          KC_F1,            KC_L,             KC_Y,             KC_P,             KC_B,             XXXXXXX,                    XXXXXXX,          KC_Z,             KC_F,             KC_O,             KC_U,             KC_F10,           KC_F12,
     XXXXXXX,          KC_W,             LGUI_T(KC_R),     LALT_T(KC_S),     LCTL_T(KC_T),     KC_G,             CW_TOGG,                    OSL(SHORTCUTS),   KC_M,             LCTL_T(KC_N),     LALT_T(KC_E),     LGUI_T(KC_I),     KC_QUOTE,         XXXXXXX,
     XXXXXXX,          KC_C,             KC_J,             KC_V,             KC_D,             KC_K,                                                           KC_X,             KC_H,             KC_COLN,          KC_COMMA,         KC_A,             XXXXXXX,
@@ -46,8 +45,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
   [KEYPAD_SYMB] = LAYOUT_moonlander(
     XXXXXXX,          XXXXXXX,          KC_F14,           KC_F15,           KC_F16,           KC_F17,           _______,                    _______,          KC_F18,           KC_F19,           KC_F20,           KC_F21,           XXXXXXX,          KC_F23,
-    XXXXXXX,          KC_F13,           KC_PERC,          KC_DLR,           KC_HASH,          US_DEG,           _______,                    _______,          KC_INSERT,        KC_KP_7,          KC_KP_8,          KC_KP_9,          KC_F22,           KC_F24,
-    XXXXXXX,          US_EURO,          LGUI_T(KC_LBRC),  TD(LALT_LBRACK),  TD(LCTL_LPAREN),  KC_LABK,          _______,                    QK_LLCK,          KC_KP_MINUS,      LCTL_T(KC_KP_4),  LALT_T(KC_KP_5),  LGUI_T(KC_KP_6),  KC_KP_SLASH,      XXXXXXX,
+    XXXXXXX,          KC_F13,           KC_PERC,          KC_DLR,           KC_HASH,          POUND,            _______,                    _______,          KC_INSERT,        KC_KP_7,          KC_KP_8,          KC_KP_9,          KC_F22,           KC_F24,
+    XXXXXXX,          EURO,             LGUI_T(KC_LBRC),  TD(LALT_LBRACK),  TD(LCTL_LPAREN),  KC_LABK,          _______,                    QK_LLCK,          KC_KP_MINUS,      LCTL_T(KC_KP_4),  LALT_T(KC_KP_5),  LGUI_T(KC_KP_6),  KC_KP_SLASH,      XXXXXXX,
     XXXXXXX,          LEFT_ARROW,       KC_RBRC,          KC_RCBR,          KC_RPRN,          KC_RABK,                                                        KC_KP_PLUS,       KC_KP_1,          KC_KP_2,          KC_KP_3,          KC_KP_ASTERISK,   XXXXXXX,
     XXXXXXX,          RIGHT_ARROW,      XXXXXXX,          XXXXXXX,          _______,                            _______,                    _______,                            _______,          KC_KP_0,          KC_EQUAL,         KC_KP_DOT,        XXXXXXX,
                                                                             _______,          _______,          _______,                    KC_PSCR,          _______,          _______
@@ -64,7 +63,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     XXXXXXX,          XXXXXXX,          KC_F2,            KC_F3,            KC_F4,            KC_F5,            _______,                    _______,          KC_F6,            KC_F7,            KC_F8,            KC_F9,            XXXXXXX,          KC_F11,
     XXXXXXX,          KC_F1,            XXXXXXX,          XXXXXXX,          XXXXXXX,          XXXXXXX,          _______,                    _______,          LSFT(KC_LEFT),    LSFT(KC_DOWN),    LSFT(KC_UP),      LSFT(KC_RIGHT),   KC_F10,           KC_F12,
     XXXXXXX,          XXXXXXX,          KC_LGUI,          KC_LALT,          KC_LCTL,          XXXXXXX,          _______,                    QK_LLCK,          KC_LEFT,          KC_DOWN,          KC_UP,            KC_RIGHT,         KC_MNXT,          XXXXXXX,
-    XXXXXXX,          XXXXXXX,          XXXXXXX,          XXXXXXX,          XXXXXXX,          XXXXXXX,                                                        KC_HOME,          KC_PGDN,          KC_PAGE_UP,       KC_END,           KC_MPLY,          XXXXXXX,
+    XXXXXXX,          XXXXXXX,          XXXXXXX,          XXXXXXX,          XXXXXXX,          XXXXXXX,                                                        HOME,             KC_PGDN,          KC_PAGE_UP,       END,              KC_MPLY,          XXXXXXX,
     XXXXXXX,          XXXXXXX,          XXXXXXX,          XXXXXXX,          _______,                            _______,                    _______,                            KC_VOLD,          KC_MUTE,          KC_VOLU,          KC_MPRV,          XXXXXXX,
                                                                             _______,          _______,          _______,                    _______,          _______,          _______
   ),
