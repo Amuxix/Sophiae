@@ -116,7 +116,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         WINDOWS_MAC_KEY(KC_END, LGUI(KC_RIGHT))
         break;
       case SNIPPING:
-        WINDOWS_MAC_KEY(LGUI(LCS(KC_4)), KC_PSCR)
+        WINDOWS_MAC_KEY(KC_PSCR, LGUI(LCS(KC_4)))
         break;
     }
   }
