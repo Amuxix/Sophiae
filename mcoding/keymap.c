@@ -12,7 +12,7 @@
 // clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [BASE] = LAYOUT_moonlander(
-    DM_PLY1,          XXXXXXX,          KC_F2,            KC_F3,            KC_F4,            KC_F5,            MAC_MODE_TOGG,              XXXXXXX,          KC_F6,            KC_F7,            KC_F8,            KC_F9,            XXXXXXX,          KC_F11,
+    DM_PLY1,          XXXXXXX,          KC_F2,            KC_F3,            KC_F4,            KC_F5,            MAC_MODE_TOGG,              TG(SPACE_SWAP),   KC_F6,            KC_F7,            KC_F8,            KC_F9,            XXXXXXX,          KC_F11,
     DM_PLY2,          KC_F1,            KC_L,             KC_Y,             KC_P,             KC_B,             XXXXXXX,                    XXXXXXX,          KC_Z,             KC_F,             KC_O,             KC_U,             KC_F10,           KC_F12,
     XXXXXXX,          KC_W,             LGUI_T(KC_R),     LALT_T(KC_S),     LCTL_T(KC_T),     KC_G,             CW_TOGG,                    OSL(SHORTCUTS),   KC_M,             LCTL_T(KC_N),     LALT_T(KC_E),     LGUI_T(KC_I),     KC_QUOTE,         XXXXXXX,
     XXXXXXX,          KC_C,             KC_J,             KC_V,             KC_D,             KC_K,                                                           KC_X,             KC_H,             KC_COLN,          KC_COMMA,         KC_A,             XXXXXXX,
@@ -43,7 +43,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_LCTL,          KC_LCTL,          _______,          _______,          _______,                            _______,                    _______,                            _______,          _______,          _______,          _______,          KC_RCTL,
                                                                             KC_SPACE,         _______,          _______,                    _______,          _______,          KC_BSPC
   ),
-  [SPACE_BSPC_SWAP] = LAYOUT_moonlander(
+  [SPACE_SWAP] = LAYOUT_moonlander(
     _______,          _______,          _______,          _______,          _______,          _______,          _______,                    _______,          _______,          _______,          _______,          _______,          _______,          _______,
     _______,          _______,          _______,          _______,          _______,          _______,          _______,                    _______,          _______,          _______,          _______,          _______,          _______,          _______,
     _______,          _______,          _______,          _______,          _______,          _______,          _______,                    _______,          _______,          _______,          _______,          _______,          _______,          _______,
@@ -76,7 +76,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                                                             _______,          _______,          _______,                    _______,          _______,          _______
   ),
   [SHORTCUTS] = LAYOUT_moonlander(
-    XXXXXXX,          XXXXXXX,          TO(CANARY_G),       TO(QWERTY_G),   TO(QWERTY_SG),    TG(SPACE_BSPC_SWAP), XXXXXXX,                 XXXXXXX,          XXXXXXX,          XXXXXXX,          XXXXXXX,          XXXXXXX,          XXXXXXX,          XXXXXXX,
+    XXXXXXX,          XXXXXXX,          TO(CANARY_G),       TO(QWERTY_G),   TO(QWERTY_SG),    XXXXXXX,          XXXXXXX,                    XXXXXXX,          XXXXXXX,          XXXXXXX,          XXXXXXX,          XXXXXXX,          XXXXXXX,          XXXXXXX,
     XXXXXXX,          TO(BASE),         XXXXXXX,            XXXXXXX,        XXXXXXX,          BOLD,             XXXXXXX,                    XXXXXXX,          LSA(KC_Z),        XXXXXXX,          XXXXXXX,          XXXXXXX,          XXXXXXX,          XXXXXXX,
     XXXXXXX,          XXXXXXX,          XXXXXXX,            XXXXXXX,        XXXXXXX,          XXXXXXX,          XXXXXXX,                    QK_LLCK,          XXXXXXX,          XXXXXXX,          XXXXXXX,          ITALIC,           XXXXXXX,          XXXXXXX,
     XXXXXXX,          KC_CALCULATOR,    XXXXXXX,            XXXXXXX,        XXXXXXX,          XXXXXXX,                                                        XXXXXXX,          XXXXXXX,          XXXXXXX,          XXXXXXX,          XXXXXXX,          XXXXXXX,
@@ -141,7 +141,8 @@ layer_state_t layer_state_set_user(layer_state_t state) {
   auto_layer_set(state);
   ML_LED_1(IS_LAYER_ON_STATE(state, CANARY_G));
   ML_LED_2(IS_LAYER_ON_STATE(state, QWERTY_G) || IS_LAYER_ON_STATE(state, QWERTY_SG));
-  ML_LED_3(IS_LAYER_ON_STATE(state, SPACE_BSPC_SWAP));
+  //ML_LED_3(IS_LAYER_ON_STATE(state, SPACE_SWAP));
+  ML_LED_3(false);
   ML_LED_4(IS_LAYER_ON_STATE(state, KEYPAD_SYMB));
   ML_LED_5(IS_LAYER_ON_STATE(state, MOVEMENT));
   ML_LED_6(IS_LAYER_ON_STATE(state, EXTRA_SYMB));
