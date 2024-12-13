@@ -1,10 +1,3 @@
-#define WINDOWS_MAC_KEY(windows_key, mac_key) \
-  if (MAC_MODE) { \
-    TAP_KEY(mac_key); \
-  } else { \
-    TAP_KEY(windows_key); \
-  }
-
 enum custom_keycodes {
   AO = ML_SAFE_RANGE, // Start in a safe range
   OES,
@@ -42,17 +35,29 @@ combo_t key_combos[COMBO_COUNT] = {
 
 #define STRING_MODIFIER(modifier) { \
   if (!MAC_MODE) { \
-    SEND_STRING_DELAY(SS_LCTL(SS_LSFT(SS_TAP(X_LEFT))) SS_RCTL(SS_TAP(modifier)) SS_TAP(X_RIGHT) SS_LCTL(SS_TAP(X_RIGHT)), 5); \
+    SEND_STRING_DELAY(SS_LCTL(SS_LSFT(SS_TAP(X_LEFT))) SS_LCTL(SS_TAP(modifier)) SS_TAP(X_RIGHT) SS_LCTL(SS_TAP(X_RIGHT)), DYNAMIC_MACRO_DELAY); \
   } else { \
-    SEND_STRING_DELAY(SS_LGUI(SS_LSFT(SS_TAP(X_LEFT))) SS_LGUI(SS_TAP(modifier)) SS_TAP(X_RIGHT) SS_LGUI(SS_TAP(X_RIGHT)), 5); \
+    SEND_STRING_DELAY(SS_LALT(SS_LSFT(SS_TAP(X_LEFT))) SS_LGUI(SS_TAP(modifier)) SS_TAP(X_RIGHT) SS_LALT(SS_TAP(X_RIGHT)), DYNAMIC_MACRO_DELAY); \
   } \
 }
 
+//Tap code is affected by mac mode so we need to send the
+#define WINDOWS_MAC_KEY(windows_key, mac_key) \
+  if (MAC_MODE) { \
+    keymap_config.swap_lctl_lgui = !MAC_MODE; \
+    keymap_config.swap_rctl_rgui = !MAC_MODE; \
+    TAP_KEY(mac_key); \
+    keymap_config.swap_lctl_lgui = MAC_MODE; \
+    keymap_config.swap_rctl_rgui = MAC_MODE; \
+  } else { \
+    TAP_KEY(windows_key); \
+  }
+
 void send_c_cedilla(void) {
   if (!MAC_MODE) {
-    SEND_STRING_DELAY(SS_LALT(SS_LCTL(SS_TAP(X_COMMA))), 5);
+    SEND_STRING_DELAY(SS_LALT(SS_LCTL(SS_TAP(X_COMMA))), DYNAMIC_MACRO_DELAY);
   } else {
-    SEND_STRING_DELAY(SS_TAP(X_QUOTE) SS_TAP(X_C), 5);
+    SEND_STRING_DELAY(SS_TAP(X_QUOTE) SS_TAP(X_C), DYNAMIC_MACRO_DELAY);
   }
 }
 
@@ -62,21 +67,21 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       case CAO:
         send_c_cedilla(); // No break continue to add ão
       case AO:
-        SEND_STRING_DELAY(SS_LSFT(SS_TAP(X_GRAVE)) SS_TAP(X_A) SS_TAP(X_O), 5);
+        SEND_STRING_DELAY(SS_LSFT(SS_TAP(X_GRAVE)) SS_TAP(X_A) SS_TAP(X_O), DYNAMIC_MACRO_DELAY);
         break;
       case COES:
         send_c_cedilla(); // No break continue to add ões
       case OES:
-        SEND_STRING_DELAY(SS_LSFT(SS_TAP(X_GRAVE)) SS_TAP(X_O) SS_TAP(X_E) SS_TAP(X_S), 5);
+        SEND_STRING_DELAY(SS_LSFT(SS_TAP(X_GRAVE)) SS_TAP(X_O) SS_TAP(X_E) SS_TAP(X_S), DYNAMIC_MACRO_DELAY);
         break;
       case LEFT_ARROW:
-        SEND_STRING_DELAY(SS_LSFT(SS_TAP(X_COMMA)) SS_TAP(X_MINUS), 5);
+        SEND_STRING_DELAY(SS_LSFT(SS_TAP(X_COMMA)) SS_TAP(X_MINUS), DYNAMIC_MACRO_DELAY);
         break;
       case RIGHT_ARROW:
-        SEND_STRING_DELAY(SS_TAP(X_MINUS) SS_LSFT(SS_TAP(X_DOT)), 5);
+        SEND_STRING_DELAY(SS_TAP(X_MINUS) SS_LSFT(SS_TAP(X_DOT)), DYNAMIC_MACRO_DELAY);
         break;
       case EQ_RIGHT_ARROW:
-        SEND_STRING_DELAY(SS_TAP(X_EQUAL) SS_LSFT(SS_TAP(X_DOT)), 5);
+        SEND_STRING_DELAY(SS_TAP(X_EQUAL) SS_LSFT(SS_TAP(X_DOT)), DYNAMIC_MACRO_DELAY);
         break;
       case BOLD:
         STRING_MODIFIER(X_B)
@@ -85,10 +90,10 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         STRING_MODIFIER(X_I)
         break;
       case INDENT:
-        SEND_STRING_DELAY(SS_LSFT(SS_TAP(X_LEFT)) SS_TAP(X_TAB) SS_LSFT(SS_TAP(X_RIGHT)), 5);
+        SEND_STRING_DELAY(SS_LSFT(SS_TAP(X_LEFT)) SS_TAP(X_TAB) SS_LSFT(SS_TAP(X_RIGHT)), DYNAMIC_MACRO_DELAY);
         break;
       case UNINDENT:
-        SEND_STRING_DELAY(SS_LSFT(SS_TAP(X_LEFT)) SS_LSFT(SS_TAP(X_TAB)) SS_LSFT(SS_TAP(X_RIGHT)), 5);
+        SEND_STRING_DELAY(SS_LSFT(SS_TAP(X_LEFT)) SS_LSFT(SS_TAP(X_TAB)) SS_LSFT(SS_TAP(X_RIGHT)), DYNAMIC_MACRO_DELAY);
         break;
       case MAC_MODE_TOGG:
         MAC_MODE = !MAC_MODE;
