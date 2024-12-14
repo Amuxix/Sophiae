@@ -4,22 +4,15 @@
 
 RGB webhid_leds[RGB_MATRIX_LED_COUNT];
 
+char *LAYER_STATE_CHANGE = "LSC";
+char *LAYER_STATE_SET = "LSS";
+
 void auto_layer_set(layer_state_t state) {
-  // SPACE_SWAP is special
-  uint8_t layer = get_highest_layer(state & ~((layer_state_t)1 << SPACE_SWAP));
-  if (layer >= BASE && layer <= QWERTY_SG) {
-    dprintf("Sending layer set %i\n", layer);
-    char response[RAW_EPSIZE] = "LS";
-    response[2] = (char)(layer + 48);
-    memset(response + 3, 0, RAW_EPSIZE - 3);
-    raw_hid_send((uint8_t *) response, RAW_EPSIZE);
-  } else if (IS_LAYER_ON_STATE(state, SPACE_SWAP)) {
-    dprintf("Sending layer special set %i\n", layer);
-    char response[RAW_EPSIZE] = "LSS";
-    response[3] = (char)(layer + 48);
-    memset(response + 4, 0, RAW_EPSIZE - 4);
-    raw_hid_send((uint8_t *) response, RAW_EPSIZE);
-  }
+  char message[RAW_EPSIZE];
+  memset(message, '\0', RAW_EPSIZE);
+  strcpy(message, LAYER_STATE_CHANGE);
+  memcpy(&message[strlen(LAYER_STATE_CHANGE)], (char *)&state, sizeof(layer_state_t));
+  raw_hid_send((uint8_t *) message, RAW_EPSIZE);
 }
 
 void send_error(void) {
@@ -29,19 +22,10 @@ void send_error(void) {
 }
 
 void raw_hid_receive(uint8_t *data, uint8_t length) {
-  if (data[0] == 'L' && data[1] == 'C') {
-    uint8_t layer = data[2] - 48; // Convert from ascii
-    if (layer >= BASE && layer <= QWERTY_SG) {
-      dprintf("Changing to layer %i\n", layer);
-      layer_move(layer);
-      raw_hid_send(data, length);
-      return;
-    } else if (layer == SPACE_SWAP) {
-      dprintf("Turning special layer on %i\n", layer);
-      layer_on(layer);
-      raw_hid_send(data, length);
-      return;
-    }
+  if (strncmp((char *)data, LAYER_STATE_SET, strlen(LAYER_STATE_SET)) == 0) {
+    layer_state_t *state = (layer_state_t *) &data[strlen(LAYER_STATE_SET)];
+    layer_state_set(*state);
+    return;
   }
   send_error();
 }
