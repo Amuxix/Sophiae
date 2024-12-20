@@ -62,6 +62,7 @@ void send_c_cedilla(void) {
 }
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+  if (!prevent_same_side_mods(keycode, record)) return false;
   if (record->event.pressed) {
     switch (keycode) {
       case CAO:
