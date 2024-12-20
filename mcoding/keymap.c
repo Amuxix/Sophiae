@@ -2,6 +2,7 @@
 #include "version.h"
 #include "keycodes.h"
 #include "layers.c"
+#include "press_helpers.c"
 #include "dances.c"
 #include "same_side_mod_prevention.c"
 #include "custom_keys.c"
