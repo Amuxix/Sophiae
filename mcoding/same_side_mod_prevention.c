@@ -68,33 +68,33 @@ bool handle_key_down(bool is_left, uint16_t key, uint8_t mod) {
 }
 
 bool on_key_down(uint16_t keycode, keyrecord_t *record) {
-  bool is_left_side_key = record->event.key.row <= MATRIX_ROWS / 2;
-  bool is_hold = record->tap.count == 0;
+  bool is_left_side_key = record->event.key.row < MATRIX_ROWS / 2;
+  bool is_hold = keycode > QK_BASIC_MAX && record->tap.count == 0;
 
   bool left_mod_on = (home_mods & 0x0f) > 0;
   bool right_mod_on = (home_mods & 0xf0) > 0;
 
-  uprintf("kc: 0x%04X, col: %2u, row: %2u, is_left_side_key %u, left_mod_on %u, right_mod_on %u", keycode, record->event.key.col, record->event.key.row, is_left_side_key, left_mod_on, right_mod_on);
+  dprintf("kc: 0x%04X, col: %2u, row: %2u, is_left_side_key %u, left_mod_on %u, right_mod_on %u, is_hold %u\n", keycode, record->event.key.col, record->event.key.row, is_left_side_key, left_mod_on, right_mod_on, is_hold);
 
   if (is_hold) {
     switch (keycode) {
       case LGUI_T(KC_R):
-        uprintf("LGUI_T(KC_R)");
+        dprintf("LGUI_T(KC_R)\n");
         return handle_key_down(is_left_side_key, KC_R, LEFT_GUI);
       case LALT_T(KC_S):
-        uprintf("LALT_T(KC_S)");
+        dprintf("LALT_T(KC_S)\n");
         return handle_key_down(is_left_side_key, KC_S, LEFT_ALT);
       case LCTL_T(KC_T):
-        uprintf("LCTL_T(KC_T)");
+        dprintf("LCTL_T(KC_T)\n");
         return handle_key_down(is_left_side_key, KC_T, LEFT_CTL);
       case LGUI_T(KC_I):
-        uprintf("LGUI_T(KC_I)");
+        dprintf("LGUI_T(KC_I)\n");
         return handle_key_down(is_left_side_key, KC_I, RIGHT_GUI);
       case LALT_T(KC_E):
-        uprintf("LALT_T(KC_E)");
+        dprintf("LALT_T(KC_E)\n");
         return handle_key_down(is_left_side_key, KC_E, RIGHT_ALT);
       case LCTL_T(KC_N):
-        uprintf("LCTL_T(KC_N)");
+        dprintf("LCTL_T(KC_N)\n");
         return handle_key_down(is_left_side_key, KC_N, RIGHT_CTL);
       default:
         break;
@@ -108,7 +108,7 @@ bool on_key_down(uint16_t keycode, keyrecord_t *record) {
         if ((home_mods & LEFT_ALT) > 0 && (home_mods & RIGHT_ALT) == 0) unregister_mods(MOD_LALT);
         if ((home_mods & LEFT_CTL) > 0 && (home_mods & RIGHT_CTL) == 0) unregister_mods(MOD_LCTL);
         // Send corresponding taps
-        uprintf("Left side key tap with left mod on");
+        dprintf("Left side key tap with left mod on\n");
         send_and_clear_keycodes();
       }
     } else {
@@ -119,7 +119,7 @@ bool on_key_down(uint16_t keycode, keyrecord_t *record) {
         if ((home_mods & RIGHT_ALT) > 0 && (home_mods & LEFT_ALT) == 0) unregister_mods(MOD_LALT);
         if ((home_mods & RIGHT_CTL) > 0 && (home_mods & LEFT_CTL) == 0) unregister_mods(MOD_LCTL);
         // Send corresponding taps
-        uprintf("Right side key tap with right mod on");
+        dprintf("Right side key tap with right mod on\n");
         send_and_clear_keycodes();
       }
     }
