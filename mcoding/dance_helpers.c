@@ -45,7 +45,32 @@ typedef struct {
   int8_t step;
 } tap;
 
+// Holds are negative, taps are positive
+typedef enum {
+  DOUBLE_HOLD = -2, // tap then hold
+  SINGLE_HOLD, // hold
+  DOUBLE_SINGLE_TAP, // tap then hold and press a different key before hold time has enlapsed
+  SINGLE_TAP, // tap
+  DOUBLE_TAP, // tap then tap
+  MAX_TAPS // two taps or more and then tap/hold
+} press_t;
+
 static tap dance_state[MAX_DANCES];
+
+press_t dance_step(tap_dance_state_t *state) {
+  switch (state->count) {
+    case 1:
+      if (state->interrupted || !state->pressed) return SINGLE_TAP;
+      else return SINGLE_HOLD;
+    case 2:
+      //two keystrokes and then a different keystroke before dance is finished
+      if (state->interrupted) return DOUBLE_SINGLE_TAP;
+      else if (state->pressed) return DOUBLE_HOLD;
+      else return DOUBLE_TAP;
+    default:
+      return MAX_TAPS;
+  }
+}
 
 void on_dance(tap_dance_state_t *state, uint16_t kc) {
   if (state->count == MAX_TAPS) {
@@ -66,7 +91,7 @@ void single_tap__single_hold__double_tap__double_hold__finished(
   uint16_t double_tap,
   uint16_t double_hold
 ) {
-  dance_state[dance_id].step = dance_press_type(state);
+  dance_state[dance_id].step = dance_step(state);
   switch (dance_state[dance_id].step) {
     case SINGLE_TAP: REGISTER_KEY(single_tap); break;
     case SINGLE_HOLD: REGISTER_KEY(single_hold); break;
@@ -101,7 +126,7 @@ void single_tap__single_hold__finished(
   uint16_t single_tap,
   uint16_t single_hold
 ) {
-  dance_state[dance_id].step = dance_press_type(state);
+  dance_state[dance_id].step = dance_step(state);
   switch (dance_state[dance_id].step) {
     case SINGLE_TAP: REGISTER_KEY(single_tap); break;
     case SINGLE_HOLD: REGISTER_KEY(single_hold); break;
