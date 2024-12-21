@@ -4,11 +4,9 @@ enum home_mods_t {
   LEFT_GUI = 1,
   LEFT_ALT = 2,
   LEFT_CTL = 4,
-//  LEFT_SFT = 8,
   RIGHT_GUI = 16,
   RIGHT_ALT = 32,
   RIGHT_CTL = 64,
-//  RIGHT_SFT = 128,
 };
 
 uint8_t home_mods = 0;
@@ -76,24 +74,28 @@ bool on_key_down(uint16_t keycode, keyrecord_t *record) {
   bool left_mod_on = (home_mods & 0x0f) > 0;
   bool right_mod_on = (home_mods & 0xf0) > 0;
 
+  uprintf("kc: 0x%04X, col: %2u, row: %2u, is_left_side_key %u, left_mod_on %u, right_mod_on %u", keycode, record->event.key.col, record->event.key.row, is_left_side_key, left_mod_on, right_mod_on);
+
   if (is_hold) {
     switch (keycode) {
       case LGUI_T(KC_R):
+        uprintf("LGUI_T(KC_R)");
         return handle_key_down(is_left_side_key, KC_R, LEFT_GUI);
       case LALT_T(KC_S):
+        uprintf("LALT_T(KC_S)");
         return handle_key_down(is_left_side_key, KC_S, LEFT_ALT);
       case LCTL_T(KC_T):
+        uprintf("LCTL_T(KC_T)");
         return handle_key_down(is_left_side_key, KC_T, LEFT_CTL);
-//      case LSFT_T(KC_BSPC):
-//        return handle_key_down(is_left_side_key, KC_BSPC, LEFT_SFT);
       case LGUI_T(KC_I):
+        uprintf("LGUI_T(KC_I)");
         return handle_key_down(is_left_side_key, KC_I, RIGHT_GUI);
       case LALT_T(KC_E):
+        uprintf("LALT_T(KC_E)");
         return handle_key_down(is_left_side_key, KC_E, RIGHT_ALT);
       case LCTL_T(KC_N):
+        uprintf("LCTL_T(KC_N)");
         return handle_key_down(is_left_side_key, KC_N, RIGHT_CTL);
-//      case RSFT_T(KC_SPACE):
-//        return handle_key_down(is_left_side_key, KC_SPACE, RIGHT_SFT);
       default:
         break;
     }
@@ -105,8 +107,8 @@ bool on_key_down(uint16_t keycode, keyrecord_t *record) {
         if ((home_mods & LEFT_GUI) > 0 && (home_mods & RIGHT_GUI) == 0) unregister_mods(MOD_LGUI);
         if ((home_mods & LEFT_ALT) > 0 && (home_mods & RIGHT_ALT) == 0) unregister_mods(MOD_LALT);
         if ((home_mods & LEFT_CTL) > 0 && (home_mods & RIGHT_CTL) == 0) unregister_mods(MOD_LCTL);
-//        if ((home_mods & LEFT_SFT) > 0 && (home_mods & RIGHT_SFT) == 0) unregister_mods(MOD_LSFT);
         // Send corresponding taps
+        uprintf("Left side key tap with left mod on");
         send_and_clear_keycodes();
       }
     } else {
@@ -116,8 +118,8 @@ bool on_key_down(uint16_t keycode, keyrecord_t *record) {
         if ((home_mods & RIGHT_GUI) > 0 && (home_mods & LEFT_GUI) == 0) unregister_mods(MOD_LGUI);
         if ((home_mods & RIGHT_ALT) > 0 && (home_mods & LEFT_ALT) == 0) unregister_mods(MOD_LALT);
         if ((home_mods & RIGHT_CTL) > 0 && (home_mods & LEFT_CTL) == 0) unregister_mods(MOD_LCTL);
-//        if ((home_mods & RIGHT_SFT) > 0 && (home_mods & LEFT_SFT) == 0) unregister_mods(MOD_LSFT);
         // Send corresponding taps
+        uprintf("Right side key tap with right mod on");
         send_and_clear_keycodes();
       }
     }
@@ -141,10 +143,6 @@ bool on_key_up(uint16_t keycode, keyrecord_t *record) {
         remove_keycode(KC_T);
         home_mods &= ~LEFT_CTL;
         break;
-//      case LSFT_T(KC_BSPC):
-//        remove_keycode(KC_BSPC);
-//        home_mods &= ~LEFT_SFT;
-//        break;
       case LGUI_T(KC_I):
         remove_keycode(KC_I);
         home_mods &= ~RIGHT_GUI;
@@ -157,17 +155,12 @@ bool on_key_up(uint16_t keycode, keyrecord_t *record) {
         remove_keycode(KC_N);
         home_mods &= ~RIGHT_CTL;
         break;
-//      case RSFT_T(KC_SPACE):
-//        remove_keycode(KC_SPACE);
-//        home_mods &= ~RIGHT_SFT;
-//        break;
       default:
         break;
     }
   }
   return true;
 }
-
 
 bool prevent_same_side_mods(uint16_t keycode, keyrecord_t *record) {
   if (record->event.pressed == 1) {
