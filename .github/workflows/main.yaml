@@ -30,7 +30,7 @@ jobs:
         run: pip install -r .github/requirements.txt
 
       - name: build keymap
-        run: make build
+        run: make no_update
 
       - uses: actions/upload-artifact@v4.3.4
         with:
