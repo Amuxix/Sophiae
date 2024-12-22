@@ -1,5 +1,5 @@
 enum custom_keycodes {
-  AO = ML_SAFE_RANGE, // Start in a safe range
+  AO = SAFE_RANGE, // Start in a safe range
   OES,
   CAO,
   COES,

@@ -1,14 +1,18 @@
 QMK_REPO ?= zsa/qmk_firmware
-QMK_BRANCH ?= firmware23
+QMK_BRANCH ?= firmware24
 LAYOUT ?= mcoding
-TARGET ?= keyboards/moonlander/keymaps/$(LAYOUT)
+TARGET ?= keyboards/zsa/moonlander/keymaps/$(LAYOUT)
 
 .PHONY: build
-build: clean qmk_setup copy
+build: clean update_submodule qmk_setup copy
+	cd zsa_firmware && qmk compile -kb moonlander -km $(LAYOUT)
+
+.PHONY: no_update
+no_update: clean update_submodule qmk_setup copy
 	cd zsa_firmware && qmk compile -kb moonlander -km $(LAYOUT)
 
 .PHONY: build_silent
-build_silent: clean qmk_setup copy
+build_silent: clean update_submodule qmk_setup copy
 # Silent but has no colours
 	make -C zsa_firmware moonlander:$(LAYOUT) silent=true
 
@@ -17,7 +21,7 @@ fast: clean copy
 	cd zsa_firmware && qmk compile -kb moonlander -km $(LAYOUT)
 
 .PHONY: flash
-flash: clean qmk_setup copy
+flash: clean update_submodule qmk_setup copy
 	make -C zsa_firmware moonlander:$(LAYOUT):flash
 
 
@@ -33,3 +37,8 @@ copy:
 qmk_setup:
 	make -C zsa_firmware git-submodules
 	cd zsa_firmware && qmk setup $(QMK_REPO) -b $(QMK_BRANCH) -y
+
+.PHONY: update_submodule
+update_submodule:
+	git submodule set-branch -b $(QMK_BRANCH) zsa_firmware
+	git submodule update --remote --merge
