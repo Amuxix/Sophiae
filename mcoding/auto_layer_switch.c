@@ -1,6 +1,8 @@
 #include "raw_hid.h"
 #include "action_layer.h"
 
+#define RAW_EPSIZE 32
+
 RGB webhid_leds[RGB_MATRIX_LED_COUNT];
 
 char *LAYER_STATE_CHANGE = "LSC";

@@ -140,12 +140,12 @@ uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
 
 layer_state_t layer_state_set_user(layer_state_t state) {
   auto_layer_set(state);
-  ML_LED_1(IS_LAYER_ON_STATE(state, CANARY_G));
-  ML_LED_2(IS_LAYER_ON_STATE(state, QWERTY_G) || IS_LAYER_ON_STATE(state, QWERTY_SG));
-  //ML_LED_3(IS_LAYER_ON_STATE(state, SPACE_SWAP));
-  ML_LED_3(false);
-  ML_LED_4(IS_LAYER_ON_STATE(state, KEYPAD_SYMB));
-  ML_LED_5(IS_LAYER_ON_STATE(state, MOVEMENT));
-  ML_LED_6(IS_LAYER_ON_STATE(state, EXTRA_SYMB));
+  STATUS_LED_1(IS_LAYER_ON_STATE(state, CANARY_G));
+  STATUS_LED_2(IS_LAYER_ON_STATE(state, QWERTY_G) || IS_LAYER_ON_STATE(state, QWERTY_SG));
+  //STATUS_LED_3(IS_LAYER_ON_STATE(state, SPACE_SWAP));
+  STATUS_LED_3(false);
+  STATUS_LED_4(IS_LAYER_ON_STATE(state, KEYPAD_SYMB));
+  STATUS_LED_5(IS_LAYER_ON_STATE(state, MOVEMENT));
+  STATUS_LED_6(IS_LAYER_ON_STATE(state, EXTRA_SYMB));
   return state;
 }
