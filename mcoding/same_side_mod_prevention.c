@@ -98,6 +98,8 @@ bool on_key_down(uint16_t keycode, keyrecord_t *record) {
         if ((home_mods & LEFT_GUI) > 0 && (home_mods & RIGHT_GUI) == 0) unregister_mods(MOD_LGUI);
         if ((home_mods & LEFT_ALT) > 0 && (home_mods & RIGHT_ALT) == 0) unregister_mods(MOD_LALT);
         if ((home_mods & LEFT_CTL) > 0 && (home_mods & RIGHT_CTL) == 0) unregister_mods(MOD_LCTL);
+        // Give some time for apps to register mods being unregistered
+        wait_ms(DYNAMIC_MACRO_DELAY);
         // Send corresponding taps
         send_and_clear_keycodes();
       }
@@ -108,6 +110,8 @@ bool on_key_down(uint16_t keycode, keyrecord_t *record) {
         if ((home_mods & RIGHT_GUI) > 0 && (home_mods & LEFT_GUI) == 0) unregister_mods(MOD_LGUI);
         if ((home_mods & RIGHT_ALT) > 0 && (home_mods & LEFT_ALT) == 0) unregister_mods(MOD_LALT);
         if ((home_mods & RIGHT_CTL) > 0 && (home_mods & LEFT_CTL) == 0) unregister_mods(MOD_LCTL);
+        // Give some time for apps to register mods being unregistered
+        wait_ms(DYNAMIC_MACRO_DELAY);
         // Send corresponding taps
         send_and_clear_keycodes();
       }
