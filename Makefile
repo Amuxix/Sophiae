@@ -14,7 +14,7 @@ no_update: clean update_submodule qmk_setup copy
 .PHONY: build_silent
 build_silent: clean update_submodule qmk_setup copy
 # Silent but has no colours
-	make -C zsa_firmware moonlander:$(LAYOUT) silent=true
+	make -C zsa_firmware zsa/moonlander:$(LAYOUT) silent=true
 
 .PHONY: fast
 fast: clean copy
@@ -22,7 +22,7 @@ fast: clean copy
 
 .PHONY: flash
 flash: clean update_submodule qmk_setup copy
-	make -C zsa_firmware moonlander:$(LAYOUT):flash
+	make -C zsa_firmware zsa/moonlander:$(LAYOUT):flash
 
 
 .PHONY: clean
