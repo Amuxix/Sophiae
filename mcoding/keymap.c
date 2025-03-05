@@ -90,49 +90,31 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
   switch (keycode) {
     case LGUI_T(KC_R):
-      return LONG_TAPPING_TERM;
     case LALT_T(KC_S):
-      return LONG_TAPPING_TERM;
     case LCTL_T(KC_T):
-      return LONG_TAPPING_TERM;
     case LCTL_T(KC_N):
-      return LONG_TAPPING_TERM;
     case LALT_T(KC_E):
-      return LONG_TAPPING_TERM;
     case LGUI_T(KC_I):
-      return LONG_TAPPING_TERM;
     case LT_MOV(KC_TAB):
-      return LONG_TAPPING_TERM;
     case LT_SYM(KC_ENTER):
-      return LONG_TAPPING_TERM;
+    //CANARY_G
+    case LALT_T(KC_W):
+    case LSFT_T(KC_C):
+    case LCTL_T(KC_Q):
+    case RALT_T(KC_QUOTE):
+    case RSFT_T(KC_A):
+    case RCTL_T(KC_DOT):
+    //KEYPAD_SYMB
+    case LGUI_T(KC_LBRC):
+    case LGUI_T(KC_KP_6):
+      return TAPPING_TERM + 20;
     case TD(COPY_CUT):
-      return TAPPING_TERM + 45;
     case TD(PASTE):
-      return TAPPING_TERM + 45;
     case TD(MUTE_UNMUTE):
-      return TAPPING_TERM + 45;
     case TD(LAUNCH_PAUSE):
       return TAPPING_TERM + 45;
     case RSFT_T(KC_SPACE):
       return TAPPING_TERM + 30;
-    //CANARY_G
-    case LALT_T(KC_W):
-      return LONG_TAPPING_TERM;
-    case LSFT_T(KC_C):
-      return LONG_TAPPING_TERM;
-    case LCTL_T(KC_Q):
-      return LONG_TAPPING_TERM;
-    case RALT_T(KC_QUOTE):
-      return LONG_TAPPING_TERM;
-    case RSFT_T(KC_A):
-      return LONG_TAPPING_TERM;
-    case RCTL_T(KC_DOT):
-      return LONG_TAPPING_TERM;
-    //KEYPAD_SYMB
-    case LGUI_T(KC_LBRC):
-      return LONG_TAPPING_TERM;
-    case LGUI_T(KC_KP_6):
-      return LONG_TAPPING_TERM;
     default:
       return TAPPING_TERM;
   }
