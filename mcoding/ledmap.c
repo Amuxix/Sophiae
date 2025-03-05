@@ -54,11 +54,11 @@ uint8_t PROGMEM ledmap[][RGB_MATRIX_LED_COUNT][3] = {
                                                                   VITAMIN_C,     FOXY_FUCHSIA,  FOXY_FUCHSIA,                 FOXY_FUCHSIA,  FOXY_FUCHSIA,  VITAMIN_C
     ),
     [QWERTY_SG] = LED_LAYOUT_moonlander(
-      SKYAN,         SKYAN,         SKYAN,         SKYAN,         SKYAN,         SKYAN,         VITAMIN_C,                    SKYAN,         SKYAN,         SKYAN,         SKYAN,         SKYAN,         SKYAN,         SKYAN,
+      SKYAN,         SKYAN,         SKYAN,         SKYAN,         SKYAN,         SKYAN,         SKYAN,                        VITAMIN_C,     SKYAN,         SKYAN,         SKYAN,         SKYAN,         SKYAN,         SKYAN,
       BABY_MOUTH,    BABY_MOUTH,    BABY_MOUTH,    BABY_MOUTH,    BABY_MOUTH,    BABY_MOUTH,    BABY_MOUTH,                   XXXXXXXXXXXXX, BABY_MOUTH,    BABY_MOUTH,    BABY_MOUTH,    BABY_MOUTH,    BABY_MOUTH,    BABY_MOUTH,
-      WHITE,         WHITE,         WHITE,         WHITE,         WHITE,         WHITE,         VITAMIN_C,                    TRAD_ROSE,     WHITE,         WHITE,         WHITE,         WHITE,         WHITE,         WHITE,
+      WHITE,         WHITE,         WHITE,         WHITE,         WHITE,         WHITE,         SKYAN,                        TRAD_ROSE,     WHITE,         WHITE,         WHITE,         WHITE,         WHITE,         WHITE,
       BABY_MOUTH,    BABY_MOUTH,    BABY_MOUTH,    BABY_MOUTH,    BABY_MOUTH,    BABY_MOUTH,                                                 BABY_MOUTH,    BABY_MOUTH,    BABY_MOUTH,    BABY_MOUTH,    BABY_MOUTH,    BABY_MOUTH,
-      SKYAN,         SKYAN,         SKYAN,         SKYAN,         VITAMIN_C,                    BABY_MOUTH,                   BABY_MOUTH,                   VITAMIN_C,     SKYAN,         SKYAN,         SKYAN,         SKYAN,
+      SKYAN,         SKYAN,         SKYAN,         SKYAN,         VITAMIN_C,                    VITAMIN_C,                    VITAMIN_C,                    VITAMIN_C,     SKYAN,         SKYAN,         SKYAN,         SKYAN,
                                                                   SKYAN,         SKYAN,         SKYAN,                        SKYAN,         SKYAN,         SKYAN
     ),
     [KEYPAD_SYMB] = LED_LAYOUT_moonlander(
