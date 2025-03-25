@@ -85,6 +85,8 @@ uint8_t get_mod(uint16_t keycode, bool is_left_side_key) {
       return is_left_side_key ? LEFT_ALT : RIGHT_ALT;
     case MOD_LCTL:
       return is_left_side_key ? LEFT_CTL : RIGHT_CTL;
+    default:
+      return 0;
   }
 }
 
