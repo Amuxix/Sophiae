@@ -2,13 +2,13 @@
 #include "version.h"
 #include "keycodes.h"
 #include "layers.c"
+#include "caps_word.c"
 #include "dances.c"
 #include "same_side_mod_prevention.c"
 #include "custom_keys.c"
 #include "ledmap.c"
 #include "alternates.c"
 #include "auto_layer_switch.c"
-#include "caps_word.c"
 #include "overrides.c"
 
 // clang-format off

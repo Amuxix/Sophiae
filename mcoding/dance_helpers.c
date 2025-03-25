@@ -48,7 +48,7 @@ press_t dance_step(tap_dance_state_t *state) {
       if (state->interrupted || !state->pressed) return SINGLE_TAP;
       else return HOLD;
     case 2:
-      else if (state->interrupted || !state->pressed) return DOUBLE_TAP;
+      if (state->interrupted || !state->pressed) return DOUBLE_TAP;
       else return TAP_HOLD;
     default:
       return DOUBLE_TAP;
