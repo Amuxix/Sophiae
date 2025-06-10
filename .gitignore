@@ -2,3 +2,4 @@
 *.sln
 venv
 .vscode
+.DS_Store
