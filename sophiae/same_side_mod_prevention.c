@@ -42,10 +42,10 @@ void remove_keycode(uint8_t keycode) {
 }
 
 void send_and_clear_keycodes(void) {
-  if (keycodes[0] != 0) register_code(keycodes[0]);
-  if (keycodes[1] != 0) register_code(keycodes[1]);
-  if (keycodes[2] != 0) register_code(keycodes[2]);
-  if (keycodes[3] != 0) register_code(keycodes[3]);
+  if (keycodes[0] != 0) tap_code(keycodes[0]);
+  if (keycodes[1] != 0) tap_code(keycodes[1]);
+  if (keycodes[2] != 0) tap_code(keycodes[2]);
+  if (keycodes[3] != 0) tap_code(keycodes[3]);
   keycodes[0] = 0;
   keycodes[1] = 0;
   keycodes[2] = 0;
