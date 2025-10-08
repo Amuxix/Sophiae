@@ -139,7 +139,7 @@ void set_layer_color(int layer) {
 
 bool rgb_matrix_indicators_user(void) {
   if (keyboard_config.disable_layer_led) { return false; }
-  switch (get_highest_layer(layer_state & ~((layer_state_t)1 << SPACE_SWAP))) {
+  switch (get_top_layer(layer_state)) {
     case BASE:
       set_layer_color(BASE);
       break;

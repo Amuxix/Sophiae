@@ -1,3 +1,5 @@
+#include "print.h"
+
 enum home_mods_t {
   LEFT_GUI = 1,
   LEFT_ALT = 2,
@@ -41,7 +43,7 @@ void remove_keycode(uint8_t keycode) {
   }
 }
 
-void send_and_clear_keycodes(void) {
+void send_and_clear_held_keycodes(void) {
   if (keycodes[0] != 0) tap_code(keycodes[0]);
   if (keycodes[1] != 0) tap_code(keycodes[1]);
   if (keycodes[2] != 0) tap_code(keycodes[2]);
@@ -52,28 +54,12 @@ void send_and_clear_keycodes(void) {
   keycodes[3] = 0;
 }
 
-//Mod from left side of keyboard, not right mod key
-bool left_mod_on(void) {
-  return home_mods > 0 && home_mods < 8;
+bool key_on_same_side_as_active_mod(bool is_left) {
+  return home_mods != 0 && (is_left ? home_mods < 8 : home_mods > 8);
 }
 
-bool right_mod_on(void) {
-  return home_mods > 8;
-}
-
-bool handle_key_down(bool is_left, uint8_t key, uint8_t mod) {
-  if ((is_left && right_mod_on()) || (!is_left && left_mod_on())) {
-    register_code(key);
-    return false;
-  } else {
-    add_keycode(key);
-    home_mods |= mod;
-    return true;
-  }
-}
-
-bool is_modtap_hold(uint16_t keycode, keyrecord_t *record) {
-  return record->tap.count == 0;
+bool is_mod_tap_hold(uint16_t keycode, keyrecord_t *record) {
+  return IS_QK_MOD_TAP(keycode) && record->tap.count == 0;
 }
 
 uint8_t get_mod(uint16_t keycode, bool is_left_side_key) {
@@ -90,61 +76,71 @@ uint8_t get_mod(uint16_t keycode, bool is_left_side_key) {
   }
 }
 
-bool on_key_down(uint16_t keycode, keyrecord_t *record) {
-  bool is_left_side_key = record->event.key.row < MATRIX_ROWS / 2;
+void unregister_if_opposite_side_mod_not_on(uint8_t left_mod, uint8_t right_mod, uint8_t mod, bool is_left) {
+  bool left_mod_on = (home_mods & left_mod) > 0;
+  bool right_mod_on = (home_mods & right_mod) > 0;
+  bool opposite_side_mod_on = (is_left && right_mod_on) || (!is_left && left_mod_on);
+  if (!opposite_side_mod_on) unregister_mods(mod);
+}
 
-  if (is_modtap_hold(keycode, record)) {
+bool on_key_down(uint16_t keycode, keyrecord_t *record, bool is_left) {
+  if (is_mod_tap_hold(keycode, record)) {
     uint8_t key = (uint8_t) (keycode & 0xFF);
-    uint8_t mod = get_mod(keycode, is_left_side_key);
-    return handle_key_down(is_left_side_key, key, mod);
-  } else { //basic or tap on mod-tap
-    if (is_left_side_key) {
-      if (left_mod_on()) {
-        // Key on left side of kb was tapped and a mod from left side is active
-        // Disable left side mods if right side equivalent not on
-        if ((home_mods & LEFT_GUI) > 0 && (home_mods & RIGHT_GUI) == 0) unregister_mods(MOD_LGUI);
-        if ((home_mods & LEFT_ALT) > 0 && (home_mods & RIGHT_ALT) == 0) unregister_mods(MOD_LALT);
-        if ((home_mods & LEFT_CTL) > 0 && (home_mods & RIGHT_CTL) == 0) unregister_mods(MOD_LCTL);
-        // Give some time for apps to register mods being unregistered
-        wait_ms(DYNAMIC_MACRO_DELAY);
-        // Send corresponding taps
-        send_and_clear_keycodes();
-      }
+    uint8_t mod = get_mod(keycode, is_left);
+    if (home_mods == 0 || key_on_same_side_as_active_mod(is_left)) {
+      uprintf("Mod-tap held on same side as mod on or no mods on\n");
+      add_keycode(key);
+      home_mods |= mod;
+      return true;
     } else {
-      if (right_mod_on()) {
-        // Key on right side of kb was tapped and a mod from right side is active
-        // Disable right side mods if left side equivalent not on
-        if ((home_mods & RIGHT_GUI) > 0 && (home_mods & LEFT_GUI) == 0) unregister_mods(MOD_LGUI);
-        if ((home_mods & RIGHT_ALT) > 0 && (home_mods & LEFT_ALT) == 0) unregister_mods(MOD_LALT);
-        if ((home_mods & RIGHT_CTL) > 0 && (home_mods & LEFT_CTL) == 0) unregister_mods(MOD_LCTL);
-        // Give some time for apps to register mods being unregistered
-        wait_ms(DYNAMIC_MACRO_DELAY);
-        // Send corresponding taps
-        send_and_clear_keycodes();
-      }
+      uprintf("Mod-tap held with opposite side mod on\n");
+      register_code(key);
+      return false;
+    }
+  } else { //basic or tap on mod-tap
+    if (key_on_same_side_as_active_mod(is_left)) {
+      uprintf("Key with same side mod\n");
+      // Key on tapped is on same side as active mod
+      // Disable tapped key side mods if opposite side equivalent not on
+      unregister_if_opposite_side_mod_not_on(LEFT_GUI, RIGHT_GUI, MOD_LGUI, is_left);
+      unregister_if_opposite_side_mod_not_on(LEFT_ALT, RIGHT_ALT, MOD_LALT, is_left);
+      unregister_if_opposite_side_mod_not_on(LEFT_CTL, RIGHT_CTL, MOD_LCTL, is_left);
+      // Give some time for apps to register mods being unregistered
+      wait_ms(DYNAMIC_MACRO_DELAY);
+      // Send corresponding taps
+      send_and_clear_held_keycodes();
+    }
+    return true;
+  }
+}
+
+bool on_key_up(uint16_t keycode, keyrecord_t *record, bool is_left) {
+  if (is_mod_tap_hold(keycode, record)) {
+    uint8_t key = (uint8_t) (keycode & 0xFF);
+    uint8_t mod = get_mod(keycode, is_left);
+    if (home_mods == 0 || key_on_same_side_as_active_mod(is_left)) {
+      remove_keycode(key);
+      home_mods &= ~mod;
+    } else {
+      unregister_code(key);
+      return false;
     }
   }
   return true;
 }
 
-bool on_key_up(uint16_t keycode, keyrecord_t *record) {
-  bool is_left_side_key = record->event.key.row < MATRIX_ROWS / 2;
-  if (is_modtap_hold(keycode, record)) {
-    uint8_t key = (uint8_t) (keycode & 0xFF);
-    uint8_t mod = get_mod(keycode, is_left_side_key);
-    remove_keycode(key);
-    home_mods &= ~mod;
-  }
-  return true;
-}
-
 bool prevent_same_side_mods(uint16_t keycode, keyrecord_t *record) {
-  if (!IS_QK_BASIC(keycode) && !IS_QK_MOD_TAP(keycode)) return true; // Nothing special to do here
-  if (record->event.key.col == 5 || record->event.key.col == 11) return true; // Ignore the thumb clusters
+  bool not_on_base_layer = get_top_layer(layer_state) != BASE;
+  bool not_basic_or_mod_tap = !IS_QK_BASIC(keycode) && !IS_QK_MOD_TAP(keycode); // Key is not basic key or a mod tap do nothing
+  bool in_thumb_cluster = record->event.key.row == 5 || record->event.key.row == 11; // Key is on thumb clusters
+  bool is_left = record->event.key.row < MATRIX_ROWS / 2;
+  bool key_down = record->event.pressed == 1;
+  uprintf("not_basic_or_mod_tap %d, in_thumb_cluster %d, key_down %d, is_mod_tap_hold %d, row %d, col %d, is_left %d\n", not_basic_or_mod_tap, in_thumb_cluster, key_down, IS_QK_MOD_TAP(keycode) && record->tap.count == 0, record->event.key.row, record->event.key.col, is_left);
+  if (not_on_base_layer || not_basic_or_mod_tap || in_thumb_cluster) return true;
 
-  if (record->event.pressed == 1) {
-    return on_key_down(keycode, record);
+  if (key_down) {
+    return on_key_down(keycode, record, is_left);
   } else {
-    return on_key_up(keycode, record);
+    return on_key_up(keycode, record, is_left);
   }
 }
