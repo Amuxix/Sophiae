@@ -1,7 +1,9 @@
 #include QMK_KEYBOARD_H
 #include "version.h"
 #include "keycodes.h"
-#include "layers.c"
+#include "print.h"
+#include "enums.c"
+#include "utils.c"
 #include "caps_word.c"
 #include "dances.c"
 #include "same_side_mod_prevention.c"
@@ -113,6 +115,7 @@ uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
     case TD(PASTE):
     case TD(MUTE_UNMUTE):
     case TD(LAUNCH_PAUSE):
+    case TD(CAPS_WORDS_DANCE):
       return TAPPING_TERM + 45;
     case RSFT_T(KC_SPACE):
       return TAPPING_TERM + 30;

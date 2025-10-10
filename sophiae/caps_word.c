@@ -14,8 +14,10 @@ bool caps_word_press_user(uint16_t keycode) {
       return true;  // Keep Caps Word Active.
     case KC_SPACE:
       return CAPS_PHRASE_STATE;
+    case TD(CAPS_WORDS_DANCE):
+      return true;  // Keep Caps Word Active.
     default:
-      return false;  // Deactivate Caps Word.
+      return false; // Deactivate Caps Word.
   }
 }
 

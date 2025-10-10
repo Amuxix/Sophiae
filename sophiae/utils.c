@@ -1,0 +1,1 @@
+#define get_top_layer(layer_state) get_highest_layer((layer_state) & ~((layer_state_t)1 << SPACE_SWAP))

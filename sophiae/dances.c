@@ -1,16 +1,3 @@
-enum tap_dance_codes {
-  COPY_CUT = 0,
-  PASTE,
-  MUTE_UNMUTE,
-  UNDO,
-  REDO,
-  LAUNCH_PAUSE,
-  LALT_LBRACK,
-  LCTL_LPAREN,
-  CAPS_WORDS_DANCE,
-  MAX_DANCES,
-};
-
 #include "dance_helpers.c" // This needs to be after tap_dance_codes because tap_dance_codes is used in the helpers
 
 SINGLE_TAP__HOLD__DOUBLE_TAP__TAP_HOLD(COPY_CUT, LCTL(KC_C), LCS(KC_C), LCTL(KC_X), LCS(KC_X))

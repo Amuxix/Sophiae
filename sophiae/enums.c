@@ -1,0 +1,24 @@
+enum layers {
+  BASE,
+  CANARY_G,
+  QWERTY_G,
+  QWERTY_SG,
+  SPACE_SWAP,
+  KEYPAD_SYMB,
+  EXTRA_SYMB,
+  MOVEMENT,
+  SHORTCUTS
+};
+
+enum tap_dance_codes {
+  COPY_CUT = 0,
+  PASTE,
+  MUTE_UNMUTE,
+  UNDO,
+  REDO,
+  LAUNCH_PAUSE,
+  LALT_LBRACK,
+  LCTL_LPAREN,
+  CAPS_WORDS_DANCE,
+  MAX_DANCES,
+};
