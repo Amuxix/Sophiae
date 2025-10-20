@@ -24,10 +24,6 @@
 
 extern rgb_config_t rgb_matrix_config;
 
-void keyboard_post_init_user(void) {
-  rgb_matrix_enable();
-}
-
 // clang-format off
 uint8_t PROGMEM ledmap[][RGB_MATRIX_LED_COUNT][3] = {
     [BASE] = LED_LAYOUT_moonlander(
@@ -105,7 +101,7 @@ void set_led_color(int layer, int led, HSV hsv, bool force) {
     hsv = (HSV)SAPPHIRE_BLUE;
   }
 
-  if (led == MAC_MODE_LED_ID && MAC_MODE) {
+  if (led == MAC_MODE_LED_ID && sophiae_config.mac_mode) {
     hsv = (HSV)SAPPHIRE_BLUE;
   }
 

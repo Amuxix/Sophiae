@@ -19,8 +19,6 @@ enum custom_keycodes {
   SNIPPING,
 };
 
-bool MAC_MODE = false;
-
 const uint16_t PROGMEM FOU[] = { KC_F, KC_O, KC_U, COMBO_END};
 const uint16_t PROGMEM LYP[] = { KC_L, KC_Y, KC_P, COMBO_END};
 const uint16_t PROGMEM HCOLONCOMMA[] = { KC_H, KC_COLN, KC_COMMA, COMBO_END};
@@ -34,7 +32,7 @@ combo_t key_combos[COMBO_COUNT] = {
 };
 
 #define STRING_MODIFIER(modifier) { \
-  if (!MAC_MODE) { \
+  if (!sophiae_config.mac_mode) { \
     SEND_STRING_DELAY(SS_LCTL(SS_LSFT(SS_TAP(X_LEFT))) SS_LCTL(SS_TAP(modifier)) SS_TAP(X_RIGHT) SS_LCTL(SS_TAP(X_RIGHT)), DYNAMIC_MACRO_DELAY); \
   } else { \
     SEND_STRING_DELAY(SS_LALT(SS_LSFT(SS_TAP(X_LEFT))) SS_LGUI(SS_TAP(modifier)) SS_TAP(X_RIGHT) SS_LALT(SS_TAP(X_RIGHT)), DYNAMIC_MACRO_DELAY); \
@@ -43,18 +41,18 @@ combo_t key_combos[COMBO_COUNT] = {
 
 //Tap code is affected by mac mode so we need to send the
 #define WINDOWS_MAC_KEY(windows_key, mac_key) \
-  if (MAC_MODE) { \
-    keymap_config.swap_lctl_lgui = !MAC_MODE; \
-    keymap_config.swap_rctl_rgui = !MAC_MODE; \
+  if (sophiae_config.mac_mode) { \
+    keymap_config.swap_lctl_lgui = !sophiae_config.mac_mode; \
+    keymap_config.swap_rctl_rgui = !sophiae_config.mac_mode; \
     TAP_KEY(mac_key); \
-    keymap_config.swap_lctl_lgui = MAC_MODE; \
-    keymap_config.swap_rctl_rgui = MAC_MODE; \
+    keymap_config.swap_lctl_lgui = sophiae_config.mac_mode; \
+    keymap_config.swap_rctl_rgui = sophiae_config.mac_mode; \
   } else { \
     TAP_KEY(windows_key); \
   }
 
 void send_c_cedilla(void) {
-  if (!MAC_MODE) {
+  if (!sophiae_config.mac_mode) {
     SEND_STRING_DELAY(SS_LALT(SS_LCTL(SS_TAP(X_COMMA))), DYNAMIC_MACRO_DELAY);
   } else {
     SEND_STRING_DELAY(SS_TAP(X_QUOTE) SS_TAP(X_C), DYNAMIC_MACRO_DELAY);
@@ -97,9 +95,21 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         SEND_STRING_DELAY(SS_LSFT(SS_TAP(X_LEFT)) SS_LSFT(SS_TAP(X_TAB)) SS_LSFT(SS_TAP(X_RIGHT)), DYNAMIC_MACRO_DELAY);
         break;
       case MAC_MODE_TOGG:
-        MAC_MODE = !MAC_MODE;
-        keymap_config.swap_lctl_lgui = MAC_MODE;
-        keymap_config.swap_rctl_rgui = MAC_MODE;
+        if (debug_mac_mode) {
+          dprintf("Mac mode is now: %d, swap_lctl_lgui: %d\n", sophiae_config.mac_mode, keymap_config.swap_lctl_lgui);
+          dprintf("raw: %d\n", sophiae_config.raw);
+        }
+        sophiae_config.mac_mode = !sophiae_config.mac_mode;
+        keymap_config.swap_lctl_lgui = sophiae_config.mac_mode;
+        keymap_config.swap_rctl_rgui = sophiae_config.mac_mode;
+        eeconfig_update_user(sophiae_config.raw);
+        eeconfig_update_keymap(keymap_config.raw);
+        clear_keyboard(); // clear to prevent stuck keys
+        break;
+      case CG_TOGG:
+        if (debug_mac_mode) {
+          dprintf("Mac mode is now: %d, swap_lctl_lgui: %d\n", sophiae_config.mac_mode, keymap_config.swap_lctl_lgui);
+        }
         break;
       case EURO:
         WINDOWS_MAC_KEY(ALGR(KC_5), S(LALT(KC_2)))

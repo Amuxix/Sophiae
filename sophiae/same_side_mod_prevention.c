@@ -86,18 +86,24 @@ bool on_key_down(uint16_t keycode, keyrecord_t *record, bool is_left) {
     uint8_t key = (uint8_t) (keycode & 0xFF);
     uint8_t mod = get_mod(keycode, is_left);
     if (home_mods == 0 || key_on_same_side_as_active_mod(is_left)) {
-      dprintf("Mod-tap held on same side as mod on or no mods on\n");
+      if (debug_same_side) {
+        dprintf("Mod-tap held on same side as mod on or no mods on, home_mods: %d\n", home_mods);
+      }
       add_keycode(key);
       home_mods |= mod;
       return true;
     } else {
-      dprintf("Mod-tap held with opposite side mod on\n");
+      if (debug_same_side) {
+        dprintf("Mod-tap held with opposite side mod on, home_mods: %d\n", home_mods);
+      }
       register_code(key);
       return false;
     }
   } else { //basic or tap on mod-tap
     if (key_on_same_side_as_active_mod(is_left)) {
-      dprintf("Key with same side mod\n");
+      if (debug_same_side) {
+        dprintf("Key with same side mod, home_mods: %d\n", home_mods);
+      }
       // Key on tapped is on same side as active mod
       // Disable tapped key side mods if opposite side equivalent not on
       unregister_if_opposite_side_mod_not_on(LEFT_GUI, RIGHT_GUI, MOD_LGUI, is_left);
@@ -133,7 +139,9 @@ bool prevent_same_side_mods(uint16_t keycode, keyrecord_t *record) {
   bool in_thumb_cluster = record->event.key.row == 5 || record->event.key.row == 11; // Key is on thumb clusters
   bool is_left = record->event.key.row < MATRIX_ROWS / 2;
   bool key_down = record->event.pressed == 1;
-  dprintf("not_basic_or_mod_tap %d, in_thumb_cluster %d, key_down %d, is_mod_tap_hold %d, row %d, col %d, is_left %d\n", not_basic_or_mod_tap, in_thumb_cluster, key_down, IS_QK_MOD_TAP(keycode) && record->tap.count == 0, record->event.key.row, record->event.key.col, is_left);
+  if (debug_same_side) {
+    dprintf("not_basic_or_mod_tap %d, in_thumb_cluster %d, key_down %d, is_mod_tap_hold %d, row %d, col %d, is_left %d\n", not_basic_or_mod_tap, in_thumb_cluster, key_down, IS_QK_MOD_TAP(keycode) && record->tap.count == 0, record->event.key.row, record->event.key.col, is_left);
+  }
   if (not_on_base_layer || not_basic_or_mod_tap || in_thumb_cluster) return true;
 
   if (key_down) {
