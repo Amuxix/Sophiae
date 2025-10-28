@@ -41,7 +41,7 @@ void remove_keycode(uint8_t keycode) {
   }
 }
 
-void send_and_clear_held_keycodes(void) {
+static inline void send_and_clear_held_keycodes(void) {
   if (keycodes[0] != 0) tap_code(keycodes[0]);
   if (keycodes[1] != 0) tap_code(keycodes[1]);
   if (keycodes[2] != 0) tap_code(keycodes[2]);
@@ -52,12 +52,16 @@ void send_and_clear_held_keycodes(void) {
   keycodes[3] = 0;
 }
 
-bool key_on_same_side_as_active_mod(bool is_left) {
+static inline bool key_on_same_side_as_active_mod(bool is_left) {
   return home_mods != 0 && (is_left ? home_mods < 8 : home_mods > 8);
 }
 
-bool is_home_row_mod_hold(uint16_t keycode, keyrecord_t *record) {
-  return IS_QK_MOD_TAP(keycode) && record->tap.count == 0 && (record->event.key.row == 2 || record->event.key.row == 8);
+static inline bool is_home_row(keyrecord_t *record) {
+  return (record->event.key.row == 2 && record->event.key.col > 1) || (record->event.key.row == 8 && record->event.key.col < 5);
+}
+
+static inline bool is_home_row_mod_hold(uint16_t keycode, keyrecord_t *record) {
+  return IS_QK_MOD_TAP(keycode) && record->tap.count == 0 && is_home_row(record);
 }
 
 uint8_t get_mod(uint16_t keycode, bool is_left) {
@@ -74,7 +78,7 @@ uint8_t get_mod(uint16_t keycode, bool is_left) {
   }
 }
 
-void unregister_if_opposite_side_mod_not_on(uint8_t left_mod, uint8_t right_mod, uint8_t mod, bool is_left) {
+static inline void unregister_if_opposite_side_mod_not_on(uint8_t left_mod, uint8_t right_mod, uint8_t mod, bool is_left) {
   bool left_mod_on = (home_mods & left_mod) > 0;
   bool right_mod_on = (home_mods & right_mod) > 0;
   bool opposite_side_mod_on = (is_left && right_mod_on) || (!is_left && left_mod_on);
