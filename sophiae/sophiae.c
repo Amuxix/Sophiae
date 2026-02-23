@@ -30,14 +30,14 @@ uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
     case LGUI_T(KC_I):
     case LT_MOV(KC_TAB):
     case LT_SYM(KC_ENTER):
-    //CANARY_G
+    // CANARY_G
     case LALT_T(KC_W):
     case LSFT_T(KC_C):
     case LCTL_T(KC_Q):
     case RALT_T(KC_QUOTE):
     case RSFT_T(KC_A):
     case RCTL_T(KC_DOT):
-    //KEYPAD_SYMB
+    // KEYPAD_SYMB
     case LGUI_T(KC_LBRC):
     case LGUI_T(KC_KP_6):
       return TAPPING_TERM + 20;
@@ -58,7 +58,7 @@ layer_state_t layer_state_set_user(layer_state_t state) {
   auto_layer_set(state);
   STATUS_LED_1(IS_LAYER_ON_STATE(state, CANARY_G));
   STATUS_LED_2(IS_LAYER_ON_STATE(state, QWERTY_G) || IS_LAYER_ON_STATE(state, QWERTY_SG));
-  //STATUS_LED_3(IS_LAYER_ON_STATE(state, SPACE_SWAP));
+  // STATUS_LED_3(IS_LAYER_ON_STATE(state, SPACE_SWAP));
   STATUS_LED_3(false);
   STATUS_LED_4(IS_LAYER_ON_STATE(state, KEYPAD_SYMB));
   STATUS_LED_5(IS_LAYER_ON_STATE(state, MOVEMENT));

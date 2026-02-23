@@ -1,7 +1,7 @@
 enum home_mods_t {
-  LEFT_GUI = 1,
-  LEFT_ALT = 2,
-  LEFT_CTL = 4,
+  LEFT_GUI  = 1,
+  LEFT_ALT  = 2,
+  LEFT_CTL  = 4,
   RIGHT_GUI = 16,
   RIGHT_ALT = 32,
   RIGHT_CTL = 64,
@@ -65,7 +65,7 @@ static inline bool is_home_row_mod_hold(uint16_t keycode, keyrecord_t *record) {
 }
 
 uint8_t get_mod(uint16_t keycode, bool is_left) {
-  uint8_t mod = (uint8_t) ((keycode >> 8) & 0x0F);
+  uint8_t mod = (uint8_t)((keycode >> 8) & 0x0F);
   switch (mod) {
     case MOD_LGUI:
       return is_left ? LEFT_GUI : RIGHT_GUI;
@@ -79,15 +79,15 @@ uint8_t get_mod(uint16_t keycode, bool is_left) {
 }
 
 static inline void unregister_if_opposite_side_mod_not_on(uint8_t left_mod, uint8_t right_mod, uint8_t mod, bool is_left) {
-  bool left_mod_on = (home_mods & left_mod) > 0;
-  bool right_mod_on = (home_mods & right_mod) > 0;
+  bool left_mod_on          = (home_mods & left_mod) > 0;
+  bool right_mod_on         = (home_mods & right_mod) > 0;
   bool opposite_side_mod_on = (is_left && right_mod_on) || (!is_left && left_mod_on);
   if (!opposite_side_mod_on) unregister_mods(mod);
 }
 
 bool on_key_down(uint16_t keycode, keyrecord_t *record, bool is_left) {
   if (is_home_row_mod_hold(keycode, record)) {
-    uint8_t key = (uint8_t) (keycode & 0xFF);
+    uint8_t key = (uint8_t)(keycode & 0xFF);
     uint8_t mod = get_mod(keycode, is_left);
     if (home_mods == 0 || key_on_same_side_as_active_mod(is_left)) {
       add_keycode(key);
@@ -103,7 +103,7 @@ bool on_key_down(uint16_t keycode, keyrecord_t *record, bool is_left) {
       }
       return false;
     }
-  } else { //basic or tap on mod-tap
+  } else {  // basic or tap on mod-tap
     if (key_on_same_side_as_active_mod(is_left)) {
       // Key on tapped is on same side as active mod
       // Disable tapped key side mods if opposite side equivalent not on
@@ -124,7 +124,7 @@ bool on_key_down(uint16_t keycode, keyrecord_t *record, bool is_left) {
 
 bool on_key_up(uint16_t keycode, keyrecord_t *record, bool is_left) {
   if (is_home_row_mod_hold(keycode, record)) {
-    uint8_t key = (uint8_t) (keycode & 0xFF);
+    uint8_t key = (uint8_t)(keycode & 0xFF);
     uint8_t mod = get_mod(keycode, is_left);
     if (home_mods == 0 || key_on_same_side_as_active_mod(is_left)) {
       remove_keycode(key);
@@ -144,14 +144,29 @@ bool on_key_up(uint16_t keycode, keyrecord_t *record, bool is_left) {
 }
 
 bool prevent_same_side_mods(uint16_t keycode, keyrecord_t *record) {
-  bool not_basic_or_mod_tap = !IS_QK_BASIC(keycode) && !IS_QK_MOD_TAP(keycode); // Key is not basic key or a mod tap do nothing
-  bool in_thumb_cluster = record->event.key.row == 5 || record->event.key.row == 11; // Key is on thumb clusters
-  bool is_left = record->event.key.row < MATRIX_ROWS / 2;
-  bool key_down = record->event.pressed == 1;
-  if (not_basic_or_mod_tap || in_thumb_cluster) return true;
+  // Key is not basic key or a mod tap, do nothing
+  bool not_basic_or_mod_tap = !IS_QK_BASIC(keycode) && !IS_QK_MOD_TAP(keycode);
+  // Key is on thumb clusters
+  bool in_thumb_cluster = record->event.key.row == 5 || record->event.key.row == 11;
+  // Plain modifier keys (e.g. KC_LCTL on movement layer) should not trigger same side prevention
+  bool is_modifier = IS_MODIFIER_KEYCODE(keycode);
+  bool is_left     = record->event.key.row < MATRIX_ROWS / 2;
+  bool key_down    = record->event.pressed == 1;
+  if (not_basic_or_mod_tap || in_thumb_cluster || is_modifier) return true;
 
   if (debug_same_side) {
-    dprintf("not_basic_or_mod_tap %d, in_thumb_cluster %d, key_down %d, is_mod_tap_hold %d, row %d, col %d, is_left %d\n", not_basic_or_mod_tap, in_thumb_cluster, key_down, IS_QK_MOD_TAP(keycode) && record->tap.count == 0, record->event.key.row, record->event.key.col, is_left);
+    dprintf(
+      "not_basic_or_mod_tap %d, in_thumb_cluster %d, is_modifier %d, key_down %d, is_mod_tap_hold %d, row %d, "
+      "col %d, is_left %d\n",
+      not_basic_or_mod_tap,
+      in_thumb_cluster,
+      is_modifier,
+      key_down,
+      IS_QK_MOD_TAP(keycode) && record->tap.count == 0,
+      record->event.key.row,
+      record->event.key.col,
+      is_left
+    );
   }
 
   if (key_down) {

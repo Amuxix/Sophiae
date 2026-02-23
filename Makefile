@@ -4,17 +4,21 @@ LAYOUT ?= sophiae
 TARGET ?= keyboards/zsa/moonlander/keymaps/$(LAYOUT)
 
 .PHONY: build
-build: copy_keymap submodules_update compile clean_keymap
+build: format copy_keymap submodules_update compile clean_keymap
 
 .PHONY: build_silent
-build_silent: copy_keymap submodules_update compile_silent clean_keymap
+build_silent: format copy_keymap submodules_update compile_silent clean_keymap
 
 .PHONY: fast
-fast: copy_keymap compile clean_keymap
+fast: format copy_keymap compile clean_keymap
 
 .PHONY: flash
-flash: copy_keymap submodules_update qmk_flash clean_keymap
+flash: format copy_keymap submodules_update qmk_flash clean_keymap
 
+
+.PHONY: format
+format:
+	clang-format -i --style=file $(LAYOUT)/*.c $(LAYOUT)/*.h
 
 .PHONY: qmk_flash
 qmk_flash:

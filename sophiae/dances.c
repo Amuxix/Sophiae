@@ -1,4 +1,4 @@
-#include "dance_helpers.c" // This needs to be after tap_dance_codes because tap_dance_codes is used in the helpers
+#include "dance_helpers.c"  // This needs to be after tap_dance_codes because tap_dance_codes is used in the helpers
 
 SINGLE_TAP__HOLD__DOUBLE_TAP__TAP_HOLD(COPY_CUT, LCTL(KC_C), LCS(KC_C), LCTL(KC_X), LCS(KC_X))
 SINGLE_TAP__HOLD(PASTE, LCTL(KC_V), LCS(KC_V))

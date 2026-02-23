@@ -1,20 +1,22 @@
 #include "ledmap.h"
 
-#define LAVENDER_TEA  {202,122,255}
-#define FOXY_FUCHSIA  {205,255,192}
-#define VITAMIN_C     {  0,245,245}
-#define TRAD_ROSE     {243,255,185}
-#define SKYAN         {140,162,251}
-#define BABY_MOUTH    {249,77, 245}
-#define WHITE         {  0,  0,255}
-#define BLINKING_TERM { 63,255,202}
-#define SERICOURT     { 64,255,116}
-#define HOT_BUTTER    { 29,255,231}
-#define SOIL_AVAGDDU  { 28,255,134}
-#define SKY_BLUE      {152,140,255}
-#define SAPPHIRE_BLUE {150,255,190}
-#define CAMARON_PINK  {253,125,255}
-#define XXXXXXXXXXXXX {  0,  0,  0}
+// clang-format off (keep colors manually aligned)
+#define LAVENDER_TEA {202, 122, 255}
+#define FOXY_FUCHSIA {205, 255, 192}
+#define VITAMIN_C {0, 245, 245}
+#define TRAD_ROSE {243, 255, 185}
+#define SKYAN {140, 162, 251}
+#define BABY_MOUTH {249, 77, 245}
+#define WHITE {0, 0, 255}
+#define BLINKING_TERM {63, 255, 202}
+#define SERICOURT {64, 255, 116}
+#define HOT_BUTTER {29, 255, 231}
+#define SOIL_AVAGDDU {28, 255, 134}
+#define SKY_BLUE {152, 140, 255}
+#define SAPPHIRE_BLUE {150, 255, 190}
+#define CAMARON_PINK {253, 125, 255}
+#define XXXXXXXXXXXXX {0, 0, 0}
+// clang-format on
 
 #define CAPS_WORDS_LED_ID 31
 #define MAC_MODE_LED_ID 65
@@ -94,8 +96,8 @@ uint8_t PROGMEM ledmap[][RGB_MATRIX_LED_COUNT][3] = {
 // clang-format on
 
 void set_led_color(int layer, int led, HSV hsv, bool force) {
-  if (led == CAPS_WORDS_LED_ID && is_caps_word_on()) return; // cool effect
-  if (led == LAYER_LOCK_LED_ID && is_layer_locked(layer)) return; // cool effect
+  if (led == CAPS_WORDS_LED_ID && is_caps_word_on()) return;       // cool effect
+  if (led == LAYER_LOCK_LED_ID && is_layer_locked(layer)) return;  // cool effect
 
   if (led == SPACE_SWAP_LED_ID && IS_LAYER_ON(SPACE_SWAP)) {
     hsv = (HSV)SAPPHIRE_BLUE;
@@ -112,19 +114,19 @@ void set_led_color(int layer, int led, HSV hsv, bool force) {
   if (!hsv.h && !hsv.s && !hsv.v) {
     rgb_matrix_set_color(led, 0, 0, 0);
   } else {
-    RGB rgb = hsv_to_rgb(hsv);
-    float f = (float)rgb_matrix_config.hsv.v / UINT8_MAX;
+    RGB   rgb = hsv_to_rgb(hsv);
+    float f   = (float)rgb_matrix_config.hsv.v / UINT8_MAX;
     rgb_matrix_set_color(led, f * rgb.r, f * rgb.g, f * rgb.b);
   }
 }
 
 void set_led_color_from_layermap(int layer, int led) {
-    HSV hsv = {
-      .h = pgm_read_byte(&ledmap[layer][led][0]),
-      .s = pgm_read_byte(&ledmap[layer][led][1]),
-      .v = pgm_read_byte(&ledmap[layer][led][2]),
-    };
-    set_led_color(layer, led, hsv, false);
+  HSV hsv = {
+    .h = pgm_read_byte(&ledmap[layer][led][0]),
+    .s = pgm_read_byte(&ledmap[layer][led][1]),
+    .v = pgm_read_byte(&ledmap[layer][led][2]),
+  };
+  set_led_color(layer, led, hsv, false);
 }
 
 void set_layer_color(int layer) {
@@ -134,7 +136,9 @@ void set_layer_color(int layer) {
 }
 
 bool rgb_matrix_indicators_user(void) {
-  if (keyboard_config.disable_layer_led) { return false; }
+  if (keyboard_config.disable_layer_led) {
+    return false;
+  }
   switch (get_top_layer(layer_state)) {
     case BASE:
       set_layer_color(BASE);
@@ -161,8 +165,7 @@ bool rgb_matrix_indicators_user(void) {
       set_layer_color(SHORTCUTS);
       break;
     default:
-      if (rgb_matrix_get_flags() == LED_FLAG_NONE)
-        rgb_matrix_set_color_all(0, 0, 0);
+      if (rgb_matrix_get_flags() == LED_FLAG_NONE) rgb_matrix_set_color_all(0, 0, 0);
       break;
   }
   return true;
