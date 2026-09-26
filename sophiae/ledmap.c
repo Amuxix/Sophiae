@@ -44,14 +44,6 @@ uint8_t PROGMEM ledmap[][RGB_MATRIX_LED_COUNT][3] = {
       LAVENDER_TEA,  LAVENDER_TEA,  LAVENDER_TEA,  LAVENDER_TEA,  VITAMIN_C,                    VITAMIN_C,                    VITAMIN_C,                    VITAMIN_C,     LAVENDER_TEA,  LAVENDER_TEA,  LAVENDER_TEA,  LAVENDER_TEA,
                                                                   FOXY_FUCHSIA,  LAVENDER_TEA,  LAVENDER_TEA,                 LAVENDER_TEA,  LAVENDER_TEA,  FOXY_FUCHSIA
     ),
-    [QWERTY_G] = LED_LAYOUT_moonlander(
-      FOXY_FUCHSIA,  FOXY_FUCHSIA,  FOXY_FUCHSIA,  FOXY_FUCHSIA,  FOXY_FUCHSIA,  FOXY_FUCHSIA,  VITAMIN_C,                    VITAMIN_C,     FOXY_FUCHSIA,  FOXY_FUCHSIA,  FOXY_FUCHSIA,  FOXY_FUCHSIA,  XXXXXXXXXXXXX, FOXY_FUCHSIA,
-      FOXY_FUCHSIA,  FOXY_FUCHSIA,  VITAMIN_C,     FOXY_FUCHSIA,  FOXY_FUCHSIA,  FOXY_FUCHSIA,  XXXXXXXXXXXXX,                VITAMIN_C,     FOXY_FUCHSIA,  FOXY_FUCHSIA,  FOXY_FUCHSIA,  FOXY_FUCHSIA,  FOXY_FUCHSIA,  FOXY_FUCHSIA,
-      FOXY_FUCHSIA,  VITAMIN_C,     VITAMIN_C,     VITAMIN_C,     FOXY_FUCHSIA,  FOXY_FUCHSIA,  VITAMIN_C,                    TRAD_ROSE,     FOXY_FUCHSIA,  VITAMIN_C,     VITAMIN_C,     VITAMIN_C,     FOXY_FUCHSIA,  FOXY_FUCHSIA,
-      FOXY_FUCHSIA,  FOXY_FUCHSIA,  FOXY_FUCHSIA,  FOXY_FUCHSIA,  FOXY_FUCHSIA,  FOXY_FUCHSIA,                                               FOXY_FUCHSIA,  FOXY_FUCHSIA,  FOXY_FUCHSIA,  FOXY_FUCHSIA,  VITAMIN_C,     FOXY_FUCHSIA,
-      FOXY_FUCHSIA,  XXXXXXXXXXXXX, FOXY_FUCHSIA,  FOXY_FUCHSIA,  VITAMIN_C,                    VITAMIN_C,                    VITAMIN_C,                    VITAMIN_C,     FOXY_FUCHSIA,  FOXY_FUCHSIA,  FOXY_FUCHSIA,  FOXY_FUCHSIA,
-                                                                  VITAMIN_C,     FOXY_FUCHSIA,  FOXY_FUCHSIA,                 FOXY_FUCHSIA,  FOXY_FUCHSIA,  VITAMIN_C
-    ),
     [QWERTY_SG] = LED_LAYOUT_moonlander(
       SKYAN,         SKYAN,         SKYAN,         SKYAN,         SKYAN,         SKYAN,         SKYAN,                        VITAMIN_C,     SKYAN,         SKYAN,         SKYAN,         SKYAN,         SKYAN,         SKYAN,
       BABY_MOUTH,    BABY_MOUTH,    BABY_MOUTH,    BABY_MOUTH,    BABY_MOUTH,    BABY_MOUTH,    BABY_MOUTH,                   VITAMIN_C,     BABY_MOUTH,    BABY_MOUTH,    BABY_MOUTH,    BABY_MOUTH,    BABY_MOUTH,    BABY_MOUTH,
@@ -114,9 +106,9 @@ void set_led_color(int layer, int led, HSV hsv, bool force) {
   if (!hsv.h && !hsv.s && !hsv.v) {
     rgb_matrix_set_color(led, 0, 0, 0);
   } else {
-    RGB   rgb = hsv_to_rgb(hsv);
-    float f   = (float)rgb_matrix_config.hsv.v / UINT8_MAX;
-    rgb_matrix_set_color(led, f * rgb.r, f * rgb.g, f * rgb.b);
+    RGB     rgb = hsv_to_rgb(hsv);
+    uint8_t v   = rgb_matrix_config.hsv.v;
+    rgb_matrix_set_color(led, (rgb.r * v) / UINT8_MAX, (rgb.g * v) / UINT8_MAX, (rgb.b * v) / UINT8_MAX);
   }
 }
 
@@ -139,34 +131,9 @@ bool rgb_matrix_indicators_user(void) {
   if (keyboard_config.disable_layer_led) {
     return false;
   }
-  switch (get_top_layer(layer_state)) {
-    case BASE:
-      set_layer_color(BASE);
-      break;
-    case CANARY_G:
-      set_layer_color(CANARY_G);
-      break;
-    case QWERTY_G:
-      set_layer_color(QWERTY_G);
-      break;
-    case QWERTY_SG:
-      set_layer_color(QWERTY_SG);
-      break;
-    case KEYPAD_SYMB:
-      set_layer_color(KEYPAD_SYMB);
-      break;
-    case EXTRA_SYMB:
-      set_layer_color(EXTRA_SYMB);
-      break;
-    case MOVEMENT:
-      set_layer_color(MOVEMENT);
-      break;
-    case SHORTCUTS:
-      set_layer_color(SHORTCUTS);
-      break;
-    default:
-      if (rgb_matrix_get_flags() == LED_FLAG_NONE) rgb_matrix_set_color_all(0, 0, 0);
-      break;
-  }
-  return true;
+
+  uint8_t layer = get_top_layer(layer_state);
+  set_layer_color(layer);
+
+  return false;
 }

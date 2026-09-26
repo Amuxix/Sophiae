@@ -1,5 +1,5 @@
 enum custom_keycodes {
-  AO = SAFE_RANGE,  // Start in a safe range
+  AO = ZSA_SAFE_RANGE,  // Start in a safe range
   OES,
   CAO,
   COES,
@@ -18,6 +18,10 @@ enum custom_keycodes {
   END,
   SNIPPING,
 };
+
+#ifndef TOGGLE_LAYER_COLOR
+#  define TOGGLE_LAYER_COLOR QK_KB_0
+#endif
 
 const uint16_t PROGMEM FOU[]         = {KC_F, KC_O, KC_U, COMBO_END};
 const uint16_t PROGMEM LYP[]         = {KC_L, KC_Y, KC_P, COMBO_END};
@@ -96,13 +100,15 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       case MAC_MODE_TOGG:
         if (debug_mac_mode) {
           dprintf("Mac mode is now: %d, swap_lctl_lgui: %d\n", sophiae_config.mac_mode, keymap_config.swap_lctl_lgui);
-          dprintf("raw: %d\n", sophiae_config.raw);
+          dprintf("raw: %lu\n", sophiae_config.raw);
         }
         sophiae_config.mac_mode      = !sophiae_config.mac_mode;
         keymap_config.swap_lctl_lgui = sophiae_config.mac_mode;
         keymap_config.swap_rctl_rgui = sophiae_config.mac_mode;
+#ifdef SAVE_TO_EEPROM
         eeconfig_update_user(sophiae_config.raw);
-        eeconfig_update_keymap(keymap_config.raw);
+        eeconfig_update_keymap(&keymap_config);
+#endif
         clear_keyboard();  // clear to prevent stuck keys
         break;
       case CG_TOGG:

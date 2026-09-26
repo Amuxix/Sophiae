@@ -1,9 +1,10 @@
 #include QMK_KEYBOARD_H
+
 #include "version.h"
 
 #include "debug.c"
 #include "sophiae_config.c"
-#include "keycodes.h"
+#include "sophiae_keycodes.h"
 #include "enums.c"
 #include "utils.c"
 #include "caps_word.c"
@@ -12,12 +13,17 @@
 #include "custom_keys.c"
 #include "ledmap.c"
 #include "alternates.c"
-#include "auto_layer_switch.c"
+#ifdef AUTO_LAYER_SWITCH
+#  include "auto_layer_switch.c"
+#endif
 #include "overrides.c"
 
 void keyboard_post_init_user(void) {
+#ifdef SAVE_TO_EEPROM
   sophiae_config.raw = eeconfig_read_user();
+#endif
   rgb_matrix_enable();
+  rgb_matrix_mode_noeeprom(RGB_MATRIX_NONE);
 }
 
 uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
@@ -55,10 +61,11 @@ uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
 }
 
 layer_state_t layer_state_set_user(layer_state_t state) {
+#ifdef AUTO_LAYER_SWITCH
   auto_layer_set(state);
+#endif
   STATUS_LED_1(IS_LAYER_ON_STATE(state, CANARY_G));
-  STATUS_LED_2(IS_LAYER_ON_STATE(state, QWERTY_G) || IS_LAYER_ON_STATE(state, QWERTY_SG));
-  // STATUS_LED_3(IS_LAYER_ON_STATE(state, SPACE_SWAP));
+  STATUS_LED_2(IS_LAYER_ON_STATE(state, QWERTY_SG));
   STATUS_LED_3(false);
   STATUS_LED_4(IS_LAYER_ON_STATE(state, KEYPAD_SYMB));
   STATUS_LED_5(IS_LAYER_ON_STATE(state, MOVEMENT));

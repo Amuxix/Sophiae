@@ -15,9 +15,9 @@
 #define RGB_MATRIX_TIMEOUT 300000
 
 #define USB_SUSPEND_WAKEUP_DELAY 0
-#define FIRMWARE_VERSION u8"9q5dN/545VB"
-#define RAW_USAGE_PAGE 0xFF60
-#define RAW_USAGE_ID 0x61
+#define SERIAL_NUMBER "9q5dN/KryAPa"
+// #define RAW_USAGE_PAGE 0xFF60
+// #define RAW_USAGE_ID 0x61
 #define LAYER_STATE_16BIT
 #define COMBO_COUNT 4
 
@@ -25,6 +25,9 @@
 #define RGB_MATRIX_STARTUP_SPD 60
 
 #define MOONLANDER_USER_LEDS
+// Uncomment to persist config changes (e.g. mac_mode) to EEPROM across power cycles
+// #define SAVE_TO_EEPROM
+
 // Macro settings
-// 10ms betweed key presses
+// 10ms between key presses
 #define DYNAMIC_MACRO_DELAY 10

@@ -1,5 +1,5 @@
 QMK_REPO ?= zsa/qmk_firmware
-QMK_BRANCH ?= firmware24
+QMK_BRANCH ?= firmware25
 LAYOUT ?= sophiae
 TARGET ?= keyboards/zsa/moonlander/keymaps/$(LAYOUT)
 
@@ -22,16 +22,16 @@ format:
 
 .PHONY: qmk_flash
 qmk_flash:
-	make -C zsa_firmware zsa/moonlander:$(LAYOUT):flash || true
+	make -C zsa_firmware zsa/moonlander/reva:$(LAYOUT):flash || true
 
 .PHONY: compile
 compile:
-	cd zsa_firmware && qmk compile -kb moonlander -km $(LAYOUT) || true
+	cd zsa_firmware && qmk compile -kb zsa/moonlander/reva -km $(LAYOUT) || true
 
 .PHONY: compile_silent
 compile_silent:
 # Silent but has no colours
-	make -C zsa_firmware zsa/moonlander:$(LAYOUT) silent=true || true
+	make -C zsa_firmware zsa/moonlander/reva:$(LAYOUT) silent=true || true
 
 .PHONY: clean_keymap
 clean_keymap:

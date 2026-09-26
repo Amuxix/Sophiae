@@ -1,7 +1,8 @@
-#include "raw_hid.h"
-#include "action_layer.h"
+#ifdef AUTO_LAYER_SWITCH
+#  include "raw_hid.h"
+#  include "action_layer.h"
 
-#define RAW_EPSIZE 32
+#  define RAW_EPSIZE 32
 
 RGB webhid_leds[RGB_MATRIX_LED_COUNT];
 
@@ -35,3 +36,4 @@ void raw_hid_receive(uint8_t *data, uint8_t length) {
   }
   send_error();
 }
+#endif

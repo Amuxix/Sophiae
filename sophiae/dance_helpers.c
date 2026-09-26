@@ -38,10 +38,10 @@
 
 // Holds are negative, taps are positive
 typedef enum {
-  SINGLE_TAP,  // tap
-  HOLD,        // hold
-  DOUBLE_TAP,  // tap then tap
-  TAP_HOLD,    // tap then hold
+  SINGLE_TAP = 1,  // tap
+  HOLD,            // hold
+  DOUBLE_TAP,      // tap then tap
+  TAP_HOLD,        // tap then hold
 } press_t;
 
 static press_t dance_state[MAX_DANCES];
