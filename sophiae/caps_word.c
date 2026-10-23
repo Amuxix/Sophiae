@@ -23,4 +23,5 @@ bool caps_word_press_user(uint16_t keycode) {
 
 void caps_word_set_user(bool active) {
   if (!active) CAPS_PHRASE_STATE = false;
+  STATUS_LED_3(active);
 }

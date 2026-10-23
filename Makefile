@@ -1,7 +1,7 @@
 QMK_REPO ?= zsa/qmk_firmware
 QMK_BRANCH ?= firmware25
 LAYOUT ?= sophiae
-TARGET ?= keyboards/zsa/moonlander/keymaps/$(LAYOUT)
+TARGET ?= keyboards/zsa/moonlander/revb/keymaps/$(LAYOUT)
 
 .PHONY: build
 build: format copy_keymap submodules_update compile clean_keymap
@@ -15,6 +15,9 @@ fast: format copy_keymap compile clean_keymap
 .PHONY: flash
 flash: format copy_keymap submodules_update qmk_flash clean_keymap
 
+.PHONY: lint
+lint: format copy_keymap submodules_update qmk_lint clean_keymap
+
 
 .PHONY: format
 format:
@@ -22,20 +25,25 @@ format:
 
 .PHONY: qmk_flash
 qmk_flash:
-	make -C zsa_firmware zsa/moonlander/reva:$(LAYOUT):flash || true
+	make -C zsa_firmware zsa/moonlander/revb:$(LAYOUT):flash || true
+
+.PHONY: qmk_lint
+qmk_lint:
+	cd zsa_firmware && qmk lint -kb zsa/moonlander/revb -km $(LAYOUT) || true
 
 .PHONY: compile
 compile:
-	cd zsa_firmware && qmk compile -kb zsa/moonlander/reva -km $(LAYOUT) || true
+	cd zsa_firmware && qmk compile -kb zsa/moonlander/revb -km $(LAYOUT) || true
 
 .PHONY: compile_silent
 compile_silent:
 # Silent but has no colours
-	make -C zsa_firmware zsa/moonlander/reva:$(LAYOUT) silent=true || true
+	make -C zsa_firmware zsa/moonlander/revb:$(LAYOUT) silent=true || true
 
 .PHONY: clean_keymap
 clean_keymap:
-	cd zsa_firmware && rm -rf $(TARGET) moonlander_$(LAYOUT).bin
+	cd zsa_firmware && rm -rf $(TARGET)
+	cd zsa_firmware && qmk clean -a
 
 .PHONY: copy_keymap
 copy_keymap:

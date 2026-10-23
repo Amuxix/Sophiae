@@ -12,7 +12,6 @@
 #include "same_side_mod_prevention.c"
 #include "custom_keys.c"
 #include "ledmap.c"
-#include "alternates.c"
 #ifdef AUTO_LAYER_SWITCH
 #  include "auto_layer_switch.c"
 #endif
@@ -66,9 +65,23 @@ layer_state_t layer_state_set_user(layer_state_t state) {
 #endif
   STATUS_LED_1(IS_LAYER_ON_STATE(state, CANARY_G));
   STATUS_LED_2(IS_LAYER_ON_STATE(state, QWERTY_SG));
-  STATUS_LED_3(false);
-  STATUS_LED_4(IS_LAYER_ON_STATE(state, KEYPAD_SYMB));
-  STATUS_LED_5(IS_LAYER_ON_STATE(state, MOVEMENT));
-  STATUS_LED_6(IS_LAYER_ON_STATE(state, EXTRA_SYMB));
+  // STATUS_LED_3(is_caps_word_on());
+
+  STATUS_LED_4(IS_LAYER_ON_STATE(state, SPACE_SWAP));
+  // STATUS_LED_5(sophiae_config.mac_mode);
+  // STATUS_LED_6(keymap_config.swap_lctl_lgui);
   return state;
+}
+
+bool pre_process_record_user(uint16_t keycode, keyrecord_t *record) {
+  switch (keycode) {
+    case MAC_MODE_TOGG:
+      STATUS_LED_5(!sophiae_config.mac_mode);
+      STATUS_LED_6(!sophiae_config.mac_mode);
+      break;
+    case CG_TOGG:
+      STATUS_LED_6(!keymap_config.swap_lctl_lgui);
+      break;
+  }
+  return true;
 }

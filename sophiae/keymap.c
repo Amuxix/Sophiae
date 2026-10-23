@@ -8,7 +8,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     XXXXXXX,          KC_W,             LGUI_T(KC_R),     LALT_T(KC_S),     LCTL_T(KC_T),     KC_G,             TD(CAPS_WORDS_DANCE),       XXXXXXX,          KC_M,             LCTL_T(KC_N),     LALT_T(KC_E),     LGUI_T(KC_I),     KC_QUOTE,         XXXXXXX,
     XXXXXXX,          KC_C,             KC_J,             KC_V,             KC_D,             KC_K,                                                           KC_X,             KC_H,             KC_COLN,          KC_COMMA,         KC_A,             XXXXXXX,
     XXXXXXX,          KC_Q,             TD(COPY_CUT),     TD(PASTE),        LT_KPD(KC_ESC),                     TD(MUTE_UNMUTE),            TD(LAUNCH_PAUSE),                   LT_KPD(KC_DEL),   TD(UNDO),         TD(REDO),         KC_DOT,           XXXXXXX,
-                                                                            LSFT_T(KC_BSPC),  LT_MOV(KC_TAB),   QK_AREP,                    KC_APPLICATION,   LT_SYM(KC_ENTER), RSFT_T(KC_SPACE)
+                                                                            LSFT_T(KC_BSPC),  LT_MOV(KC_TAB),   QK_REP,                     KC_APPLICATION,   LT_SYM(KC_ENTER), RSFT_T(KC_SPACE)
   ),
   [CANARY_G] = LAYOUT_moonlander(
     _______,          XXXXXXX,          KC_2,             KC_3,             KC_4,             KC_5,             _______,                    _______,          KC_6,             KC_7,             KC_8,             KC_9,             XXXXXXX,          KC_F11,
@@ -19,9 +19,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                                                             KC_BSPC,          _______,          _______,                    _______,          _______,          KC_SPACE
   ),
   [QWERTY_SG] = LAYOUT_moonlander(
-    _______,          _______,          KC_1,             KC_2,             KC_3,             KC_4,             KC_5,                       _______,          KC_6,             KC_7,             KC_8,             KC_9,             XXXXXXX,          KC_F11,
-    _______,          XXXXXXX,          KC_Q,             KC_W,             KC_E,             KC_R,             KC_T,                       _______,          KC_Y,             KC_U,             KC_I,             KC_O,             KC_0,             KC_F12,
-    KC_LALT,          KC_LALT,          KC_A,             KC_S,             KC_D,             KC_F,             KC_G,                       _______,          KC_H,             KC_J,             KC_K,             KC_L,             KC_P,             KC_RALT,
+    _______,          _______,          KC_2,             KC_3,             KC_4,             KC_5,             _______,                    _______,          KC_6,             KC_7,             KC_8,             KC_9,             XXXXXXX,          KC_F11,
+    _______,          KC_1,             KC_Q,             KC_W,             KC_E,             KC_R,             _______,                    KC_T,             KC_Y,             KC_U,             KC_I,             KC_O,             KC_0,             KC_F12,
+    KC_LALT,          KC_LALT,          KC_A,             KC_S,             KC_D,             KC_F,             _______,                    KC_G,             KC_H,             KC_J,             KC_K,             KC_L,             KC_P,             KC_RALT,
     KC_LSFT,          KC_LSFT,          KC_Z,             KC_X,             KC_C,             KC_V,                                                           KC_B,             KC_N,             KC_M,             KC_COMMA,         KC_QUOTE,         KC_RSFT,
     KC_LCTL,          KC_LCTL,          _______,          _______,          _______,                            _______,                    _______,                            _______,          _______,          _______,          KC_DOT,           KC_RCTL,
                                                                             KC_SPACE,         _______,          _______,                    _______,          _______,          KC_BSPC
@@ -40,7 +40,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     XXXXXXX,          EURO,             LGUI_T(KC_LBRC),  TD(LALT_LBRACK),  TD(LCTL_LPAREN),  KC_LABK,          _______,                    QK_LLCK,          KC_KP_MINUS,      LCTL_T(KC_KP_4),  LALT_T(KC_KP_5),  LGUI_T(KC_KP_6),  KC_KP_SLASH,      XXXXXXX,
     XXXXXXX,          LEFT_ARROW,       KC_RBRC,          KC_RCBR,          KC_RPRN,          KC_RABK,                                                        KC_KP_PLUS,       KC_KP_1,          KC_KP_2,          KC_KP_3,          KC_KP_ASTERISK,   XXXXXXX,
     XXXXXXX,          RIGHT_ARROW,      XXXXXXX,          XXXXXXX,          _______,                            _______,                    _______,                            _______,          KC_KP_0,          KC_EQUAL,         KC_KP_DOT,        XXXXXXX,
-                                                                            KC_BSPC,          _______,          _______,                    SNIPPING,         _______,          KC_SPACE
+                                                                            _______,          _______,          _______,                    SNIPPING,         _______,          _______
   ),
   [EXTRA_SYMB] = LAYOUT_moonlander(
     DM_REC1,          XXXXXXX,          KC_F2,            KC_F3,            KC_F4,            KC_F5,            _______,                    _______,          KC_F6,            KC_F7,            KC_F8,            KC_F9,            XXXXXXX,          KC_F11,
@@ -48,7 +48,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     XXXXXXX,          KC_SCLN,          KC_QUES,          KC_UNDS,          KC_EQUAL,         KC_AMPR,          _______,                    QK_LLCK,          XXXXXXX,          KC_LCTL,          KC_LALT,          KC_LGUI,          XXXXXXX,          XXXXXXX,
     XXXXXXX,          KC_EXLM,          KC_BSLS,          KC_AT,            KC_DQUO,          KC_PIPE,                                                        XXXXXXX,          XXXXXXX,          XXXXXXX,          XXXXXXX,          XXXXXXX,          XXXXXXX,
     XXXXXXX,          EQ_RIGHT_ARROW,   XXXXXXX,          XXXXXXX,          _______,                            _______,                    _______,                            _______,          XXXXXXX,          XXXXXXX,          XXXXXXX,          XXXXXXX,
-                                                                            KC_BSPC,          _______,          _______,                    _______,          _______,          KC_SPACE
+                                                                            _______,          _______,          _______,                    _______,          _______,          _______
   ),
   [MOVEMENT] = LAYOUT_moonlander(
     XXXXXXX,          XXXXXXX,          KC_F2,            KC_F3,            KC_F4,            KC_F5,            _______,                    _______,          KC_F6,            KC_F7,            KC_F8,            KC_F9,            XXXXXXX,          KC_F11,
@@ -59,7 +59,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                                                             _______,          _______,          _______,                    _______,          _______,          _______
   ),
   [SHORTCUTS] = LAYOUT_moonlander(
-    XXXXXXX,          XXXXXXX,          TO(CANARY_G),       XXXXXXX,        TO(QWERTY_SG),    XXXXXXX,          XXXXXXX,                    XXXXXXX,          XXXXXXX,          XXXXXXX,          XXXXXXX,          XXXXXXX,          XXXXXXX,          XXXXXXX,
+    XXXXXXX,          XXXXXXX,          TO(CANARY_G),       TO(QWERTY_SG),  XXXXXXX,          XXXXXXX,          XXXXXXX,                    XXXXXXX,          XXXXXXX,          XXXXXXX,          XXXXXXX,          XXXXXXX,          XXXXXXX,          XXXXXXX,
     XXXXXXX,          TO(BASE),         XXXXXXX,            XXXXXXX,        XXXXXXX,          BOLD,             XXXXXXX,                    XXXXXXX,          LSA(KC_Z),        XXXXXXX,          XXXXXXX,          XXXXXXX,          XXXXXXX,          XXXXXXX,
     XXXXXXX,          XXXXXXX,          XXXXXXX,            XXXXXXX,        XXXXXXX,          XXXXXXX,          XXXXXXX,                    QK_LLCK,          XXXXXXX,          XXXXXXX,          XXXXXXX,          ITALIC,           XXXXXXX,          XXXXXXX,
     XXXXXXX,          KC_CALCULATOR,    XXXXXXX,            XXXXXXX,        XXXXXXX,          XXXXXXX,                                                        XXXXXXX,          XXXXXXX,          XXXXXXX,          XXXXXXX,          XXXXXXX,          XXXXXXX,
